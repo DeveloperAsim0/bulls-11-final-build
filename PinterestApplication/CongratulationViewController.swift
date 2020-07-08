@@ -28,7 +28,7 @@ class CongratulationViewController: UIViewController {
     }
     
     @IBAction func Skip(_ sender: Any) {
-        let alert = UIAlertController(title: "Winner", message: "1000 Bull's Point Successfully Added", preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Winner", message: "100 Bull's Point Successfully Added", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
             model.bullsPoint = "100"
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

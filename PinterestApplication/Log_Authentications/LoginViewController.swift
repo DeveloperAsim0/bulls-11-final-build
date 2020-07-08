@@ -66,11 +66,11 @@ class LoginViewController: UIViewController {
             "password": passwordField.text
         ]
         
-        AF.request(self.Login_URL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
+       request(self.Login_URL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(user: "admin", password: "1234").responseJSON { response in
             switch response.result {
             case .success:
-                print(response.result)
-                
+                 print("respo1:-\(response.result)")
+                print("respo:-\(response.response)")
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "customtab")
                 vc.modalPresentationStyle = .fullScreen
@@ -79,7 +79,7 @@ class LoginViewController: UIViewController {
                 self.myactivity.isHidden = true
                 break
             case .failure(let eror):
-                print(eror.errorDescription)
+                print(eror.localizedDescription)
             }
         }
         

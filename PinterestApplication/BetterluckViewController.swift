@@ -28,7 +28,12 @@ class BetterluckViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func finish(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "customtab")
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 

@@ -46,24 +46,26 @@ class SelectYourTradeViewController: UIViewController {
                 "X-API-KEY": "\(self.Api_Key)"
             ]
             
-            AF.request(self.Date_URL, method: .get, parameters: nil,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
+        request(self.Date_URL, method: .get, parameters: nil,encoding: JSONEncoding.default, headers: header).authenticate(user: "admin", password: "1234").responseJSON { response in
                 switch response.result {
                 case .success:
                     print(response.result)
                     let myresult = try? JSON(data: response.data!)
                     print(myresult!["data"])
                     let resultArray = myresult!["data"]
+                    model.dateID.removeAll()
                     for i in resultArray.arrayValue {
                     print("y i value:- \(i)")
                     let id = i["id"].stringValue
                         model.dateID.append(id)
                         let date = i["dates"].stringValue
                         model.date.append(date)
+                      
                 }
                     self.tableView.reloadData()
                     break
                 case .failure(let eror):
-                    print(eror.errorDescription)
+                    print(eror.localizedDescription)
                 }
             }
             
@@ -93,7 +95,7 @@ extension SelectYourTradeViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tradecell") as! SelectTradeTableViewCell
         cell.DateLabel.text = model.date[indexPath.row]
-       // cell.DetailLabel.text = model.date_details[indexPath.row]
+       
         return cell
     }
 

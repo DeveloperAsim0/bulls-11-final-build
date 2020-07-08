@@ -7,9 +7,7 @@ target 'PinterestApplication' do
 
   # Pods for PinterestApplication
    pod 'IQKeyboardManager' 
-   pod 'Alamofire'
-   pod 'ALCameraViewController'
+   pod 'Alamofire', '4.9.1'
    pod 'SwiftyJSON'
-   pod 'MHLoadingButton'
 
 end

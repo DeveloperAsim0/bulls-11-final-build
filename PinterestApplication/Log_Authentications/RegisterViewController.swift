@@ -9,8 +9,7 @@
 import UIKit
 import IQKeyboardManager
 import Alamofire
-import MHLoadingButton
-import ALCameraViewController
+
 
 class RegisterViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
@@ -72,43 +71,61 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
 //        self.myactivity.startAnimating()
         let image = UIImage.init(named: "1.png")
         let imgData = image!.jpegData(compressionQuality: 0.2)!
-
-       let header:HTTPHeaders = [
+        let username = "admin"
+        let password = "1234"
+        let credentialData = "\(username):\(password)".data(using: String.Encoding.utf8)!
+        let base64Credentials = credentialData.base64EncodedString(options: [])
+        let header:HTTPHeaders = [
+            "Authorization": base64Credentials,
             "X-API-KEY": "\(self.Api_Key)"
         ]
-
+        print("myheader:- \(header)")
         let parameters = [
             "email": emailField.text,
             "password": passwordField.text,
             "phone": mobileNo.text
             ]
         
-        AF.upload(multipartFormData: { (multipartFormData) in
-            multipartFormData.append(imgData, withName: "profile_pic", fileName: "file.jpg", mimeType: "image/jpg")
+     
+        
+        upload(multipartFormData: { (multipartFormData) in
+            multipartFormData.append(imgData,  withName: "profile_pic", fileName: "file.jpg", mimeType: "image/jpg")
+            
             for (key, value) in parameters {
                 multipartFormData.append(value!.data(using: String.Encoding.utf8)!, withName: key)
                 print("mymul:- \(key), myvalu:- \(value)")
+            }
+        }, to: Registration_URL, method: .post, headers: header){ (response) in
+            switch response{
+            case .success(let upload, _, _):
+                upload.uploadProgress(closure: { (progress) in
+                    print("Upload Progress: \(progress.fractionCompleted)")
+                })
+
+                upload.responseJSON
+                    {
+                        response in
+                        print("Response :\(response.result.error.debugDescription)")
+                        print(response.request)  // original URL request
+                        print(response.response) // URL response
+                        print(response.data)     // server data
+                        print(response.result)   // result of response serialization
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+             let vc = storyboard.instantiateViewController(withIdentifier: "customtab")
+               vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
                 }
-        }, to:Registration_URL, method: .post, headers: header).authenticate(username: "admin", password: "1234").responseJSON { (response) in
-            switch response.result {
-            case .success:
-                print(response.result)
-                let alert = UIAlertController(title: "Successfully Registered", message: "", preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = storyboard.instantiateViewController(withIdentifier: "customtab")
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true, completion: nil)
-                }))
-                self.present(alert, animated: true, completion: nil)
-//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                let vc = storyboard.instantiateViewController(withIdentifier: "customtab")
-//                vc.modalPresentationStyle = .fullScreen
-//                self.present(vc, animated: true, completion: nil)
-//                self.myactivity.stopAnimating()
-//                self.myactivity.isHidden = true
-            case .failure(let err):
-                print(err.errorDescription)
+//                let alert = UIAlertController(title: "Successfully Registered", message: "", preferredStyle: UIAlertController.Style.alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
+//                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                    let vc = storyboard.instantiateViewController(withIdentifier: "customtab")
+//                    vc.modalPresentationStyle = .fullScreen
+//                    self.present(vc, animated: true, completion: nil)
+//                }))
+             //   self.present(alert, animated: true, completion: nil)
+                break
+            case .failure(let encodingError):
+                print(encodingError.localizedDescription)
             }
         }
     }
@@ -194,3 +211,36 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
 	return input.rawValue
 }
+
+/*
+ Garbage:
+ upload(multipartFormData: { (multipartFormData) in
+ multipartFormData.append(imgData, withName: "profile_pic", fileName: "file.jpg", mimeType: "image/jpg")
+ for (key, value) in parameters {
+ multipartFormData.append(value!.data(using: String.Encoding.utf8)!, withName: key)
+ print("mymul:- \(key), myvalu:- \(value)")
+ }
+ }, to:Registration_URL, method: .post, headers: header).authenticate(username: "admin", password: "1234").responseJSON { (response) in
+ switch response.result {
+ case .success:
+ print(response.result)
+ let alert = UIAlertController(title: "Successfully Registered", message: "", preferredStyle: UIAlertController.Style.alert)
+ alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
+ let storyboard = UIStoryboard(name: "Main", bundle: nil)
+ let vc = storyboard.instantiateViewController(withIdentifier: "customtab")
+ vc.modalPresentationStyle = .fullScreen
+ self.present(vc, animated: true, completion: nil)
+ }))
+ self.present(alert, animated: true, completion: nil)
+ //                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+ //                let vc = storyboard.instantiateViewController(withIdentifier: "customtab")
+ //                vc.modalPresentationStyle = .fullScreen
+ //                self.present(vc, animated: true, completion: nil)
+ //                self.myactivity.stopAnimating()
+ //                self.myactivity.isHidden = true
+ case .failure(let err):
+ print(err.errorDescription)
+ }
+ }
+
+ */

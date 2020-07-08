@@ -205,7 +205,7 @@ class ChooseTeamViewController: UIViewController {
             "date_id": "1"
             ]
         
-            AF.request(self.ApiURL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
+            request(self.ApiURL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(user: "admin", password: "1234").responseJSON { response in
                 switch response.result {
                 case .success:
                     print(response.result)
@@ -228,7 +228,7 @@ class ChooseTeamViewController: UIViewController {
                     self.table1.reloadData()
                     break
                 case .failure(let eror):
-                    print(eror.errorDescription)
+                    print(eror.localizedDescription)
                 }
             }
             
@@ -246,7 +246,7 @@ class ChooseTeamViewController: UIViewController {
             "date_id": "1"
             ]
         
-            AF.request(self.ApiURL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
+            request(self.ApiURL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(user: "admin", password: "1234").responseJSON { response in
                 switch response.result {
                 case .success:
                     print(response.result)
@@ -269,7 +269,7 @@ class ChooseTeamViewController: UIViewController {
                     self.table2.reloadData()
                     break
                 case .failure(let eror):
-                    print(eror.errorDescription)
+                    print(eror.localizedDescription)
                 }
             }
             
@@ -287,7 +287,7 @@ class ChooseTeamViewController: UIViewController {
             "date_id": "1"
             ]
         
-            AF.request(self.ApiURL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
+            request(self.ApiURL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(user: "admin", password: "1234").responseJSON { response in
                 switch response.result {
                 case .success:
                     print(response.result)
@@ -310,7 +310,7 @@ class ChooseTeamViewController: UIViewController {
                     self.table4.reloadData()
                     break
                 case .failure(let eror):
-                    print(eror.errorDescription)
+                    print(eror.localizedDescription)
                 }
             }
             
@@ -328,7 +328,7 @@ class ChooseTeamViewController: UIViewController {
             "date_id": "1"
             ]
         
-            AF.request(self.ApiURL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
+            request(self.ApiURL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(user: "admin", password: "1234").responseJSON { response in
                 switch response.result {
                 case .success:
                     print(response.result)
@@ -351,7 +351,7 @@ class ChooseTeamViewController: UIViewController {
                     self.table3.reloadData()
                     break
                 case .failure(let eror):
-                    print(eror.errorDescription)
+                    print(eror.localizedDescription)
                 }
             }
             

@@ -15,7 +15,6 @@ class CustomTabbarController: UITabBarController, UITabBarControllerDelegate{
            var walletViewController   : WalletViewController!
            var moreViewController     : MoreViewController!
            
-           
            override func viewDidLoad() {
                super.viewDidLoad()
             self.tabBar.unselectedItemTintColor = .white
@@ -24,7 +23,6 @@ class CustomTabbarController: UITabBarController, UITabBarControllerDelegate{
                myContestViewController = ContestViewController()
                walletViewController    = WalletViewController()
                moreViewController      = MoreViewController()
-            
            }
            
            

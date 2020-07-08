@@ -36,7 +36,7 @@ class contestVC: UIViewController {
             "X-API-KEY": "\(self.Api_Key)"
         ]
         
-        AF.request(self.Quiz_URL, method: .get, parameters: nil,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
+        request(self.Quiz_URL, method: .get, parameters: nil,encoding: JSONEncoding.default, headers: header).authenticate(user: "admin", password: "1234").responseJSON { response in
             switch response.result {
             case .success:
                 print(response.result)
@@ -64,7 +64,7 @@ class contestVC: UIViewController {
                 self.collectionv.reloadData()
                 break
             case .failure(let eror):
-                print(eror.errorDescription)
+                print(eror.localizedDescription)
             }
         }
         
@@ -80,6 +80,7 @@ class contestVC: UIViewController {
        // print("mytag:- \(model.chooseoption)")
         print("mychoose:- \(model.choose_Answer)")
         print("right:- \(model.rightans)")
+        debugPrint(model.rightans)
         let visibleItems: NSArray = self.collectionv.indexPathsForVisibleItems as NSArray
                   let currentItem: IndexPath = visibleItems.object(at: 0) as! IndexPath
                   let nextItem: IndexPath = IndexPath(item: currentItem.item + 1, section: 0)

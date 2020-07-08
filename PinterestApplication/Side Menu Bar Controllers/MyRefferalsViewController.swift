@@ -11,14 +11,14 @@ import UIKit
 class MyRefferalsViewController: UIViewController {
 
     @IBOutlet weak var myView: UIView!
-    
+    @IBOutlet weak var myRefferalLbl: UILabel!
     let cornerRadius: CGFloat = 6.0
     
     fileprivate func CustomNavBar(){
         title = "My Referrals"
         let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 203/255, green: 41/255, blue: 122/255, alpha: 1)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 212/255, green: 71/255, blue: 140/255, alpha: 1)
     }
     
     fileprivate func CustomizeView(){
@@ -39,7 +39,12 @@ class MyRefferalsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func shareRefferal(_ sender: Any) {
+        let activityVC = UIActivityViewController(activityItems: [self.myRefferalLbl.text], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = self.view
+        self.present(activityVC, animated: true, completion: nil)
+        print("hurray !!!!!!")
+    }
     /*
     // MARK: - Navigation
 
