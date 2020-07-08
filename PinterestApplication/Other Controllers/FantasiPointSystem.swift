@@ -25,7 +25,7 @@ class FantasiPointSystem: UIViewController {
         title = "Fantasy Point System"
         let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 203/255, green: 41/255, blue: 122/255, alpha: 1)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 212/255, green: 71/255, blue: 140/255, alpha: 1)
         contView.layer.cornerRadius = 15
         contView.layer.masksToBounds = false
         contView.layer.shadowColor = UIColor.lightGray.cgColor

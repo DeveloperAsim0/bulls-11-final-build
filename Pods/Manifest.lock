@@ -1,32 +1,24 @@
 PODS:
-  - Alamofire (5.2.1)
-  - ALCameraViewController (3.1)
+  - Alamofire (4.9.1)
   - IQKeyboardManager (6.5.5)
-  - MHLoadingButton (0.1.0)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
-  - Alamofire
-  - ALCameraViewController
+  - Alamofire (= 4.9.1)
   - IQKeyboardManager
-  - MHLoadingButton
   - SwiftyJSON
 
 SPEC REPOS:
-  trunk:
+  https://github.com/cocoapods/specs.git:
     - Alamofire
-    - ALCameraViewController
     - IQKeyboardManager
-    - MHLoadingButton
     - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
-  ALCameraViewController: 144dea45fd749a623aafd8cb7b10cea88499fcc3
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
-  MHLoadingButton: 810a3123f739e32fcd4beec45b8d1a3bad06e38e
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 70d5b361d690fec732138dbd0cd73f849a3c38f1
+PODFILE CHECKSUM: 1c302b99e262d0399d60cf35226c0da3316512e6
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.7.5

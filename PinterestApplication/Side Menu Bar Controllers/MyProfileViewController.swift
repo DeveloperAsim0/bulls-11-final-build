@@ -10,10 +10,10 @@ import UIKit
 
 class MyProfileViewController: UIViewController {
 
-    @IBOutlet weak var firstView    : UIView!
-    @IBOutlet weak var secondView   : UIView!
-    @IBOutlet weak var thirdView    : UIView!
-    @IBOutlet weak var shareBtn     : UIButton!
+    @IBOutlet weak var firstView      : UIView!
+    @IBOutlet weak var secondView     : UIView!
+    @IBOutlet weak var thirdView      : UIView!
+    @IBOutlet weak var shareBtn       : UIButton!
     @IBOutlet weak var bullspointvalue: UILabel!
     
     let cornerRadius: CGFloat = 3.0
@@ -27,7 +27,7 @@ class MyProfileViewController: UIViewController {
         firstView.layer.shadowRadius    = 2.0
         firstView.layer.cornerRadius    = cornerRadius
         firstView.layer.masksToBounds   = false
-        
+    
         secondView.layer.shadowColor    = UIColor.lightGray.cgColor
         secondView.layer.shadowOffset   = CGSize(width: 0, height: 1.0)
         secondView.layer.shadowOpacity  = 0.5
@@ -50,20 +50,19 @@ class MyProfileViewController: UIViewController {
         title = "My Profile"
         let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 203/255, green: 41/255, blue: 122/255, alpha: 1)
-
-        // Do any additional setup after loading the view.
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 212/255, green: 71/255, blue: 140/255, alpha: 1)
     }
     
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func shareScreenshot(_ sender: Any) {
+        var image :UIImage?
+        let currentLayer = UIApplication.shared.keyWindow!.layer
+        let currentScale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(currentLayer.frame.size, false, currentScale);
+        guard let currentContext = UIGraphicsGetCurrentContext() else {return}
+        currentLayer.render(in: currentContext)
+        image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        guard let img = image else { return }
+        UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil)
     }
-    */
-
 }

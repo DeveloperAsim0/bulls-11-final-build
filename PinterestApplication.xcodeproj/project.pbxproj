@@ -208,6 +208,14 @@
 			path = "Side Menu Bar Controllers";
 			sourceTree = "<group>";
 		};
+		B9D1AABD24B5E1870079EE65 /* TableViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = TableViews;
+			path = TableView;
+			sourceTree = "<group>";
+		};
 		DA96087B1FD71A1900C8EE06 /* Log_Authentications */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +248,7 @@
 		DAB9FCFA1FC8E4C200CF64A7 /* PinterestApplication */ = {
 			isa = PBXGroup;
 			children = (
+				B9D1AABD24B5E1870079EE65 /* TableViews */,
 				3A85873D249A23A7005EA0AB /* Models */,
 				3A5ABC32249738B800FFA09D /* Constant */,
 				3AEA89D22473C0E1001F3EF3 /* HomeScreens */,
@@ -379,18 +388,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PinterestApplication/Pods-PinterestApplication-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ALCameraViewController/ALCameraViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
-				"${BUILT_PRODUCTS_DIR}/MHLoadingButton/MHLoadingButton.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ALCameraViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MHLoadingButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -590,13 +595,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V5A7X3J52B;
+				DEVELOPMENT_TEAM = 23YA9SNS7C;
 				INFOPLIST_FILE = PinterestApplication/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = myBullsProject;
 				PRODUCT_NAME = bulls11;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -607,13 +612,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V5A7X3J52B;
+				DEVELOPMENT_TEAM = 23YA9SNS7C;
 				INFOPLIST_FILE = PinterestApplication/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = myBullsProject;
 				PRODUCT_NAME = bulls11;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
