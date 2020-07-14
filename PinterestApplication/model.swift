@@ -27,8 +27,16 @@ class model{
     static var fourthtext           = [String]()
     static var date                 = [String]()
     static var dateListStatus       = [Bool]()
-    static var dateID               = [String]()
+    static var dateID               = String()
     static var date_details         = [String]()
+    static var CoreDiff             = [String]()
+    static var TopTenCore           = [String]()
+    static var NonCoreDiff          = [String]()
+    static var TopNonCore           = [String]()
+    static var final_Batsman        = [String]()
+    static var final_Bowler         = [String]()
+    static var final_wicket_keeper  = [String]()
+    
 }
 
 
@@ -54,10 +62,13 @@ class wicketkeeparTeam {
 }
 
 class allrounderTeam {
-    static var Company_Details = [String]()
-    static var Company_ID      = [String]()
-    static var Company_Name    = [String]()
-    static var Company_Type    = [String]()
+    static var Company_Details          = [String]()
+    static var Company_ID               = [String]()
+    static var Company_Name_Batsman_Core     = [String]()
+    static var Company_Name_Batsman_NonCore = [String]()
+    static var Company_Name_Bowler      = [String]()
+    static var Company_Name_Wicket_Keeper    = [String]()
+    static var Company_Type             = [String]()
 }
 
 class savedBatsmanTeams {

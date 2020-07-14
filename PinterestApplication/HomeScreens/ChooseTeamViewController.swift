@@ -15,7 +15,7 @@ class ChooseTeamViewController: UIViewController {
     @IBOutlet var batsmanImages: [UIImageView]!
     @IBOutlet var bowlerImages: [UIImageView]!
     @IBOutlet var wicketImages: [UIImageView]!
-    @IBOutlet var allrounderImages: [UIImageView]!
+   // @IBOutlet var allrounderImages: [UIImageView]!
     
     @IBOutlet weak var firstcircle      : UIImageView!
     @IBOutlet weak var secondcircle     : UIImageView!
@@ -41,7 +41,6 @@ class ChooseTeamViewController: UIViewController {
      @IBOutlet weak var table4            : UITableView!
     @IBOutlet weak var batsmen          : UIButton!
     @IBOutlet weak var bowler           : UIButton!
-    @IBOutlet weak var allRounder       : UIButton!
     @IBOutlet weak var wicketKeeper     : UIButton!
     @IBOutlet weak var special          : UIButton!
     @IBOutlet weak var selected         : UIButton!
@@ -165,10 +164,10 @@ class ChooseTeamViewController: UIViewController {
         bowler.layer.borderWidth   = 0.5
         bowler.layer.masksToBounds = true
         
-        allRounder.layer.cornerRadius  = 12.5
-        allRounder.layer.borderColor   = UIColor.gray.cgColor
-        allRounder.layer.borderWidth   = 0.5
-        allRounder.layer.masksToBounds = true
+//        allRounder.layer.cornerRadius  = 12.5
+//        allRounder.layer.borderColor   = UIColor.gray.cgColor
+//        allRounder.layer.borderWidth   = 0.5
+//        allRounder.layer.masksToBounds = true
         
         wicketKeeper.layer.cornerRadius  = 12.5
         wicketKeeper.layer.borderColor   = UIColor.gray.cgColor
@@ -201,154 +200,79 @@ class ChooseTeamViewController: UIViewController {
             ]
             
             let parameters = [
-            "comp_type": "batsman",
-            "date_id": "1"
-            ]
+            "date_id": model.dateID
+                ] as [String : Any]
         
-            AF.request(self.ApiURL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
+            print("myid:- \(parameters)")
+            AF.request("http://projectstatus.co.in/Bulls11/api/authentication/list-datewise-compnaies", method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
                 switch response.result {
                 case .success:
-                    print(response.result)
                     let myresult = try? JSON(data: response.data!)
-                    print(myresult!["data"])
-                    let resultArray = myresult!["data"]
-                    batsmanTeam.Company_Details.removeAll()
-                    batsmanTeam.Company_Name.removeAll()
-                    batsmanTeam.Company_ID.removeAll()
-                    for i in resultArray.arrayValue {
-                    print("y i value:- \(i)")
-                        let id = i["c_id"].stringValue
-                        batsmanTeam.Company_ID.append(id)
-                        let companyName  = i["c_name"].stringValue
-                        batsmanTeam.Company_Name.append(companyName)
-                        print("company:- \(batsmanTeam.Company_Name)")
-                        let companyDetails = i["c_detail"].stringValue
-                        batsmanTeam.Company_Details.append(companyDetails)
-                }
+                    print("level:-\(myresult!["data"])")
+                    let ResultArray = myresult!["data"]
+                    model.CoreDiff.removeAll()
+                    model.NonCoreDiff.removeAll()
+                    model.TopTenCore.removeAll()
+                    model.TopNonCore.removeAll()
+                    model.final_wicket_keeper.removeAll()
+                    model.final_Bowler.removeAll()
+                    model.final_Batsman.removeAll()
+                    for i in ResultArray.arrayValue {
+                        print("mycoretype:- \(i["core_type"].stringValue)")
+                        let set = i["core_type"].stringValue
+                        let company = i["c_type"].stringValue
+                        let diff = i["diff"].stringValue
+                        print("mydif:- \(diff)")
+                        if set == "core" && company == "Large"{
+                            model.CoreDiff.append(diff)
+                            print("mycorediff:- \(model.CoreDiff)")
+                            let coreteams = i["c_name"].stringValue
+                            print("core large:- \(coreteams)")
+                            allrounderTeam.Company_Name_Batsman_Core.append(coreteams)
+                            print("core teams :- \(allrounderTeam.Company_Name_Batsman_Core.prefix(10))")
+                        } else if set == "Non core" && company == "Large"{
+                            model.NonCoreDiff.append(diff)
+                            let nonCoreTeams = i["c_name"].stringValue
+                            print("noncorebatsman:- \(nonCoreTeams)")
+                            allrounderTeam.Company_Name_Batsman_NonCore.append(nonCoreTeams)
+                            print("Noncore teams :- \(allrounderTeam.Company_Name_Batsman_NonCore.prefix(8))")
+                            print("none:- \(model.NonCoreDiff)")
+                            print("bad")
+                        }
+                        
+                        if set == "Non core" && company == "Mid" {
+                            print("bowlers:- \(i["c_name"].stringValue)")
+                            let compName = i["c_name"].stringValue
+                           allrounderTeam.Company_Name_Bowler.append(compName)
+                        }
+                        
+                        if set == "Non core" && company == "Small" {
+                            let compName = i["c_name"].stringValue
+                            allrounderTeam.Company_Name_Wicket_Keeper.append(compName)
+                        }
+                    }
+                    print("company_Count:- \(allrounderTeam.Company_Name_Batsman_Core.count)")
+                    
+                    // for batsman
+                    if allrounderTeam.Company_Name_Batsman_Core.count >= 10 {
+                        print("allbatsman")
+                        model.final_Batsman.append(contentsOf: allrounderTeam.Company_Name_Batsman_Core.prefix(10))
+                        model.final_Batsman.append(contentsOf: allrounderTeam.Company_Name_Batsman_NonCore.prefix(8))
+                        print("finalCount:- \(model.final_Batsman)")
+                        
+                    } else {
+                        print("paagal")
+                    }
+                    // for bowlers
+                    model.final_Bowler.append(contentsOf: allrounderTeam.Company_Name_Bowler.prefix(12))
+                    print("bowlers:- \(model.final_Bowler)")
+                    // for wicket_Keeper
+                    model.final_wicket_keeper.append(contentsOf: allrounderTeam.Company_Name_Wicket_Keeper.prefix(3))
+                    print("bowlers:- \(model.final_wicket_keeper)")
+                    
                     self.table1.reloadData()
-                    break
-                case .failure(let eror):
-                    print(eror.errorDescription)
-                }
-            }
-            
-        }
-    
-    func Fetch_Data_Bowler() {
-    //        self.myactivity.isHidden = false
-    //        self.myactivity.startAnimating()
-            let header:HTTPHeaders = [
-                "X-API-KEY": "\(self.Api_Key)"
-            ]
-            
-            let parameters = [
-            "comp_type": "bowler",
-            "date_id": "1"
-            ]
-        
-            AF.request(self.ApiURL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
-                switch response.result {
-                case .success:
-                    print(response.result)
-                    let myresult = try? JSON(data: response.data!)
-                    print(myresult!["data"])
-                    let resultArray = myresult!["data"]
-                    bowlerTeam.Company_Details.removeAll()
-                    bowlerTeam.Company_Name.removeAll()
-                    bowlerTeam.Company_ID.removeAll()
-                    for i in resultArray.arrayValue {
-                    print("y i value:- \(i)")
-                        let id = i["c_id"].stringValue
-                        bowlerTeam.Company_ID.append(id)
-                        let companyName  = i["c_name"].stringValue
-                        bowlerTeam.Company_Name.append(companyName)
-                        print("company:- \(bowlerTeam.Company_Name)")
-                        let companyDetails = i["c_detail"].stringValue
-                        bowlerTeam.Company_Details.append(companyDetails)
-                }
                     self.table2.reloadData()
-                    break
-                case .failure(let eror):
-                    print(eror.errorDescription)
-                }
-            }
-            
-        }
-    
-    func Fetch_Data_Wicket_Keepar() {
-    //        self.myactivity.isHidden = false
-    //        self.myactivity.startAnimating()
-            let header:HTTPHeaders = [
-                "X-API-KEY": "\(self.Api_Key)"
-            ]
-            
-            let parameters = [
-            "comp_type": "wicket_keeper",
-            "date_id": "1"
-            ]
-        
-            AF.request(self.ApiURL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
-                switch response.result {
-                case .success:
-                    print(response.result)
-                    let myresult = try? JSON(data: response.data!)
-                    print(myresult!["data"])
-                    let resultArray = myresult!["data"]
-                    wicketkeeparTeam.Company_Details.removeAll()
-                    wicketkeeparTeam.Company_Name.removeAll()
-                    wicketkeeparTeam.Company_ID.removeAll()
-                    for i in resultArray.arrayValue {
-                    print("y i value:- \(i)")
-                        let id = i["c_id"].stringValue
-                        wicketkeeparTeam.Company_ID.append(id)
-                        let companyName  = i["c_name"].stringValue
-                        wicketkeeparTeam.Company_Name.append(companyName)
-                        print("company:- \(wicketkeeparTeam.Company_Name)")
-                        let companyDetails = i["c_detail"].stringValue
-                        wicketkeeparTeam.Company_Details.append(companyDetails)
-                }
                     self.table4.reloadData()
-                    break
-                case .failure(let eror):
-                    print(eror.errorDescription)
-                }
-            }
-            
-        }
-    
-    func Fetch_Data_All_Rounder() {
-    //        self.myactivity.isHidden = false
-    //        self.myactivity.startAnimating()
-            let header:HTTPHeaders = [
-                "X-API-KEY": "\(self.Api_Key)"
-            ]
-            
-            let parameters = [
-            "comp_type": "all_rounder",
-            "date_id": "1"
-            ]
-        
-            AF.request(self.ApiURL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
-                switch response.result {
-                case .success:
-                    print(response.result)
-                    let myresult = try? JSON(data: response.data!)
-                    print(myresult!["data"])
-                    let resultArray = myresult!["data"]
-                    allrounderTeam.Company_Details.removeAll()
-                    allrounderTeam.Company_Name.removeAll()
-                    allrounderTeam.Company_ID.removeAll()
-                    for i in resultArray.arrayValue {
-                    print("y i value:- \(i)")
-                        let id = i["c_id"].stringValue
-                        allrounderTeam.Company_ID.append(id)
-                        let companyName  = i["c_name"].stringValue
-                        allrounderTeam.Company_Name.append(companyName)
-                        print("company:- \(allrounderTeam.Company_Name)")
-                        let companyDetails = i["c_detail"].stringValue
-                        allrounderTeam.Company_Details.append(companyDetails)
-                }
-                    self.table3.reloadData()
                     break
                 case .failure(let eror):
                     print(eror.errorDescription)
@@ -367,12 +291,12 @@ class ChooseTeamViewController: UIViewController {
         print("batsmanTag:- \(self.batsmen.tag)")
         self.batsmen.backgroundColor = UIColor(red: 226/255, green: 40/255, blue: 140/255, alpha: 1.0)
         self.bowler.backgroundColor = .clear
-        self.allRounder.backgroundColor = .clear
+       // self.allRounder.backgroundColor = .clear
         self.wicketKeeper.backgroundColor = .clear
     }
     
     @IBAction func Bowler(_ sender: Any){
-      Fetch_Data_Bowler()
+     // Fetch_Data_Bowler()
         table1.isHidden = true
         table3.isHidden = true
         table4.isHidden = true
@@ -382,7 +306,7 @@ class ChooseTeamViewController: UIViewController {
         print("batsmanTag:- \(self.bowler.tag)")
         self.batsmen.backgroundColor = .clear
         self.bowler.backgroundColor = UIColor(red: 226/255, green: 40/255, blue: 140/255, alpha: 1.0)
-        self.allRounder.backgroundColor = .clear
+       // self.allRounder.backgroundColor = .clear
         self.wicketKeeper.backgroundColor = .clear
     }
     
@@ -391,12 +315,12 @@ class ChooseTeamViewController: UIViewController {
         table2.isHidden = true
         table4.isHidden = true
         table3.isHidden = false
-        Fetch_Data_All_Rounder()
-        self.allroundertag = allRounder.tag
-        print("batsmanTag:- \(self.allRounder.tag)")
+       // Fetch_Data_All_Rounder()
+//        self.allroundertag = allRounder.tag
+//        print("batsmanTag:- \(self.allRounder.tag)")
         self.batsmen.backgroundColor = .clear
         self.bowler.backgroundColor = .clear
-        self.allRounder.backgroundColor = UIColor(red: 226/255, green: 40/255, blue: 140/255, alpha: 1.0)
+       // self.allRounder.backgroundColor = UIColor(red: 226/255, green: 40/255, blue: 140/255, alpha: 1.0)
         self.wicketKeeper.backgroundColor = .clear
     }  
     
@@ -405,16 +329,17 @@ class ChooseTeamViewController: UIViewController {
         table1.isHidden = true
         table3.isHidden = true
         table2.isHidden = true
-        Fetch_Data_Wicket_Keepar()
+       // Fetch_Data_Wicket_Keepar()
         self.wicketkeepartag = wicketKeeper.tag
         print("batsmanTag:- \(self.wicketKeeper.tag)")
         self.batsmen.backgroundColor = .clear
         self.bowler.backgroundColor = .clear
-        self.allRounder.backgroundColor = .clear
+      //  self.allRounder.backgroundColor = .clear
         self.wicketKeeper.backgroundColor = UIColor(red: 226/255, green: 40/255, blue: 140/255, alpha: 1.0)
     }
     
     @IBAction func chooseSpecialPlayer(_ sender: Any){
+        
         let alert = UIAlertController(title: "Please choose 11 players to create Team", message: "", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
            let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -544,19 +469,17 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 1{
-        return batsmanTeam.Company_ID.count
+            return model.final_Batsman.count
         } else if tableView.tag == 2{
-        return bowlerTeam.Company_ID.count
-        } else if tableView.tag == 3{
-        return allrounderTeam.Company_ID.count
+            return model.final_Bowler.count
         } else if tableView.tag == 4{
-        
-            return wicketkeeparTeam.Company_ID.count
+            return model.final_wicket_keeper.count
         }
         return batsmanTeam.Company_ID.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if let cell = tableView.cellForRow(at: indexPath) as? ChooseTeamTableViewCell {
              print(cell.CompanyNameLbl)
             savedBatsmanTeams.CompanyName.append(cell.CompanyNameLbl.text ?? "defaults")
@@ -575,16 +498,13 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
         }
         if tableView.tag == 1 {
             batsmanImages[indexPath.row].image = mybatsman
-           // let selectedIndex = table1.indexPathsForSelectedSections
         } else if tableView.tag == 2 {
             bowlerImages[indexPath.row].image = mybowler
-        } else if tableView.tag == 3 {
-            wicketImages[indexPath.row].image = myallrounder
-        } else if tableView.tag == 4 {
-            allrounderImages[indexPath.row].image = mywicket
+        }  else if tableView.tag == 4 {
+            wicketImages[indexPath.row].image = mywicket
         }
-    }
-    
+  }
+        
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
 //        myImages[indexPath.row].image = nil
         if let cell = tableView.cellForRow(at: indexPath) as? ChooseTeamTableViewCell {
@@ -599,10 +519,10 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
             print(cell.CompanyNameLbl)
             savedAllRounderTeams.CompanyName.removeAll()
         }
-        if let cell = tableView.cellForRow(at: indexPath) as? fourthTableViewCell {
-            print(cell.CompanyNameLbl)
-            savedWicketKeeperTeams.CompanyName.removeAll()
-        }
+//        if let cell = tableView.cellForRow(at: indexPath) as? fourthTableViewCell {
+//            print(cell.CompanyNameLbl)
+//            savedWicketKeeperTeams.CompanyName.removeAll()
+//        }
         if tableView.tag == 1 {
             batsmanImages[indexPath.row].image = nil
             // let selectedIndex = table1.indexPathsForSelectedSections
@@ -610,8 +530,6 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
             bowlerImages[indexPath.row].image = nil
         } else if tableView.tag == 3 {
             wicketImages[indexPath.row].image = nil
-        } else if tableView.tag == 4 {
-            allrounderImages[indexPath.row].image = nil
         }
     }
     
@@ -622,8 +540,8 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
         cell.conView.layer.cornerRadius = 5.0
         cell.conView.layer.borderColor = UIColor.gray.cgColor
         cell.conView.layer.borderWidth = 0.5
-        cell.CompanyNameLbl.text = batsmanTeam.Company_Name[indexPath.row]
-        cell.CompanyDetailLbl.text = batsmanTeam.Company_Details[indexPath.row]
+            cell.CompanyNameLbl.text = model.final_Batsman[indexPath.row]
+       // cell.CompanyDetailLbl.text = batsmanTeam.Company_Details[indexPath.row]
         return cell
         } else if tableView.tag == 2 {
                let cell = table2.dequeueReusableCell(withIdentifier: "choose2") as! secondTableViewCell
@@ -632,8 +550,9 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
                cell.conView.layer.cornerRadius = 5.0
                cell.conView.layer.borderColor = UIColor.gray.cgColor
                cell.conView.layer.borderWidth = 0.5
-               cell.CompanyNameLbl.text = bowlerTeam.Company_Name[indexPath.row]
-               cell.CompanyDetailLbl.text = bowlerTeam.Company_Details[indexPath.row]
+            cell.CompanyNameLbl.text = model.final_Bowler[indexPath.row]
+               //cell.CompanyNameLbl.text = bowlerTeam.Company_Name[indexPath.row]
+              // cell.CompanyDetailLbl.text = bowlerTeam.Company_Details[indexPath.row]
                return cell
         } else  if tableView.tag == 3 {
                let cell = table3.dequeueReusableCell(withIdentifier: "choose3") as! thirdTableViewCell
@@ -641,8 +560,8 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
                cell.conView.layer.cornerRadius = 5.0
                cell.conView.layer.borderColor = UIColor.gray.cgColor
                cell.conView.layer.borderWidth = 0.5
-               cell.CompanyNameLbl.text = allrounderTeam.Company_Name[indexPath.row]
-               cell.CompanyDetailLbl.text = allrounderTeam.Company_Details[indexPath.row]
+              // cell.CompanyNameLbl.text = allrounderTeam.Company_Name[indexPath.row]
+             //  cell.CompanyDetailLbl.text = allrounderTeam.Company_Details[indexPath.row]
                return cell
         } else  if tableView.tag == 4 {
                let cell = table4.dequeueReusableCell(withIdentifier: "choose4") as! fourthTableViewCell
@@ -650,10 +569,139 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
                cell.conView.layer.cornerRadius = 5.0
                cell.conView.layer.borderColor = UIColor.gray.cgColor
                cell.conView.layer.borderWidth = 0.5
-               cell.CompanyNameLbl.text = wicketkeeparTeam.Company_Name[indexPath.row]
-               cell.CompanyDetailLbl.text = wicketkeeparTeam.Company_Details[indexPath.row]
+            cell.CompanyNameLbl.text = model.final_wicket_keeper[indexPath.row]
+//               cell.CompanyNameLbl.text = wicketkeeparTeam.Company_Name[indexPath.row]
+//               cell.CompanyDetailLbl.text = wicketkeeparTeam.Company_Details[indexPath.row]
                return cell
         }
         return UITableViewCell()
     }
 }
+
+
+
+/*
+ Garbage:-
+ func Fetch_Data_Bowler() {
+ //        self.myactivity.isHidden = false
+ //        self.myactivity.startAnimating()
+         let header:HTTPHeaders = [
+             "X-API-KEY": "\(self.Api_Key)"
+         ]
+         
+         let parameters = [
+         "comp_type": "bowler",
+         "date_id": model.dateID
+             ] as [String : Any]
+     
+         AF.request("http://projectstatus.co.in/Bulls11/api/authentication/list-datewise-compnaies", method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
+             switch response.result {
+             case .success:
+                 print(response.result)
+                 let myresult = try? JSON(data: response.data!)
+                 print(myresult!["data"])
+                 let resultArray = myresult!["data"]
+                 bowlerTeam.Company_Details.removeAll()
+                 bowlerTeam.Company_Name.removeAll()
+                 bowlerTeam.Company_ID.removeAll()
+                 for i in resultArray.arrayValue {
+                 print("y i value:- \(i)")
+                     let id = i["c_id"].stringValue
+                     bowlerTeam.Company_ID.append(id)
+                     let companyName  = i["c_name"].stringValue
+                     bowlerTeam.Company_Name.append(companyName)
+                     print("company:- \(bowlerTeam.Company_Name)")
+                     let companyDetails = i["c_detail"].stringValue
+                     bowlerTeam.Company_Details.append(companyDetails)
+             }
+                 self.table2.reloadData()
+                 break
+             case .failure(let eror):
+                 print(eror.errorDescription)
+             }
+         }
+         
+     }
+ 
+ func Fetch_Data_Wicket_Keepar() {
+ //        self.myactivity.isHidden = false
+ //        self.myactivity.startAnimating()
+         let header:HTTPHeaders = [
+             "X-API-KEY": "\(self.Api_Key)"
+         ]
+         
+         let parameters = [
+         "comp_type": "wicket_keeper",
+         "date_id": model.dateID
+             ] as [String : Any]
+     
+         AF.request(self.ApiURL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
+             switch response.result {
+             case .success:
+                 print(response.result)
+                 let myresult = try? JSON(data: response.data!)
+                 print(myresult!["data"])
+                 let resultArray = myresult!["data"]
+                 wicketkeeparTeam.Company_Details.removeAll()
+                 wicketkeeparTeam.Company_Name.removeAll()
+                 wicketkeeparTeam.Company_ID.removeAll()
+                 for i in resultArray.arrayValue {
+                 print("y i value:- \(i)")
+                     let id = i["c_id"].stringValue
+                     wicketkeeparTeam.Company_ID.append(id)
+                     let companyName  = i["c_name"].stringValue
+                     wicketkeeparTeam.Company_Name.append(companyName)
+                     print("company:- \(wicketkeeparTeam.Company_Name)")
+                     let companyDetails = i["c_detail"].stringValue
+                     wicketkeeparTeam.Company_Details.append(companyDetails)
+             }
+                 self.table4.reloadData()
+                 break
+             case .failure(let eror):
+                 print(eror.errorDescription)
+             }
+         }
+         
+     }
+ 
+ func Fetch_Data_All_Rounder() {
+ //        self.myactivity.isHidden = false
+ //        self.myactivity.startAnimating()
+         let header:HTTPHeaders = [
+             "X-API-KEY": "\(self.Api_Key)"
+         ]
+         
+         let parameters = [
+         "comp_type": "all_rounder",
+         "date_id": model.dateID
+             ] as [String : Any]
+     
+         AF.request(self.ApiURL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
+             switch response.result {
+             case .success:
+                 print(response.result)
+                 let myresult = try? JSON(data: response.data!)
+                 print(myresult!["data"])
+                 let resultArray = myresult!["data"]
+                 allrounderTeam.Company_Details.removeAll()
+                 allrounderTeam.Company_Name.removeAll()
+                 allrounderTeam.Company_ID.removeAll()
+                 for i in resultArray.arrayValue {
+                 print("y i value:- \(i)")
+                     let id = i["c_id"].stringValue
+                     allrounderTeam.Company_ID.append(id)
+                     let companyName  = i["c_name"].stringValue
+                     allrounderTeam.Company_Name.append(companyName)
+                     print("company:- \(allrounderTeam.Company_Name)")
+                     let companyDetails = i["c_detail"].stringValue
+                     allrounderTeam.Company_Details.append(companyDetails)
+             }
+                 self.table3.reloadData()
+                 break
+             case .failure(let eror):
+                 print(eror.errorDescription)
+             }
+         }
+         
+     }
+ */

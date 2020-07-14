@@ -43,8 +43,6 @@ class SelectCaptainViewController: UIViewController {
         joinview.clipsToBounds          = true
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
       //  CustomizeViews()
@@ -120,9 +118,7 @@ extension SelectCaptainViewController: UITableViewDataSource, UITableViewDelegat
                return savedBatsmanTeams.CompanyName.count
                } else if tableView.tag == 2{
                return savedBowlerTeams.CompanyName.count
-               } else if tableView.tag == 3{
-               return savedAllRounderTeams.CompanyName.count
-               } else if tableView.tag == 4{
+               }else if tableView.tag == 4{
                return savedWicketKeeperTeams.CompanyName.count
                }
                return savedBatsmanTeams.CompanyName.count
@@ -136,10 +132,6 @@ extension SelectCaptainViewController: UITableViewDataSource, UITableViewDelegat
                 } else if tableView.tag == 2 {
                        let cell = table2.dequeueReusableCell(withIdentifier: "bowler") as! SavedBowlerTableViewCell
             cell.bowlerSaved.text = savedBowlerTeams.CompanyName[indexPath.row]
-                       return cell
-                } else  if tableView.tag == 3 {
-                       let cell = tabel3.dequeueReusableCell(withIdentifier: "allrounderr") as! SavedAllRounderTableViewCell
-            cell.allrounderSaved.text = savedAllRounderTeams.CompanyName[indexPath.row]
                        return cell
                 } else  if tableView.tag == 4 {
                        let cell = table4.dequeueReusableCell(withIdentifier: "wicketkeepar") as! SavedWicketkeeperTableViewCell

@@ -55,10 +55,11 @@ class SelectYourTradeViewController: UIViewController {
                     let resultArray = myresult!["data"]
                     for i in resultArray.arrayValue {
                     print("y i value:- \(i)")
-                    let id = i["id"].stringValue
+                    let id = i["d_id"].stringValue
                         model.dateID.append(id)
                         let date = i["dates"].stringValue
                         model.date.append(date)
+                       // print("mydate:- \(model.date)")
                 }
                     self.tableView.reloadData()
                     break
