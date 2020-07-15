@@ -55,7 +55,10 @@ class SelectYourTradeViewController: UIViewController {
                     let resultArray = myresult!["data"]
                     for i in resultArray.arrayValue {
                     print("y i value:- \(i)")
+                        let details = i["small_content"].stringValue
+                        model.date_details.append(details)
                     let id = i["d_id"].stringValue
+                        print("id:- \(id)")
                         model.dateID.append(id)
                         let date = i["dates"].stringValue
                         model.date.append(date)
@@ -78,6 +81,12 @@ class SelectYourTradeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+    }
+    
 }
 
 
@@ -94,6 +103,7 @@ extension SelectYourTradeViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tradecell") as! SelectTradeTableViewCell
         cell.DateLabel.text = model.date[indexPath.row]
+        cell.DetailLabel.text = model.date_details[indexPath.row]
        // cell.DetailLabel.text = model.date_details[indexPath.row]
         return cell
     }
@@ -101,7 +111,8 @@ extension SelectYourTradeViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "choose") as! ChooseTeamViewController
-        vc.ApiURL = self.NextApiUrl 
+        vc.ApiURL = self.NextApiUrl
+        vc.myDateID = model.dateID
         self.navigationController?.pushViewController(vc, animated: true)
     }
 

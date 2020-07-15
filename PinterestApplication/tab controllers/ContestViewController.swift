@@ -15,7 +15,7 @@ class ContestViewController: UIViewController {
     var sideMenu2 = false
     
     fileprivate func CustomNavBar(){
-        title = "CONTEST"
+        title = "RESULT"
         let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 212/255, green: 71/255, blue: 140/255, alpha: 1)

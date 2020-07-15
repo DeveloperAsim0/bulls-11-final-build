@@ -44,7 +44,10 @@ class ChooseTeamViewController: UIViewController {
     @IBOutlet weak var wicketKeeper     : UIButton!
     @IBOutlet weak var special          : UIButton!
     @IBOutlet weak var selected         : UIButton!
-
+    
+    var BatsmanNumber = 1
+    var BowlerNumber = 1
+    var WicketKeeperNumber = 1
     var batsmantag = Int()
     var bowlertag = Int()
     var allroundertag = Int()
@@ -52,7 +55,7 @@ class ChooseTeamViewController: UIViewController {
     
     var ApiURL = String()
     let Api_Key = "BULLS11@2020"
-    
+    var myDateID = String()
     var myimagesNames = [UIImage(named: "wicket_keeper"), UIImage(named: "boll"), UIImage(named: "All-rounder"),UIImage(named: "bate")]
     var mywicket = UIImage(named: "wicket_keeper")
     var mybatsman = UIImage(named: "bate")
@@ -200,7 +203,7 @@ class ChooseTeamViewController: UIViewController {
             ]
             
             let parameters = [
-            "date_id": model.dateID
+            "date_id": myDateID
                 ] as [String : Any]
         
             print("myid:- \(parameters)")
@@ -339,16 +342,16 @@ class ChooseTeamViewController: UIViewController {
     }
     
     @IBAction func chooseSpecialPlayer(_ sender: Any){
-        
+        if self.sixthcircle.image == nil && tenthcircle.image == nil && eleventhcircle.image == nil {
         let alert = UIAlertController(title: "Please choose 11 players to create Team", message: "", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
-           let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                  let vc = storyboard.instantiateViewController(withIdentifier: "moreplayer")
-                  self.navigationController?.pushViewController(vc, animated: true)
-        }))
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
-    }
-    
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "moreplayer")
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+}
     @IBAction func viewSelectedPlayer(_ sender: Any){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "selectedPlayer")
@@ -483,10 +486,13 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.cellForRow(at: indexPath) as? ChooseTeamTableViewCell {
              print(cell.CompanyNameLbl)
             savedBatsmanTeams.CompanyName.append(cell.CompanyNameLbl.text ?? "defaults")
+            countForBatsman()
         }
         if let cell = tableView.cellForRow(at: indexPath) as? secondTableViewCell {
              print(cell.CompanyNameLbl)
             savedBowlerTeams.CompanyName.append(cell.CompanyNameLbl.text ?? "defaults")
+            countForBowler()
+            
         }
         if let cell = tableView.cellForRow(at: indexPath) as? thirdTableViewCell {
              print(cell.CompanyNameLbl)
@@ -495,42 +501,142 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.cellForRow(at: indexPath) as? fourthTableViewCell {
              print(cell.CompanyNameLbl)
             savedWicketKeeperTeams.CompanyName.append(cell.CompanyNameLbl.text ?? "defaults")
-        }
-        if tableView.tag == 1 {
-            batsmanImages[indexPath.row].image = mybatsman
-        } else if tableView.tag == 2 {
-            bowlerImages[indexPath.row].image = mybowler
-        }  else if tableView.tag == 4 {
-            wicketImages[indexPath.row].image = mywicket
+            countForWicketKeeper()
         }
   }
         
+    func countForBatsman() {
+        print("firstnumber:- \(self.BatsmanNumber)")
+                         if self.BatsmanNumber == 1 {
+                             print("increse1:- \(self.BatsmanNumber)")
+                             self.BatsmanNumber += 1
+                         firstcircle.image = #imageLiteral(resourceName: "bate")
+                         } else if self.BatsmanNumber == 2 {
+                             self.BatsmanNumber += 1
+                             print("increse2:- \(self.BatsmanNumber)")
+                             secondcircle.image = #imageLiteral(resourceName: "bate")
+                         } else if self.BatsmanNumber == 3 {
+                             self.BatsmanNumber += 1
+                             print("increse3:- \(self.BatsmanNumber)")
+                             thirdcircle.image = #imageLiteral(resourceName: "bate")
+                         } else if self.BatsmanNumber == 4 {
+                             self.BatsmanNumber += 1
+                             print("increse3:- \(self.BatsmanNumber)")
+                            fourthcircle.image = #imageLiteral(resourceName: "bate")
+                         } else if self.BatsmanNumber == 5 {
+                             self.BatsmanNumber += 1
+                             print("increse3:- \(self.BatsmanNumber)")
+                             fifthcircle.image = #imageLiteral(resourceName: "bate")
+                         } else if self.BatsmanNumber == 6 {
+                             self.BatsmanNumber += 1
+                             print("increse3:- \(self.BatsmanNumber)")
+                             sixthcircle.image = #imageLiteral(resourceName: "bate")
+                         }
+                         
+                         if sixthcircle.image != nil {
+                             table1.allowsSelection = false
+                         } else {
+                             table1.allowsSelection = true
+                         }
+    }
+    
+    func countForBowler() {
+         print("firstnumber:- \(self.BowlerNumber)")
+                         if self.BowlerNumber == 1 {
+                             print("increse1:- \(self.BowlerNumber)")
+                             self.BowlerNumber += 1
+                         seventhcircle.image = #imageLiteral(resourceName: "boll")
+                         } else if self.BowlerNumber == 2 {
+                             self.BowlerNumber += 1
+                             print("increse2:- \(self.BowlerNumber)")
+                             eightcircle.image = #imageLiteral(resourceName: "boll")
+                         } else if self.BowlerNumber == 3 {
+                             self.BowlerNumber += 1
+                             print("increse3:- \(self.BowlerNumber)")
+                             ninthcircle.image = #imageLiteral(resourceName: "boll")
+                         } else if self.BowlerNumber == 4 {
+                             self.BowlerNumber += 1
+                             print("increse3:- \(self.BowlerNumber)")
+                            tenthcircle.image = #imageLiteral(resourceName: "boll")
+                         }
+                         
+                         if tenthcircle.image != nil {
+                             table2.allowsSelection = false
+                         } else {
+                             table2.allowsSelection = true
+                         }
+    }
+    
+    func countForWicketKeeper() {
+        print("firstnumber:- \(self.WicketKeeperNumber)")
+                         if self.WicketKeeperNumber == 1 {
+                             print("increse1:- \(self.WicketKeeperNumber)")
+                             self.WicketKeeperNumber += 1
+                         eleventhcircle.image = #imageLiteral(resourceName: "wicket_keeper")
+                         }
+                         if eleventhcircle.image != nil {
+                             table4.allowsSelection = false
+                         } else {
+                             table4.allowsSelection = true
+                         }
+    }
+    
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        myImages[indexPath.row].image = nil
         if let cell = tableView.cellForRow(at: indexPath) as? ChooseTeamTableViewCell {
-            print(cell.CompanyNameLbl)
             savedBatsmanTeams.CompanyName.removeAll()
+            RemoveBatsman()
         }
         if let cell = tableView.cellForRow(at: indexPath) as? secondTableViewCell {
-            print(cell.CompanyNameLbl)
             savedBowlerTeams.CompanyName.removeAll()
         }
         if let cell = tableView.cellForRow(at: indexPath) as? thirdTableViewCell {
-            print(cell.CompanyNameLbl)
             savedAllRounderTeams.CompanyName.removeAll()
         }
-//        if let cell = tableView.cellForRow(at: indexPath) as? fourthTableViewCell {
-//            print(cell.CompanyNameLbl)
-//            savedWicketKeeperTeams.CompanyName.removeAll()
-//        }
-        if tableView.tag == 1 {
-            batsmanImages[indexPath.row].image = nil
-            // let selectedIndex = table1.indexPathsForSelectedSections
-        } else if tableView.tag == 2 {
-            bowlerImages[indexPath.row].image = nil
-        } else if tableView.tag == 3 {
-            wicketImages[indexPath.row].image = nil
+    }
+    
+    func RemoveBatsman() {
+        if BatsmanNumber == 2 {
+            BatsmanNumber -= 1
+            self.firstcircle.image = nil
+        } else if BatsmanNumber == 3 {
+            BatsmanNumber -= 1
+            self.secondcircle.image = nil
+        } else if BatsmanNumber == 4 {
+        BatsmanNumber -= 1
+        self.thirdcircle.image = nil
+        }  else if BatsmanNumber == 5 {
+        BatsmanNumber -= 1
+        self.fourthcircle.image = nil
+        } else if BatsmanNumber == 6 {
+        BatsmanNumber -= 1
+        self.fifthcircle.image = nil
+        } else if BatsmanNumber == 7 {
+        BatsmanNumber -= 1
+        self.sixthcircle.image = nil
         }
+    }
+    
+    func RemoveBowler() {
+           if BowlerNumber == 2 {
+               BowlerNumber -= 1
+               self.seventhcircle.image = nil
+           } else if BowlerNumber == 3 {
+               BowlerNumber -= 1
+               self.eightcircle.image = nil
+           } else if BowlerNumber == 4 {
+           BowlerNumber -= 1
+           self.ninthcircle.image = nil
+           }  else if BowlerNumber == 5 {
+           BowlerNumber -= 1
+           self.tenthcircle.image = nil
+           }
+    }
+    
+    func RemoveWicketKeeper() {
+           if WicketKeeperNumber == 2 {
+               WicketKeeperNumber -= 1
+               self.eleventhcircle.image = nil
+           }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
