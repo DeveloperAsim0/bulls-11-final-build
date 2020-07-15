@@ -362,7 +362,7 @@ class ChooseTeamViewController: UIViewController {
 
 extension ChooseTeamViewController: showStatus{
     func didTapForStatus(Title: String) {
-        let showAlert = UIAlertController(title: "Demo Alert", message: nil, preferredStyle: .alert)
+        let showAlert = UIAlertController(title: "Status", message: nil, preferredStyle: .alert)
         let imageView = UIImageView(frame: CGRect(x: 10, y: 50, width: 250, height: 230))
         imageView.image = UIImage(named: "graph") // Your image here...
         showAlert.view.addSubview(imageView)
@@ -386,7 +386,7 @@ extension ChooseTeamViewController: showStatus{
 
 extension ChooseTeamViewController: showStatus2{
     func didTapForStatus2(Title: String) {
-        let showAlert = UIAlertController(title: "Demo Alert", message: nil, preferredStyle: .alert)
+        let showAlert = UIAlertController(title: "Status", message: nil, preferredStyle: .alert)
         let imageView = UIImageView(frame: CGRect(x: 10, y: 50, width: 250, height: 230))
         imageView.image = UIImage(named: "graph") // Your image here...
         showAlert.view.addSubview(imageView)
@@ -410,7 +410,7 @@ extension ChooseTeamViewController: showStatus2{
 
 extension ChooseTeamViewController: showStatus3{
     func didTapForStatus3(Title: String) {
-        let showAlert = UIAlertController(title: "Demo Alert", message: nil, preferredStyle: .alert)
+        let showAlert = UIAlertController(title: "Status", message: nil, preferredStyle: .alert)
         let imageView = UIImageView(frame: CGRect(x: 10, y: 50, width: 250, height: 230))
         imageView.image = UIImage(named: "graph") // Your image here...
         showAlert.view.addSubview(imageView)

@@ -24,6 +24,7 @@ class LoginViewController: UIViewController {
     let Api_Key = "BULLS11@2020"
     
     fileprivate func CustomNavBar(){
+        self.navigationController?.navigationBar.tintColor = UIColor.white
            title = "Login"
            let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
            navigationController?.navigationBar.titleTextAttributes = textAttributes
@@ -70,11 +71,24 @@ class LoginViewController: UIViewController {
             switch response.result {
             case .success:
                 print(response.result)
-                
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "customtab")
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true, completion: nil)
+                let myresult = try? JSON(data: response.data!)
+                if myresult?["message"] == nil {
+                    let alert = UIAlertController(title: "Alert", message: "Wrong Email or Password", preferredStyle: .alert)
+                    self.present(alert, animated: true, completion: nil)
+
+                    // change to desired number of seconds (in this case 5 seconds)
+                    let when = DispatchTime.now() + 2
+                    DispatchQueue.main.asyncAfter(deadline: when){
+                      // your code with delay
+                      alert.dismiss(animated: true, completion: nil)
+                    }
+                } else {
+                    print("mine:- \(String(describing: myresult?["message"].stringValue))")
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "customtab")
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: true, completion: nil)
+                }
                 self.myactivity.stopAnimating()
                 self.myactivity.isHidden = true
                 break

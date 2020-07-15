@@ -11,6 +11,7 @@ import IQKeyboardManager
 import Alamofire
 import MHLoadingButton
 import ALCameraViewController
+import SwiftyJSON
 
 class RegisterViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
@@ -71,8 +72,7 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
 //        self.myactivity.isHidden = false
 //        self.myactivity.startAnimating()
         let image = UIImage.init(named: "1.png")
-        let imgData = image!.jpegData(compressionQuality: 0.2)!
-
+        let imgData = imageViewRef.image!.jpegData(compressionQuality: 0.2)!
        let header:HTTPHeaders = [
             "X-API-KEY": "\(self.Api_Key)"
         ]
@@ -87,26 +87,37 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
             multipartFormData.append(imgData, withName: "profile_pic", fileName: "file.jpg", mimeType: "image/jpg")
             for (key, value) in parameters {
                 multipartFormData.append(value!.data(using: String.Encoding.utf8)!, withName: key)
-                print("mymul:- \(key), myvalu:- \(value)")
                 }
         }, to:Registration_URL, method: .post, headers: header).authenticate(username: "admin", password: "1234").responseJSON { (response) in
             switch response.result {
             case .success:
                 print(response.result)
-                let alert = UIAlertController(title: "Successfully Registered", message: "", preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = storyboard.instantiateViewController(withIdentifier: "customtab")
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true, completion: nil)
-                }))
-                self.present(alert, animated: true, completion: nil)
-//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                let vc = storyboard.instantiateViewController(withIdentifier: "customtab")
-//                vc.modalPresentationStyle = .fullScreen
-//                self.present(vc, animated: true, completion: nil)
-//                self.myactivity.stopAnimating()
-//                self.myactivity.isHidden = true
+                let myresult = try? JSON(data: response.data!)
+                print("my:- \(myresult?["status"])")
+                if myresult?["status"] == false  {
+                    let alert = UIAlertController(title: "Alert", message: "\(myresult!["message"])", preferredStyle: .alert)
+                    self.present(alert, animated: true, completion: nil)
+
+                    // change to desired number of seconds (in this case 5 seconds)
+                    let when = DispatchTime.now() + 2
+                    DispatchQueue.main.asyncAfter(deadline: when){
+                      // your code with delay
+                      alert.dismiss(animated: true, completion: nil)
+                    }
+                } else if myresult?["status"] == true{
+                    let alert = UIAlertController(title: "Successfully Registered", message: "", preferredStyle: UIAlertController.Style.alert)
+                                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
+                                        UserDefaults.standard.set(true, forKey: "UserHasSubmittedPassword")
+                                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                        let vc = storyboard.instantiateViewController(withIdentifier: "customtab")
+                                        vc.modalPresentationStyle = .fullScreen
+                                        self.present(vc, animated: true, completion: nil)
+                                    }))
+                                    self.present(alert, animated: true, completion: nil)
+                                    self.myactivity.stopAnimating()
+                                    self.myactivity.isHidden = true
+                }
+//
             case .failure(let err):
                 print(err.errorDescription)
             }

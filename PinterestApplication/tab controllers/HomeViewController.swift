@@ -228,6 +228,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.row == 7 {
         // controler
         } else if indexPath.row == 8 {
+            UserDefaults.standard.removeObject(forKey: "UserHasSubmittedPassword")
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
                               let vc = storyboard.instantiateViewController(withIdentifier: "view")
                               vc.modalPresentationStyle = .fullScreen
