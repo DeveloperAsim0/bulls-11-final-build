@@ -180,6 +180,7 @@ class ChooseTeamViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("chutiya")
         editButton()
         CustomizeViews2()
         circularbutton()
@@ -195,6 +196,11 @@ class ChooseTeamViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+    }
+    
     func Fetch_Data() {
     //        self.myactivity.isHidden = false
     //        self.myactivity.startAnimating()
@@ -202,12 +208,7 @@ class ChooseTeamViewController: UIViewController {
                 "X-API-KEY": "\(self.Api_Key)"
             ]
             
-            let parameters = [
-            "date_id": myDateID
-                ] as [String : Any]
-        
-            print("myid:- \(parameters)")
-            AF.request("http://projectstatus.co.in/Bulls11/api/authentication/list-datewise-compnaies", method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
+            AF.request("http://projectstatus.co.in/Bulls11/api/authentication/list-datewise-compnaies", method: .get, parameters: nil,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
                 switch response.result {
                 case .success:
                     let myresult = try? JSON(data: response.data!)
@@ -231,7 +232,9 @@ class ChooseTeamViewController: UIViewController {
                             print("mycorediff:- \(model.CoreDiff)")
                             let coreteams = i["c_name"].stringValue
                             print("core large:- \(coreteams)")
-                            allrounderTeam.Company_Name_Batsman_Core.append(coreteams)
+                            let coreteamsID = i["c_id"].stringValue
+                            allrounderTeam.Company_ID.append(coreteamsID)
+                            allrounderTeam.Company_Name_Batsman_Core.append(coreteams) // 4
                             print("core teams :- \(allrounderTeam.Company_Name_Batsman_Core.prefix(10))")
                         } else if set == "Non core" && company == "Large"{
                             model.NonCoreDiff.append(diff)
@@ -246,11 +249,15 @@ class ChooseTeamViewController: UIViewController {
                         if set == "Non core" && company == "Mid" {
                             print("bowlers:- \(i["c_name"].stringValue)")
                             let compName = i["c_name"].stringValue
+                            let compID = i["c_id"].stringValue
+                            allrounderTeam.BowlerCompID.append(compID)
                            allrounderTeam.Company_Name_Bowler.append(compName)
                         }
                         
                         if set == "Non core" && company == "Small" {
                             let compName = i["c_name"].stringValue
+                            let compID = i["c_id"].stringValue
+                            allrounderTeam.wicketkeeperID.append(compID)
                             allrounderTeam.Company_Name_Wicket_Keeper.append(compName)
                         }
                     }
@@ -263,7 +270,9 @@ class ChooseTeamViewController: UIViewController {
                         model.final_Batsman.append(contentsOf: allrounderTeam.Company_Name_Batsman_NonCore.prefix(8))
                         print("finalCount:- \(model.final_Batsman)")
                         
-                    } else {
+                    } else if allrounderTeam.Company_Name_Batsman_Core.count < 10 {
+                        model.final_Batsman.append(contentsOf: allrounderTeam.Company_Name_Batsman_Core)
+                        model.final_Batsman.append(contentsOf: allrounderTeam.Company_Name_Batsman_NonCore)
                         print("paagal")
                     }
                     // for bowlers
@@ -486,13 +495,16 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.cellForRow(at: indexPath) as? ChooseTeamTableViewCell {
              print(cell.CompanyNameLbl)
             savedBatsmanTeams.CompanyName.append(cell.CompanyNameLbl.text ?? "defaults")
+            savedBatsmanTeams.CompanyID.append(cell.userIds)
+            print("myids:- \(savedBatsmanTeams.CompanyID)")
             countForBatsman()
         }
         if let cell = tableView.cellForRow(at: indexPath) as? secondTableViewCell {
              print(cell.CompanyNameLbl)
             savedBowlerTeams.CompanyName.append(cell.CompanyNameLbl.text ?? "defaults")
+            savedBowlerTeams.CompanyID.append(cell.userIds)
+             print("myBowlerids:- \(savedBowlerTeams.CompanyID)")
             countForBowler()
-            
         }
         if let cell = tableView.cellForRow(at: indexPath) as? thirdTableViewCell {
              print(cell.CompanyNameLbl)
@@ -501,6 +513,8 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.cellForRow(at: indexPath) as? fourthTableViewCell {
              print(cell.CompanyNameLbl)
             savedWicketKeeperTeams.CompanyName.append(cell.CompanyNameLbl.text ?? "defaults")
+            savedWicketKeeperTeams.CompanyID.append(cell.userIds)
+            print("myWicketids:- \(savedWicketKeeperTeams.CompanyID)")
             countForWicketKeeper()
         }
   }
@@ -646,17 +660,19 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
         cell.conView.layer.cornerRadius = 5.0
         cell.conView.layer.borderColor = UIColor.gray.cgColor
         cell.conView.layer.borderWidth = 0.5
-            cell.CompanyNameLbl.text = model.final_Batsman[indexPath.row]
+        cell.CompanyNameLbl.text = model.final_Batsman[indexPath.row]
+        cell.userIds = allrounderTeam.Company_ID[indexPath.row]
        // cell.CompanyDetailLbl.text = batsmanTeam.Company_Details[indexPath.row]
         return cell
         } else if tableView.tag == 2 {
                let cell = table2.dequeueReusableCell(withIdentifier: "choose2") as! secondTableViewCell
 //              cell.delegate = self as showStatus2
-             cell.delegate = self as showStatus2
+               cell.delegate = self as showStatus2
                cell.conView.layer.cornerRadius = 5.0
                cell.conView.layer.borderColor = UIColor.gray.cgColor
                cell.conView.layer.borderWidth = 0.5
-            cell.CompanyNameLbl.text = model.final_Bowler[indexPath.row]
+               cell.CompanyNameLbl.text = model.final_Bowler[indexPath.row]
+               cell.userIds = allrounderTeam.BowlerCompID[indexPath.row]
                //cell.CompanyNameLbl.text = bowlerTeam.Company_Name[indexPath.row]
               // cell.CompanyDetailLbl.text = bowlerTeam.Company_Details[indexPath.row]
                return cell
@@ -675,7 +691,8 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
                cell.conView.layer.cornerRadius = 5.0
                cell.conView.layer.borderColor = UIColor.gray.cgColor
                cell.conView.layer.borderWidth = 0.5
-            cell.CompanyNameLbl.text = model.final_wicket_keeper[indexPath.row]
+               cell.CompanyNameLbl.text = model.final_wicket_keeper[indexPath.row]
+            cell.userIds = allrounderTeam.wicketkeeperID[indexPath.row]
 //               cell.CompanyNameLbl.text = wicketkeeparTeam.Company_Name[indexPath.row]
 //               cell.CompanyDetailLbl.text = wicketkeeparTeam.Company_Details[indexPath.row]
                return cell

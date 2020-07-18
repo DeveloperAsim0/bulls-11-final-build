@@ -10,6 +10,7 @@ import UIKit
 import IQKeyboardManager
 import Alamofire
 import SwiftyJSON
+import SwiftKeychainWrapper
 
 class LoginViewController: UIViewController {
 
@@ -83,7 +84,22 @@ class LoginViewController: UIViewController {
                       alert.dismiss(animated: true, completion: nil)
                     }
                 } else {
+                    print(Date().description(with: .current))
+                    
+                    let Result = myresult!["data"].dictionaryValue
+                    let userid = Result["id"]!.stringValue
+                    Login_Model.id.append(userid)
+                    let lastname = Result["last_name"]!.stringValue
+                    Login_Model.last_name.append(lastname)
+                    let firstname = Result["first_name"]!.stringValue
+                    Login_Model.first_name.append(firstname)
+                    let profile = Result["profile_pic"]!.stringValue
+                    Login_Model.profile_pic.append(profile)
                     print("mine:- \(String(describing: myresult?["message"].stringValue))")
+                    let isSaved: Bool = KeychainWrapper.standard.set(userid, forKey: "userID")
+                    let isProfile = KeychainWrapper.standard.set(profile, forKey: "profilepic")
+                    let isFullName: Bool = KeychainWrapper.standard.set(firstname + lastname, forKey: "fullname")
+                     UserDefaults.standard.set(true, forKey: "UserHasSubmittedPassword")
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = storyboard.instantiateViewController(withIdentifier: "customtab")
                     vc.modalPresentationStyle = .fullScreen
@@ -115,7 +131,6 @@ class LoginViewController: UIViewController {
         vc.modalPresentationStyle = .fullScreen
         self.navigationController?.pushViewController(vc, animated: true)
     }
-
 }
 
 extension UIView {
@@ -129,3 +144,4 @@ extension UIView {
         self.layer.add(animation, forKey: "position")
     }
 }
+

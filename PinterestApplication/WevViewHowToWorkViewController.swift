@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import AVFoundation
 
 class WevViewHowToWorkViewController: UIViewController, WKNavigationDelegate {
 
@@ -18,8 +19,15 @@ override func viewDidLoad() {
     webview = WKWebView()
     webview.navigationDelegate = self
     view = webview
+//    AVCaptureDevice.requestAccess(for: cameraMediaType) { granted in
+//    if granted {
+//        
+//        print("Granted access to \(cameraMediaType)")
+//    } else {
+//        print("Denied access to \(cameraMediaType)")
+//    }
     let url = URL(string: "")!
-    webview.load(URLRequest(url: url))
+    //webview.load(URLRequest(url: "https://tryb4ubuy.in/ML5/mobile_live_ML5_testing.php?enterprise_id=C_52"))
     webview.allowsBackForwardNavigationGestures = true
     // Do any additional setup after loading the view.
 }

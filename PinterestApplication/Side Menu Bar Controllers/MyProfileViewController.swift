@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import SDWebImage
+import SwiftKeychainWrapper
+import Alamofire
+import SwiftyJSON
 
 class MyProfileViewController: UIViewController {
 
@@ -15,6 +19,14 @@ class MyProfileViewController: UIViewController {
     @IBOutlet weak var thirdView    : UIView!
     @IBOutlet weak var shareBtn     : UIButton!
     @IBOutlet weak var bullspointvalue: UILabel!
+    @IBOutlet weak var User_name    : UILabel!
+    @IBOutlet weak var profilepic   : UIImageView!
+    @IBOutlet weak var bullscoinValue: UILabel!
+    @IBOutlet weak var phoneNumber   : UILabel!
+    @IBOutlet weak var quizContests  : UILabel!
+    
+    let Profile_URL = "http://projectstatus.co.in/Bulls11/api/authentication/user/"
+    let Api_Key = "BULLS11@2020"
     
     let cornerRadius: CGFloat = 3.0
     
@@ -38,14 +50,46 @@ class MyProfileViewController: UIViewController {
         shareBtn.layer.masksToBounds    = true
     }
     
+    
+    
+    func Fetch_Profile() {
+        let header:HTTPHeaders = [
+            "X-API-KEY": "\(self.Api_Key)"
+        ]
+        
+        AF.request(self.Profile_URL + KeychainWrapper.standard.string(forKey: "userID")!, method: .get, parameters: nil,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
+                   switch response.result {
+                   case .success:
+                    print(response.result)
+                    let result = try? JSON(data: response.data!)
+                    print("myResult:- \(result!.dictionaryValue)")
+                    let finalResult = result!.dictionaryValue
+                    print("firstname:- \(finalResult["first_name"]!.stringValue)")
+                    let fullname = finalResult["first_name"]!.stringValue + finalResult["last_name"]!.stringValue
+                    self.User_name.text = fullname
+                    let profilepic = finalResult["profile_pic"]?.stringValue
+                    self.profilepic.sd_setImage(with: URL(string: profilepic!), placeholderImage: UIImage(named: "user icon"))
+                    let bullspoints = finalResult["bull_points"]?.stringValue
+                    self.bullspointvalue.text = bullspoints
+                    let bullscoins = finalResult["bulls_coin"]?.stringValue
+                    self.bullscoinValue.text = bullscoins
+                    let phoneNo = finalResult["phone"]?.stringValue
+                    self.phoneNumber.text = phoneNo
+                    let quiz = finalResult["quiz"]?.stringValue
+                    self.quizContests.text = quiz
+                    break
+                   case .failure:
+                    print(response.error.debugDescription)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        Fetch_Profile()
+//        self.profilepic.sd_setImage(with: URL(string: Login_Model.profile_pic), placeholderImage: UIImage(named: "user icon"))
+//        self.User_name.text = KeychainWrapper.standard.string(forKey: "userID")
          CustomizeView()
-        if model.bullsPoint != nil {
-            self.bullspointvalue.text = model.bullsPoint
-        } else {
-            self.bullspointvalue.text = "0"
-        }
         self.navigationController?.navigationBar.topItem?.title = ""
         title = "My Profile"
         let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
@@ -54,7 +98,6 @@ class MyProfileViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    
     
     /*
     // MARK: - Navigation

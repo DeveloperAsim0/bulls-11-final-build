@@ -58,111 +58,8 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         CustomizeTextField()
         CustomizeRegisterBtn()
         CustomNavBar()
-       imageViewRef.layer.borderWidth = 0.55
-       imageViewRef.layer.masksToBounds = false
-       imageViewRef.layer.borderColor = UIColor.white.cgColor
-       imageViewRef.layer.cornerRadius = imageViewRef.frame.size.width / 2
-       imageViewRef.clipsToBounds = true
-        self.myactivity.isHidden = true
-      //  picker.delegate = self
+        //  picker.delegate = self
         // Do any additional setup after loading the view.
-    }
-    
-      func Fetch_Data() {
-//        self.myactivity.isHidden = false
-//        self.myactivity.startAnimating()
-        let image = UIImage.init(named: "1.png")
-        let imgData = imageViewRef.image!.jpegData(compressionQuality: 0.2)!
-       let header:HTTPHeaders = [
-            "X-API-KEY": "\(self.Api_Key)"
-        ]
-
-        let parameters = [
-            "email": emailField.text,
-            "password": passwordField.text,
-            "phone": mobileNo.text
-            ]
-        
-        AF.upload(multipartFormData: { (multipartFormData) in
-            multipartFormData.append(imgData, withName: "profile_pic", fileName: "file.jpg", mimeType: "image/jpg")
-            for (key, value) in parameters {
-                multipartFormData.append(value!.data(using: String.Encoding.utf8)!, withName: key)
-                }
-        }, to:Registration_URL, method: .post, headers: header).authenticate(username: "admin", password: "1234").responseJSON { (response) in
-            switch response.result {
-            case .success:
-                print(response.result)
-                let myresult = try? JSON(data: response.data!)
-                print("my:- \(myresult?["status"])")
-                if myresult?["status"] == false  {
-                    let alert = UIAlertController(title: "Alert", message: "\(myresult!["message"])", preferredStyle: .alert)
-                    self.present(alert, animated: true, completion: nil)
-
-                    // change to desired number of seconds (in this case 5 seconds)
-                    let when = DispatchTime.now() + 2
-                    DispatchQueue.main.asyncAfter(deadline: when){
-                      // your code with delay
-                      alert.dismiss(animated: true, completion: nil)
-                    }
-                } else if myresult?["status"] == true{
-                    let alert = UIAlertController(title: "Successfully Registered", message: "", preferredStyle: UIAlertController.Style.alert)
-                                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
-                                        UserDefaults.standard.set(true, forKey: "UserHasSubmittedPassword")
-                                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                                        let vc = storyboard.instantiateViewController(withIdentifier: "customtab")
-                                        vc.modalPresentationStyle = .fullScreen
-                                        self.present(vc, animated: true, completion: nil)
-                                    }))
-                                    self.present(alert, animated: true, completion: nil)
-                                    self.myactivity.stopAnimating()
-                                    self.myactivity.isHidden = true
-                }
-//
-            case .failure(let err):
-                print(err.errorDescription)
-            }
-        }
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let pickerImage = info[UIImagePickerController.InfoKey.editedImage,default: UIImagePickerController.InfoKey.editedImage] as? UIImage else {return}
-        imageViewRef.image = pickerImage
-        imageViewRef.contentMode = .scaleToFill
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    func openGallery()
-    {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.allowsEditing = true
-            imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-            self.present(imagePicker, animated: true, completion: nil)
-        }
-        else
-        {
-            let alert  = UIAlertController(title: "Warning", message: "You don't have permission to access gallery.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-
-    func openCamera()
-    {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerController.SourceType.camera
-            imagePicker.allowsEditing = false
-            self.present(imagePicker, animated: true, completion: nil)
-        }
-        else
-        {
-            let alert  = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
     }
     
     @IBAction func RegisterBTN(_ sender: Any){
@@ -171,7 +68,14 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
                    passwordView.shake()
                    mobileView.shake()
                } else {
-                   Fetch_Data()
+//                   Fetch_Data()
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "signupprofile") as! SignUpProfileViewController
+            vc.modalPresentationStyle = .fullScreen
+            vc.phoneNumber = self.mobileNo.text!
+            vc.emailString = self.emailField.text!
+            vc.passwordString = self.passwordField.text!
+            self.navigationController?.pushViewController(vc, animated: true)
                    print("textField has some text")
                }
     }
@@ -183,25 +87,4 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    @IBAction func selectImage(_ sender: Any){
-      let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
-      alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-          self.openCamera()
-      }))
-
-      alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
-          self.openGallery()
-      }))
-
-      alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-
-      self.present(alert, animated: true, completion: nil)
-    }
-        //MARK:UIImagePickerControllerDelegate
-    
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-	return input.rawValue
 }

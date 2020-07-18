@@ -3,6 +3,10 @@ PODS:
   - ALCameraViewController (3.1)
   - IQKeyboardManager (6.5.5)
   - MHLoadingButton (0.1.0)
+  - SDWebImage (5.8.3):
+    - SDWebImage/Core (= 5.8.3)
+  - SDWebImage/Core (5.8.3)
+  - SwiftKeychainWrapper (3.4.0)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
@@ -10,6 +14,8 @@ DEPENDENCIES:
   - ALCameraViewController
   - IQKeyboardManager
   - MHLoadingButton
+  - SDWebImage
+  - SwiftKeychainWrapper
   - SwiftyJSON
 
 SPEC REPOS:
@@ -18,6 +24,8 @@ SPEC REPOS:
     - ALCameraViewController
     - IQKeyboardManager
     - MHLoadingButton
+    - SDWebImage
+    - SwiftKeychainWrapper
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -25,8 +33,10 @@ SPEC CHECKSUMS:
   ALCameraViewController: 144dea45fd749a623aafd8cb7b10cea88499fcc3
   IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
   MHLoadingButton: 810a3123f739e32fcd4beec45b8d1a3bad06e38e
+  SDWebImage: 112503ec94a5a2a41869503844a15e8d8f1ead5c
+  SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 70d5b361d690fec732138dbd0cd73f849a3c38f1
+PODFILE CHECKSUM: e79184e207af1229542530798e99d6eb91e0f2c5
 
 COCOAPODS: 1.8.4

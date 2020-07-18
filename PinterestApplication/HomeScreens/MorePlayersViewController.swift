@@ -44,7 +44,7 @@ class MorePlayersViewController: UIViewController {
 //        passiveBtn.layer.cornerRadius = 15
 //    }
 //
-    fileprivate func CustomizeViews2(){
+    fileprivate func CustomizeViews2() {
         selectview.backgroundColor    = .clear
         selectview.layer.cornerRadius = selectview.frame.size.width/2
         selectview.layer.borderColor  = UIColor.white.cgColor
@@ -138,7 +138,6 @@ class MorePlayersViewController: UIViewController {
       //  CustomizeButton()
         // Do any additional setup after loading the view.
     }
-    
     
     @IBAction func next(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

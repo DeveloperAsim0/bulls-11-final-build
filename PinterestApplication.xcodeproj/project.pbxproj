@@ -13,9 +13,11 @@
 		3A16B31E249B36B70006D89E /* sidemenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A16B31D249B36B70006D89E /* sidemenuCell.swift */; };
 		3A1D735324921A18002D7AB3 /* letsplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1D735224921A18002D7AB3 /* letsplayViewController.swift */; };
 		3A226C0824A1DFD300D0AB44 /* BetterluckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A226C0724A1DFD300D0AB44 /* BetterluckViewController.swift */; };
+		3A2FFEDD24C019E700B74EB8 /* SignUpProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2FFEDC24C019E700B74EB8 /* SignUpProfileViewController.swift */; };
 		3A360F7D246E961C00FB95C4 /* HowToPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A360F7C246E961C00FB95C4 /* HowToPlayViewController.swift */; };
 		3A360F7F246EB11500FB95C4 /* LegalityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A360F7E246EB11500FB95C4 /* LegalityViewController.swift */; };
 		3A3C070C246C3E55009D65B0 /* MyHallOfFameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C070B246C3E55009D65B0 /* MyHallOfFameViewController.swift */; };
+		3A42590124C0313D0027F4E8 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A42590024C0313D0027F4E8 /* LoginModel.swift */; };
 		3A478DBD249110FF006A8533 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A478DBC249110FF006A8533 /* CongratulationViewController.swift */; };
 		3A4DE77A246D31400037969E /* WeeklyLeaderBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DE779246D31400037969E /* WeeklyLeaderBoardViewController.swift */; };
 		3A4DE77C246D327B0037969E /* leaderBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DE77B246D327B0037969E /* leaderBoardCell.swift */; };
@@ -38,6 +40,7 @@
 		3A858736249A016A005EA0AB /* WevViewHowToWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A858735249A016A005EA0AB /* WevViewHowToWorkViewController.swift */; };
 		3A85873C249A0667005EA0AB /* WebViewHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85873B249A0667005EA0AB /* WebViewHelpViewController.swift */; };
 		3A85873F249A23B8005EA0AB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85873E249A23B8005EA0AB /* Model.swift */; };
+		3A9A9F0724C2EE800089A6E9 /* SavedFinalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9A9F0624C2EE800089A6E9 /* SavedFinalModel.swift */; };
 		3AA4944C246BD92000EB45E2 /* CustomTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4944B246BD92000EB45E2 /* CustomTabbarController.swift */; };
 		3AA4944E246BD98600EB45E2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4944D246BD98600EB45E2 /* HomeViewController.swift */; };
 		3AA49450246BD99300EB45E2 /* ContestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4944F246BD99300EB45E2 /* ContestViewController.swift */; };
@@ -67,9 +70,11 @@
 		3A16B31D249B36B70006D89E /* sidemenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sidemenuCell.swift; sourceTree = "<group>"; };
 		3A1D735224921A18002D7AB3 /* letsplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = letsplayViewController.swift; sourceTree = "<group>"; };
 		3A226C0724A1DFD300D0AB44 /* BetterluckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterluckViewController.swift; sourceTree = "<group>"; };
+		3A2FFEDC24C019E700B74EB8 /* SignUpProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileViewController.swift; sourceTree = "<group>"; };
 		3A360F7C246E961C00FB95C4 /* HowToPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayViewController.swift; sourceTree = "<group>"; };
 		3A360F7E246EB11500FB95C4 /* LegalityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalityViewController.swift; sourceTree = "<group>"; };
 		3A3C070B246C3E55009D65B0 /* MyHallOfFameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHallOfFameViewController.swift; sourceTree = "<group>"; };
+		3A42590024C0313D0027F4E8 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		3A478DBC249110FF006A8533 /* CongratulationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratulationViewController.swift; sourceTree = "<group>"; };
 		3A4DE779246D31400037969E /* WeeklyLeaderBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyLeaderBoardViewController.swift; sourceTree = "<group>"; };
 		3A4DE77B246D327B0037969E /* leaderBoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = leaderBoardCell.swift; sourceTree = "<group>"; };
@@ -92,6 +97,7 @@
 		3A858735249A016A005EA0AB /* WevViewHowToWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WevViewHowToWorkViewController.swift; sourceTree = "<group>"; };
 		3A85873B249A0667005EA0AB /* WebViewHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewHelpViewController.swift; sourceTree = "<group>"; };
 		3A85873E249A23B8005EA0AB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		3A9A9F0624C2EE800089A6E9 /* SavedFinalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFinalModel.swift; sourceTree = "<group>"; };
 		3AA4944B246BD92000EB45E2 /* CustomTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbarController.swift; sourceTree = "<group>"; };
 		3AA4944D246BD98600EB45E2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3AA4944F246BD99300EB45E2 /* ContestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				3A85873E249A23B8005EA0AB /* Model.swift */,
+				3A42590024C0313D0027F4E8 /* LoginModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -215,6 +222,7 @@
 				3A5347952469762100E99240 /* OTPViewController.swift */,
 				3A53479124696A3E00E99240 /* LoginViewController.swift */,
 				3ACECF1824695C9E003354CF /* RegisterViewController.swift */,
+				3A2FFEDC24C019E700B74EB8 /* SignUpProfileViewController.swift */,
 			);
 			path = Log_Authentications;
 			sourceTree = "<group>";
@@ -266,6 +274,7 @@
 				3A79F81D24A479D5007BC669 /* secondTableViewCell.swift */,
 				3A79F81F24A479DE007BC669 /* thirdTableViewCell.swift */,
 				3A79F82124A479E6007BC669 /* fourthTableViewCell.swift */,
+				3A9A9F0624C2EE800089A6E9 /* SavedFinalModel.swift */,
 			);
 			path = PinterestApplication;
 			sourceTree = "<group>";
@@ -383,6 +392,8 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/MHLoadingButton/MHLoadingButton.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -391,6 +402,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MHLoadingButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,7 +424,9 @@
 				DAB9FCFE1FC8E4C300CF64A7 /* ViewController.swift in Sources */,
 				3A79F82224A479E6007BC669 /* fourthTableViewCell.swift in Sources */,
 				3AE2D43F2490D985002DC0F4 /* contestVC.swift in Sources */,
+				3A2FFEDD24C019E700B74EB8 /* SignUpProfileViewController.swift in Sources */,
 				3A16B31E249B36B70006D89E /* sidemenuCell.swift in Sources */,
+				3A9A9F0724C2EE800089A6E9 /* SavedFinalModel.swift in Sources */,
 				3A5ABC34249738D100FFA09D /* Constant.swift in Sources */,
 				3AF0244E246D1121009D8D5F /* MyProfileViewController.swift in Sources */,
 				3A8587322499FEEA005EA0AB /* WevViewLeagalityViewController.swift in Sources */,
@@ -433,6 +448,7 @@
 				3A858736249A016A005EA0AB /* WevViewHowToWorkViewController.swift in Sources */,
 				3AC5B519246ED93000F23701 /* HelpCentreViewController.swift in Sources */,
 				3A478DBD249110FF006A8533 /* CongratulationViewController.swift in Sources */,
+				3A42590124C0313D0027F4E8 /* LoginModel.swift in Sources */,
 				3AA4944E246BD98600EB45E2 /* HomeViewController.swift in Sources */,
 				3A85873C249A0667005EA0AB /* WebViewHelpViewController.swift in Sources */,
 				3A360F7F246EB11500FB95C4 /* LegalityViewController.swift in Sources */,

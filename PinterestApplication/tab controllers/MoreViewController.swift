@@ -20,7 +20,7 @@ class MoreViewController: UIViewController {
     @IBOutlet weak var myinfo: UIButton!
     @IBOutlet weak var mysideview: UIView!
     @IBOutlet weak var table: UITableView!
-    
+    @IBOutlet weak var UserName: UILabel!
     
     var sideMenu4 = false
     
@@ -37,6 +37,7 @@ class MoreViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.UserName.text = Login_Model.first_name + "" + Login_Model.last_name
        // self.navigationController?.navigationBar.topItem?.title = "MORE"
         CustomNavBar()
         mysideview.layer.borderColor = UIColor.darkGray.cgColor

@@ -9,6 +9,8 @@
 import Foundation
 
 class model{
+    static var totalSlots = [String]()
+    static var actualDateID = String()
     static var firstoption          = [String]()
     static var secondoption         = [String]()
     static var thirdoption          = [String]()
@@ -69,6 +71,9 @@ class allrounderTeam {
     static var Company_Name_Bowler      = [String]()
     static var Company_Name_Wicket_Keeper    = [String]()
     static var Company_Type             = [String]()
+    static var BowlerCompID   = [String]()
+    static var wicketkeeperID   = [String]()
+    
 }
 
 class savedBatsmanTeams {

@@ -16,10 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        // so in this example name is "Main".
+      //   so in this example name is "Main".
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let storyboard2 = UIStoryboard(name: "Main", bundle: nil)
-              
+
         if UserDefaults.standard.value(forKey: "UserHasSubmittedPassword") != nil{
             //Navigate to homeviewcontroller
              let vc2 = storyboard2.instantiateViewController(withIdentifier: "customtab")
@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //Navigate to rootviewcontroller
             self.window?.rootViewController = navigationController
         }
-        
+
         self.window?.makeKeyAndVisible()
        
         // Override point for customization after application launch.

@@ -23,7 +23,7 @@ class secondTableViewCell: UITableViewCell {
             super.awakeFromNib()
         }
 
-     
+     var userIds = String()
         override func layoutSubviews() {
             super.layoutSubviews()
         }

@@ -11,5 +11,7 @@ target 'PinterestApplication' do
    pod 'ALCameraViewController'
    pod 'SwiftyJSON'
    pod 'MHLoadingButton'
+   pod 'SDWebImage'
+   pod 'SwiftKeychainWrapper'
 
 end

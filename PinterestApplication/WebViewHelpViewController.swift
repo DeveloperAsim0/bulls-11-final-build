@@ -18,7 +18,7 @@ var webview: WKWebView!
     webview = WKWebView()
     webview.navigationDelegate = self
     view = webview
-    let url = URL(string: "http://projectstatus.co.in/Bulls11/html/helpcenter.html")!
+    let url = URL(string: "https://tryb4ubuy.in/ML5/mobile_live_ML5_testing.php?enterprise_id=C_52")!
     webview.load(URLRequest(url: url))
     webview.allowsBackForwardNavigationGestures = true
     // Do any additional setup after loading the view.

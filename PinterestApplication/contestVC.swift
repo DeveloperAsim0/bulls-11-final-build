@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import SwiftKeychainWrapper
 
 class contestVC: UIViewController {
     
@@ -23,7 +24,7 @@ class contestVC: UIViewController {
         let Api_Key = "BULLS11@2020"
     
     var quesNumber = ["1", "2", "3"]
-    
+    var WhichResult = String()
     override func viewDidLoad() {
     super.viewDidLoad()
         Fetch_Data()
@@ -70,6 +71,27 @@ class contestVC: UIViewController {
         
     }
     
+    func getResult() {
+        let header:HTTPHeaders = [
+            "X-API-KEY": "\(self.Api_Key)"
+        ]
+        
+        let parameter = [
+            "user_id": KeychainWrapper.standard.string(forKey: "userID"),
+            "result": WhichResult
+        ]
+        print(parameter)
+        AF.request("http://projectstatus.co.in/Bulls11/api/authentication/quiz_result", method: .post, parameters: parameter,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
+            switch response.result {
+            case .success:
+                print(response.result)
+                
+            case .failure:
+                print(response.error?.errorDescription)
+            }
+        }
+    }
+    
     @IBAction func next(_ sender: Any) {
         self.nextbtn.tag += 1
         var one = 1
@@ -88,19 +110,33 @@ class contestVC: UIViewController {
                   }
         if self.nextbtn.tag == 4 {
             print("no more")
+            
             if model.choose_Answer == model.rightans {
                 print("winner")
+                self.WhichResult = "pass"
+                 print("re:- \(self.WhichResult)")
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "congratulation")
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true, completion: nil)
             } else {
+                self.WhichResult = "fail"
+                print("re:- \(self.WhichResult)")
                 print("buhhhhhhh")
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "betterluck")
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true, completion: nil)
             }
+            getResult()
+            let dateFormatter : DateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let date = Date()
+            let dateString = dateFormatter.string(from: date)
+            let interval = date.timeIntervalSince1970
+            let isTimeSaved: Bool = KeychainWrapper.standard.set(dateString, forKey: "DateSaved")
+            print("mydate:- \(dateString)")
+            print("mytime:-\(interval)")
         } else {
             print("enjoy")
         }
@@ -136,7 +172,7 @@ extension contestVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
         cell.third.text = model.thirdoption[indexPath.row]
         cell.fourth.text = model.fourthoption[indexPath.row]
         cell.questiion.text = model.ques[indexPath.row]
-        cell.number.text = self.quesNumber[indexPath.row]
+        //cell.number.text = self.quesNumber[indexPath.row]
         return cell
     }
     

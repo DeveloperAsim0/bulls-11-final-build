@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
+import SDWebImage
+import Alamofire
+import SwiftyJSON
 
 class HomeViewController: UIViewController {
     
@@ -20,6 +24,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var secondView: UIView!
     @IBOutlet weak var thirdView: UIView!
     @IBOutlet weak var sidemenuview: UIView!
+    @IBOutlet weak var profilePic: UIImageView!
     
     @IBOutlet weak var leadingConstraints: NSLayoutConstraint!
     @IBOutlet weak var table: UITableView!
@@ -33,8 +38,12 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var Weekly: UIButton!
     @IBOutlet weak var Quiz: UIButton!
     
-    var sideMenu4 = false
+    //Side Menu outlet:
+    @IBOutlet weak var UserName: UILabel!
     
+    var sideMenu4 = false
+    let Profile_URL = "http://projectstatus.co.in/Bulls11/api/authentication/user/"
+    let Api_Key = "BULLS11@2020"
     var namearr = ["My Profile", "Weekly Leaderboard", "Hall of Fame", "My Balance", "My Rewards & Offer", "My Refferals", "My Info Setting", "Point Systems", "Logout"]
     
     var iconArr = ["myprofile", "my_contest_icon", "hall_of_fame", "mybalance", "myrewardsoffers", "myreferrals", "myinfosettings", "pointsystem", "logout"]
@@ -113,11 +122,38 @@ class HomeViewController: UIViewController {
         thirdinheritview.clipsToBounds = true
     }
     
+    func Fetch_Profile() {
+        let header:HTTPHeaders = [
+            "X-API-KEY": "\(self.Api_Key)"
+        ]
+        
+        AF.request(self.Profile_URL + KeychainWrapper.standard.string(forKey: "userID")!, method: .get, parameters: nil,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
+                   switch response.result {
+                   case .success:
+                    print(response.result)
+                    let result = try? JSON(data: response.data!)
+                    print("myResult:- \(result!.dictionaryValue)")
+                    let finalResult = result!.dictionaryValue
+                    print("firstname:- \(finalResult["first_name"]!.stringValue)")
+                    let fullname = finalResult["first_name"]!.stringValue + finalResult["last_name"]!.stringValue
+                    self.UserName.text = fullname
+                    let profilepic = finalResult["profile_pic"]?.stringValue
+                 //   self.profilePic.sd_setImage(with: URL(string: profilepic ?? "don't know"), placeholderImage: UIImage(named: "user icon"))
+                   
+                    break
+                   case .failure:
+                    print(response.error.debugDescription)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        Fetch_Profile()
         //self.navigationController?.navigationBar.topItem?.title = "HOME"
         CustomNavBar()
         CustomizeViews()
+       // KeychainWrapper.standard.removeObject(forKey: "DateSaved")
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -143,10 +179,23 @@ class HomeViewController: UIViewController {
     }
 
     @IBAction func QuizBtnSegue(_ sender: Any) {
+        let dateFormatter : DateFormatter = DateFormatter()
+                   dateFormatter.dateFormat = "yyyy-MM-dd"
+                   let date = Date()
+                   let dateString = dateFormatter.string(from: date)
+                   let interval = date.timeIntervalSince1970
+                   print("mydate:- \(dateString)")
+                   print("mytime:-\(interval)")
+       let savedDate = KeychainWrapper.standard.string(forKey: "DateSaved")
+        print("savedDate:- \(savedDate)")
+        if dateString != savedDate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "contestVC")
         vc.modalPresentationStyle = .fullScreen
-        self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            print("nikal yahan se")
+        }
     }
 
     @IBAction func openSideMenu(_ sender: Any){

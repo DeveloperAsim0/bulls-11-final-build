@@ -19,6 +19,7 @@ class WalletViewController: UIViewController {
     
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var leadingConstraints: NSLayoutConstraint!
+    @IBOutlet weak var UserName: UILabel!
     
     let cornerRadius: CGFloat = 6.0
     
@@ -81,6 +82,7 @@ class WalletViewController: UIViewController {
         CustomizeUIBUTTON()
         CustomizeUIVIEW()
         CustomNavBar()
+        self.UserName.text = Login_Model.first_name + "" + Login_Model.last_name
         // Do any additional setup after loading the view.
     }
     

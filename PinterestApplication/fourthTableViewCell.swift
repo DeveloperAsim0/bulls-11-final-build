@@ -27,6 +27,8 @@ class fourthTableViewCell: UITableViewCell {
             super.layoutSubviews()
         }
         
+    var userIds = String()
+    
         @IBAction func popupViewBtn(_ sender: UIButton){
             delegate?.didTapForStatus4(Title: "OK")
         }

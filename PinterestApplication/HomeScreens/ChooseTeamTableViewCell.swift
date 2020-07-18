@@ -18,6 +18,8 @@ class ChooseTeamTableViewCell: UITableViewCell {
     @IBOutlet weak var CompanyNameLbl: UILabel!
     @IBOutlet weak var CompanyDetailLbl: UILabel!
     
+    var userIds = String()
+    
     var delegate: showStatus?
     override func awakeFromNib() {
         super.awakeFromNib()

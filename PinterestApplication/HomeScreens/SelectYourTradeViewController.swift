@@ -40,8 +40,6 @@ class SelectYourTradeViewController: UIViewController {
     
     
     func Fetch_Data() {
-    //        self.myactivity.isHidden = false
-    //        self.myactivity.startAnimating()
             let header:HTTPHeaders = [
                 "X-API-KEY": "\(self.Api_Key)"
             ]
@@ -57,11 +55,13 @@ class SelectYourTradeViewController: UIViewController {
                     print("y i value:- \(i)")
                         let details = i["small_content"].stringValue
                         model.date_details.append(details)
-                    let id = i["d_id"].stringValue
+                        let id = i["d_id"].stringValue
                         print("id:- \(id)")
                         model.dateID.append(id)
                         let date = i["dates"].stringValue
                         model.date.append(date)
+                        let prizeAmount = i["prize_amount"].stringValue
+                        model.totalSlots.append(prizeAmount)
                        // print("mydate:- \(model.date)")
                 }
                     self.tableView.reloadData()
@@ -113,6 +113,7 @@ extension SelectYourTradeViewController: UITableViewDelegate, UITableViewDataSou
         let vc = storyboard.instantiateViewController(withIdentifier: "choose") as! ChooseTeamViewController
         vc.ApiURL = self.NextApiUrl
         vc.myDateID = model.dateID
+        model.actualDateID = model.dateID
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
