@@ -97,6 +97,7 @@ class LoginViewController: UIViewController {
                     Login_Model.profile_pic.append(profile)
                     print("mine:- \(String(describing: myresult?["message"].stringValue))")
                     let isSaved: Bool = KeychainWrapper.standard.set(userid, forKey: "userID")
+                    print("useri:- \(KeychainWrapper.standard.string(forKey: "userID"))")
                     let isProfile = KeychainWrapper.standard.set(profile, forKey: "profilepic")
                     let isFullName: Bool = KeychainWrapper.standard.set(firstname + lastname, forKey: "fullname")
                      UserDefaults.standard.set(true, forKey: "UserHasSubmittedPassword")

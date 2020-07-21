@@ -19,6 +19,8 @@ class SelectYourTradeViewController: UIViewController {
     var Date_URL = String()
     let Api_Key = "BULLS11@2020"
     var NextApiUrl = String()
+    
+    
     fileprivate func CustomizeViews(){
         selectview.backgroundColor      = .clear
         selectview.layer.cornerRadius   = selectview.frame.size.width/2
@@ -78,8 +80,7 @@ class SelectYourTradeViewController: UIViewController {
         CustomizeViews()
         Fetch_Data()
         self.navigationController?.navigationBar.topItem?.title = "Back"
-
-        // Do any additional setup after loading the view.
+         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,7 +98,7 @@ extension SelectYourTradeViewController: UITableViewDelegate, UITableViewDataSou
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.dateID.count
+        return model.date.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -112,9 +113,9 @@ extension SelectYourTradeViewController: UITableViewDelegate, UITableViewDataSou
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "choose") as! ChooseTeamViewController
         vc.ApiURL = self.NextApiUrl
-        vc.myDateID = model.dateID
-        model.actualDateID = model.dateID
+//      vc.myDateID = model.dateID
+        model.actualDateID = model.dateID[indexPath.row]
+        print("actualid = \(model.actualDateID)")
         self.navigationController?.pushViewController(vc, animated: true)
     }
-
 }

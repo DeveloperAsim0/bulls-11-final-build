@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
+import SwiftKeychainWrapper
+import SDWebImage
 
 class MoreViewController: UIViewController {
 
     @IBOutlet weak var leadingConstraints: NSLayoutConstraint!
-    @IBOutlet weak var myprofile: UIButton!
+    @IBOutlet weak var myprofile: UIImageView!
     @IBOutlet weak var weeklyleaderboard: UIButton!
     @IBOutlet weak var halloffame: UIButton!
     @IBOutlet weak var mybalance: UIButton!
@@ -23,10 +27,11 @@ class MoreViewController: UIViewController {
     @IBOutlet weak var UserName: UILabel!
     
     var sideMenu4 = false
+    let Profile_URL = "http://projectstatus.co.in/Bulls11/api/authentication/user/"
+       let Api_Key = "BULLS11@2020"
+    var namearr = ["My Profile", "Weekly Leaderboard", "Hall of Fame", "My Balance", "My Rewards & Offer", "My Refferals", "Point Systems", "Logout"]
     
-    var namearr = ["My Profile", "Weekly Leaderboard", "Hall of Fame", "My Balance", "My Rewards & Offer", "My Refferals", "My Info Setting", "Point Systems", "Logout"]
-    
-    var iconArr = ["myprofile", "my_contest_icon", "hall_of_fame", "mybalance", "myrewardsoffers", "myreferrals", "myinfosettings", "pointsystem", "logout"]
+    var iconArr = ["myprofile", "my_contest_icon", "hall_of_fame", "mybalance", "myrewardsoffers", "myreferrals", "pointsystem", "logout"]
     
     fileprivate func CustomNavBar(){
         title = "MORE"
@@ -35,11 +40,35 @@ class MoreViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 212/255, green: 71/255, blue: 140/255, alpha: 1)
     }
     
+    func Fetch_Profile() {
+        let header:HTTPHeaders = [
+            "X-API-KEY": "\(self.Api_Key)"
+        ]
+        
+        AF.request(self.Profile_URL + KeychainWrapper.standard.string(forKey: "userID")!, method: .get, parameters: nil,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON{ response in
+            switch response.result {
+                   case .success:
+                    print("ok:-\(response.result)")
+                    let result = try? JSON(data: response.data!)
+                    print("myResult:- \(result!.dictionaryValue)")
+                    let finalResult = result!.dictionaryValue
+                    print("firstname:- \(finalResult["first_name"]!.stringValue)")
+                    let fullname = finalResult["first_name"]!.stringValue + finalResult["last_name"]!.stringValue
+                    self.UserName.text = fullname
+                    let profilepic = finalResult["profile_pic"]?.stringValue
+                    self.myprofile.sd_setImage(with: URL(string: profilepic!), placeholderImage: UIImage(named: "user icon"))
+                    break
+                   case .failure:
+                    print(response.error.debugDescription)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.UserName.text = Login_Model.first_name + "" + Login_Model.last_name
-       // self.navigationController?.navigationBar.topItem?.title = "MORE"
         CustomNavBar()
+        Fetch_Profile()
+        self.myprofile.layer.cornerRadius = self.myprofile.frame.size.width/2
         mysideview.layer.borderColor = UIColor.darkGray.cgColor
         mysideview.layer.borderWidth = 1
         mysideview.layer.masksToBounds = true
@@ -134,7 +163,7 @@ class MoreViewController: UIViewController {
 
 extension MoreViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        return 8
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -189,19 +218,14 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource {
            
         
         } else if indexPath.row == 7 {
-        // controler
-        } else if indexPath.row == 8 {
-            UserDefaults.standard.removeObject(forKey: "UserHasSubmittedPassword")
+           UserDefaults.standard.removeObject(forKey: "UserHasSubmittedPassword")
+            KeychainWrapper.standard.removeObject(forKey: "userID")
+            print("userid:- \(KeychainWrapper.standard.string(forKey: "userID"))")
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
                               let vc = storyboard.instantiateViewController(withIdentifier: "view")
                               vc.modalPresentationStyle = .fullScreen
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
-                       
-            
         }
     }
-    
-    
-    
 }

@@ -14,7 +14,6 @@ import SwiftyJSON
 
 class MyProfileViewController: UIViewController {
 
-    @IBOutlet weak var firstView    : UIView!
     @IBOutlet weak var secondView   : UIView!
     @IBOutlet weak var thirdView    : UIView!
     @IBOutlet weak var shareBtn     : UIButton!
@@ -24,6 +23,7 @@ class MyProfileViewController: UIViewController {
     @IBOutlet weak var bullscoinValue: UILabel!
     @IBOutlet weak var phoneNumber   : UILabel!
     @IBOutlet weak var quizContests  : UILabel!
+    @IBOutlet weak var quizWins      : UILabel!
     
     let Profile_URL = "http://projectstatus.co.in/Bulls11/api/authentication/user/"
     let Api_Key = "BULLS11@2020"
@@ -33,12 +33,6 @@ class MyProfileViewController: UIViewController {
     fileprivate func CustomizeView() {
         let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
-        firstView.layer.shadowColor     = UIColor.gray.cgColor
-        firstView.layer.shadowOffset    = CGSize(width: 0, height: 1.0)
-        firstView.layer.shadowOpacity   = 0.5
-        firstView.layer.shadowRadius    = 2.0
-        firstView.layer.cornerRadius    = cornerRadius
-        firstView.layer.masksToBounds   = false
         
         secondView.layer.shadowColor    = UIColor.lightGray.cgColor
         secondView.layer.shadowOffset   = CGSize(width: 0, height: 1.0)
@@ -56,7 +50,8 @@ class MyProfileViewController: UIViewController {
         let header:HTTPHeaders = [
             "X-API-KEY": "\(self.Api_Key)"
         ]
-        
+        print("userid::-\(KeychainWrapper.standard.string(forKey: "userID")!)")
+        print("url::-\(self.Profile_URL + KeychainWrapper.standard.string(forKey: "userID")!)")
         AF.request(self.Profile_URL + KeychainWrapper.standard.string(forKey: "userID")!, method: .get, parameters: nil,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
                    switch response.result {
                    case .success:
@@ -87,6 +82,7 @@ class MyProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Fetch_Profile()
+        self.profilepic.layer.cornerRadius = self.profilepic.frame.size.width/2
 //        self.profilepic.sd_setImage(with: URL(string: Login_Model.profile_pic), placeholderImage: UIImage(named: "user icon"))
 //        self.User_name.text = KeychainWrapper.standard.string(forKey: "userID")
          CustomizeView()

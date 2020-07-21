@@ -16,6 +16,15 @@ class letsplayViewController: UIViewController {
     @IBOutlet weak var selectView: UIView!
     @IBOutlet weak var createview: UIView!
     @IBOutlet weak var joinview: UIView!
+    @IBOutlet weak var pointsview: UIView!
+    @IBOutlet weak var unpaidView: UIView!
+    @IBOutlet weak var pointslbl: UILabel!
+    @IBOutlet weak var butt : UIButton!
+    
+    @IBOutlet weak var lbl: UILabel!
+    @IBOutlet weak var lbl2: UILabel!
+    @IBOutlet weak var lbl3: UILabel!
+    @IBOutlet weak var lbl4: UILabel!
     
     @IBOutlet weak var blackview: UIButton!
     @IBOutlet weak var pinkview: UIButton!
@@ -32,19 +41,19 @@ class letsplayViewController: UIViewController {
     @IBOutlet weak var fourthfeeBtn: UIButton!
     
     @IBOutlet weak var firstprizeLbl1:UIButton!
-    @IBOutlet weak var prittykitLbl1: UIButton!
+    @IBOutlet weak var priceKittylbl1: UILabel!
     @IBOutlet weak var totalprizeLbl1:UIButton!
     
     @IBOutlet weak var firstprizeLbl2:UIButton!
-    @IBOutlet weak var prittykitLbl2: UIButton!
+    @IBOutlet weak var priceKittylbl2: UILabel!
     @IBOutlet weak var totalprizeLbl2:UIButton!
     
     @IBOutlet weak var firstprizeLbl3:UIButton!
-    @IBOutlet weak var prittykitLbl3: UIButton!
+    @IBOutlet weak var priceKittylbl13: UILabel!
     @IBOutlet weak var totalprizeLbl3:UIButton!
     
     @IBOutlet weak var firstprizeLbl4:UIButton!
-    @IBOutlet weak var prittykitLbl4: UIButton!
+    @IBOutlet weak var priceKittylbl14: UILabel!
     @IBOutlet weak var totalprizeLbl4:UIButton!
     
     var saveFees = [String]()
@@ -56,9 +65,35 @@ class letsplayViewController: UIViewController {
     var specialplayer = [String]()
     var selection = "paid"
     var currency = String()
+    var currencyType = "coins"
     var userid = KeychainWrapper.standard.string(forKey: "userID")
     
     fileprivate func CustomizeView() {
+        pointsview.layer.cornerRadius = 7
+        pointsview.layer.borderColor = UIColor(red: 212/255, green: 71/255, blue: 141/255, alpha: 1.0).cgColor
+        pointsview.layer.borderWidth = 1.3
+        pointsview.clipsToBounds = true
+        
+        pointsview.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.40).cgColor
+        pointsview.layer.shadowOffset = CGSize(width: 0, height: 3)
+        pointsview.layer.shadowOpacity = 1.0
+        pointsview.layer.shadowRadius = 7.0
+        pointsview.layer.masksToBounds = false
+        
+        butt.layer.cornerRadius = 5
+        
+        lbl.layer.masksToBounds = true
+        lbl.layer.cornerRadius = 10
+        
+        lbl2.layer.masksToBounds = true
+        lbl2.layer.cornerRadius = 10
+        
+        lbl3.layer.masksToBounds = true
+        lbl3.layer.cornerRadius = 10
+        
+        lbl4.layer.masksToBounds = true
+        lbl4.layer.cornerRadius = 10
+        
         selectView.layer.cornerRadius = selectView.frame.size.width/2
         selectView.layer.borderColor = UIColor.white.cgColor
         selectView.layer.borderWidth = 1.5
@@ -134,16 +169,16 @@ class letsplayViewController: UIViewController {
 //                        self.savetotalprize.append(totalprize)
                     }
                     // for btn
-                    self.firstfeeBtn.titleLabel?.text = "Fee - ₹" + self.saveFees[0]
-                    self.secondfeeBtn.titleLabel?.text = "Fee - ₹" + self.saveFees[1]
-                    self.thirdfeeBtn.titleLabel?.text = "Fee - ₹" + self.saveFees[2]
-                    self.fourthfeeBtn.titleLabel?.text = "Fee - ₹" + self.saveFees[3]
+                    self.lbl.text = "Fee - ₹" + self.saveFees[0]
+                    self.lbl2.text = "Fee - ₹" + self.saveFees[1]
+                    self.lbl3.text = "Fee - ₹" + self.saveFees[2]
+                    self.lbl4.text = "Fee - ₹" + self.saveFees[3]
                     
                     // for lbls
-                    self.prittykitLbl1.titleLabel?.text = "Price Kitty -" + self.saveprittykit[0]
-                    self.prittykitLbl2.titleLabel?.text = "Price Kitty -" + self.saveprittykit[1]
-                    self.prittykitLbl3.titleLabel?.text = "Price Kitty -" + self.saveprittykit[2]
-                    self.prittykitLbl4.titleLabel?.text = "Price Kitty -" + self.saveprittykit[3]
+//                    self.priceKittylbl1.text = "Price Kitty -" + self.saveprittykit[0]
+//                    self.priceKittylbl2.text = "Price Kitty -" + self.saveprittykit[1]
+//                    self.priceKittylbl13.text = "Price Kitty -" + self.saveprittykit[2]
+//                    self.priceKittylbl14.text = "Price Kitty -" + self.saveprittykit[3]
 
 //                    self.totalprizeLbl1.titleLabel?.text = "Total Slots -" + model.totalSlots[0]
 //                    self.totalprizeLbl2.titleLabel?.text = "Total Slots -" + model.totalSlots[1]
@@ -168,12 +203,13 @@ class letsplayViewController: UIViewController {
         let parameter = [
             "user_id": userid!,
             "paid_unpaid": selection,
-            "amount_type": currency,
-            "amount": "100",
+            "amount_type": currencyType,
+            "amount": currency,
             "c_id": userIDMerge,
-            "captain": semiFinalBatsmanModel.Captains,
-            "sp_player": specialplayer,
+            "captain": finalModel.Captain,
+            "sp_player": finalModel.starPlayer,
             "contest_id": model.actualDateID
+            
             ] as [String : Any]
             print("params:- \(parameter)")
             AF.request("http://projectstatus.co.in/Bulls11/api/authentication/create-team", method: .post, parameters: parameter,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
@@ -181,7 +217,7 @@ class letsplayViewController: UIViewController {
                        case .success:
                         print(response.result)
                         let result = try? JSON(data: response.data!)
-                       print("result:- \(result)")
+                        print("result:- \(String(describing: result))")
                         break
                        case .failure:
                         print(response.error?.errorDescription)
@@ -191,21 +227,32 @@ class letsplayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.unpaidView.isHidden = true
+        self.pinkview.isSelected = true
         CustomizeView()
         get_Details()
         self.userIDMerge = savedBatsmanTeams.CompanyID + savedBowlerTeams.CompanyID + savedWicketKeeperTeams.CompanyID
-        self.specialplayer = semiFinalWicketModel.starplayer + semiFinalBowlerModel.starplayer + semiFinalBatsmanModel.starplayer
        print("updated:- \(semiFinalBatsmanModel.Captains)")
       
        print("allusers:- \(userIDMerge)")
+        print("usersid:- \(String(describing: userid))")
         // Do any additional setup after loading the view.
     }
     
     @IBAction func paid(_ sender: UIButton) {
         if sender.isSelected {
             sender.isSelected = false
+            blackview.isSelected = false
         } else {
             sender.isSelected = true
+            blackview.isSelected = false
+            self.unpaidView.isHidden = true
+            self.currencyType = "coins"
+        //    self.unpaidView.isHidden = false
+            self.firstView.isHidden = false
+            self.secondview.isHidden = false
+            self.thirdview.isHidden = false
+            self.fourthview.isHidden = false
             self.selection = "paid"
             self.currency = "coin"
         }
@@ -214,11 +261,44 @@ class letsplayViewController: UIViewController {
     @IBAction func unpaid(_ sender: UIButton) {
         if sender.isSelected {
                    sender.isSelected = false
+            pinkview.isSelected = false
                } else {
-                   sender.isSelected = true
-                   self.selection = "unpaid"
+            sender.isSelected = true
+            self.currencyType = "points"
+            pinkview.isSelected = false
+            self.unpaidView.isHidden = false
+            self.firstView.isHidden = true
+            self.secondview.isHidden = true
+            self.thirdview.isHidden = true
+            self.fourthview.isHidden = true
+            self.selection = "unpaid"
             self.currency = "points"
-               }
+       }
+    }
+    
+    @IBAction func pointsBtn(_ sender: Any){
+        self.currency = "100"
+        print("pointcurrency:-\(self.currency)")
+    }
+    
+    @IBAction func firstBtn(_ sender: Any){
+        self.currency = "10"
+        print("currenct1-\(self.currency)")
+    }
+    
+    @IBAction func secondBtn(_ sender: Any){
+        self.currency = "50"
+        print("currenct2-\(self.currency)")
+    }
+    
+    @IBAction func thirdBtn(_ sender: Any){
+        self.currency = "100"
+        print("currenct3-\(self.currency)")
+    }
+    
+    @IBAction func fourthBtn(_ sender: Any){
+        self.currency = "500"
+        print("currenct4-\(self.currency)")
     }
     
     @IBAction func LetsPlay(_ sender: Any) {

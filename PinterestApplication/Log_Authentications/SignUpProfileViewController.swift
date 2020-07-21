@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import SwiftKeychainWrapper
 
 class SignUpProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -69,8 +70,7 @@ class SignUpProfileViewController: UIViewController, UIImagePickerControllerDele
             self.activictyView.startAnimating()
     //        let image = UIImage.init(named: "1.png")
             let imgData = imageViewRef.image!.jpegData(compressionQuality: 0.2)!
-            
-           let header:HTTPHeaders = [
+            let header:HTTPHeaders = [
                 "X-API-KEY": "\(self.Api_Key)"
             ]
 
@@ -107,13 +107,10 @@ class SignUpProfileViewController: UIViewController, UIImagePickerControllerDele
                     } else if myresult?["status"] == true{
                         UserDefaults.standard.set(true, forKey: "UserHasSubmittedPassword")
                         let Result = myresult!["data"].dictionaryValue
-                        let lastname = Result["last_name"]!.stringValue
-                        Login_Model.last_name.append(lastname)
-                        let firstname = Result["first_name"]!.stringValue
-                        Login_Model.first_name.append(firstname)
-                        let profile = Result["profile_pic"]!.stringValue
-                        Login_Model.profile_pic.append(profile)
-                        
+                        print("myresult:- \(Result["id"]?.stringValue)")
+                        let userID = Result["id"]!.stringValue
+                        let isSaved: Bool = KeychainWrapper.standard.set(userID, forKey: "userID")
+                        print("myuser:- \(KeychainWrapper.standard.string(forKey: "userID"))")
                         let alert = UIAlertController(title: "Successfully Registered", message: "", preferredStyle: UIAlertController.Style.alert)
                                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
                                             UserDefaults.standard.set(true, forKey: "UserHasSubmittedPassword")

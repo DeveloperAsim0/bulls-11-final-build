@@ -193,12 +193,8 @@ class ChooseTeamViewController: UIViewController {
         self.table3.rowHeight = UITableView.automaticDimension
         self.table4.estimatedRowHeight = 80
         self.table4.rowHeight = UITableView.automaticDimension
+        print("alright")
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
     }
     
     func Fetch_Data() {
@@ -298,17 +294,14 @@ class ChooseTeamViewController: UIViewController {
         table3.isHidden = true
         table4.isHidden = true
         table2.isHidden = true
-        Fetch_Data() // 226 40 140
         self.batsmantag = batsmen.tag
         print("batsmanTag:- \(self.batsmen.tag)")
         self.batsmen.backgroundColor = UIColor(red: 226/255, green: 40/255, blue: 140/255, alpha: 1.0)
         self.bowler.backgroundColor = .clear
-       // self.allRounder.backgroundColor = .clear
         self.wicketKeeper.backgroundColor = .clear
     }
     
     @IBAction func Bowler(_ sender: Any){
-     // Fetch_Data_Bowler()
         table1.isHidden = true
         table3.isHidden = true
         table4.isHidden = true
@@ -318,7 +311,6 @@ class ChooseTeamViewController: UIViewController {
         print("batsmanTag:- \(self.bowler.tag)")
         self.batsmen.backgroundColor = .clear
         self.bowler.backgroundColor = UIColor(red: 226/255, green: 40/255, blue: 140/255, alpha: 1.0)
-       // self.allRounder.backgroundColor = .clear
         self.wicketKeeper.backgroundColor = .clear
     }
     
@@ -524,7 +516,7 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
                          if self.BatsmanNumber == 1 {
                              print("increse1:- \(self.BatsmanNumber)")
                              self.BatsmanNumber += 1
-                         firstcircle.image = #imageLiteral(resourceName: "bate")
+                             firstcircle.image = #imageLiteral(resourceName: "bate")
                          } else if self.BatsmanNumber == 2 {
                              self.BatsmanNumber += 1
                              print("increse2:- \(self.BatsmanNumber)")
@@ -536,7 +528,7 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
                          } else if self.BatsmanNumber == 4 {
                              self.BatsmanNumber += 1
                              print("increse3:- \(self.BatsmanNumber)")
-                            fourthcircle.image = #imageLiteral(resourceName: "bate")
+                             fourthcircle.image = #imageLiteral(resourceName: "bate")
                          } else if self.BatsmanNumber == 5 {
                              self.BatsmanNumber += 1
                              print("increse3:- \(self.BatsmanNumber)")
@@ -547,11 +539,31 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
                              sixthcircle.image = #imageLiteral(resourceName: "bate")
                          }
                          
-                         if sixthcircle.image != nil {
-                             table1.allowsSelection = false
-                         } else {
-                             table1.allowsSelection = true
-                         }
+        if savedBatsmanTeams.CompanyID.count >= 6 {
+            let refreshAlert = UIAlertController(title: "Alert", message: "User only select 6 Batsman", preferredStyle: UIAlertController.Style.alert)
+            refreshAlert.addAction(UIAlertAction(title: "Clear", style: .default, handler: { (action: UIAlertAction!) in
+                model.final_Batsman.removeAll()
+                self.RemoveBatsman()
+                self.Fetch_Data()
+                savedBatsmanTeams.CompanyID.removeAll()
+                  print("Handle Ok logic here")
+            }))
+
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                  print("Handle Cancel Logic here")
+                self.table1.allowsSelection = false
+            }))
+
+            present(refreshAlert, animated: true, completion: nil)
+           // table1.allowsSelection = false
+        } else {
+            //table1.allowsSelection = true
+        }
+//                         if sixthcircle.image != nil {
+//                             table1.allowsSelection = false
+//                         } else {
+//                             table1.allowsSelection = true
+//                         }
     }
     
     func countForBowler() {
@@ -574,10 +586,23 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
                             tenthcircle.image = #imageLiteral(resourceName: "boll")
                          }
                          
-                         if tenthcircle.image != nil {
-                             table2.allowsSelection = false
-                         } else {
-                             table2.allowsSelection = true
+                        if savedBowlerTeams.CompanyID.count >= 4 {
+                             let refreshAlert = UIAlertController(title: "Alert", message: "User only select 4 Bowler", preferredStyle: UIAlertController.Style.alert)
+                             refreshAlert.addAction(UIAlertAction(title: "Clear", style: .default, handler: { (action: UIAlertAction!) in
+                                 model.final_Bowler.removeAll()
+                                 self.RemoveBowler()
+                                 self.Fetch_Data()
+                                 savedBowlerTeams.CompanyID.removeAll()
+                                   print("Handle Ok logic here")
+                             }))
+
+                             refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                                   print("Handle Cancel Logic here")
+                                 self.table2.allowsSelection = false
+                             }))
+
+                             present(refreshAlert, animated: true, completion: nil)
+                            // table1.allowsSelection = false
                          }
     }
     
@@ -588,10 +613,23 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
                              self.WicketKeeperNumber += 1
                          eleventhcircle.image = #imageLiteral(resourceName: "wicket_keeper")
                          }
-                         if eleventhcircle.image != nil {
-                             table4.allowsSelection = false
-                         } else {
-                             table4.allowsSelection = true
+                        if savedBowlerTeams.CompanyID.count >= 1 {
+                             let refreshAlert = UIAlertController(title: "Alert", message: "User only select 1 Wicket-Keeper", preferredStyle: UIAlertController.Style.alert)
+                             refreshAlert.addAction(UIAlertAction(title: "Clear", style: .default, handler: { (action: UIAlertAction!) in
+                                 model.final_wicket_keeper.removeAll()
+                                 self.RemoveWicketKeeper()
+                                 self.Fetch_Data()
+                                 savedWicketKeeperTeams.CompanyID.removeAll()
+                                   print("Handle Ok logic here")
+                             }))
+
+                             refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                                   print("Handle Cancel Logic here")
+                                 self.table4.allowsSelection = false
+                             }))
+
+                             present(refreshAlert, animated: true, completion: nil)
+                            // table1.allowsSelection = false
                          }
     }
     
@@ -602,9 +640,11 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
         }
         if let cell = tableView.cellForRow(at: indexPath) as? secondTableViewCell {
             savedBowlerTeams.CompanyName.removeAll()
+            RemoveBowler()
         }
         if let cell = tableView.cellForRow(at: indexPath) as? thirdTableViewCell {
             savedAllRounderTeams.CompanyName.removeAll()
+            RemoveWicketKeeper()
         }
     }
     
@@ -612,6 +652,8 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
         if BatsmanNumber == 2 {
             BatsmanNumber -= 1
             self.firstcircle.image = nil
+            table1.allowsSelection = true
+            savedBatsmanTeams.CompanyID.remove(at: 1)
         } else if BatsmanNumber == 3 {
             BatsmanNumber -= 1
             self.secondcircle.image = nil
@@ -692,7 +734,7 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
                cell.conView.layer.borderColor = UIColor.gray.cgColor
                cell.conView.layer.borderWidth = 0.5
                cell.CompanyNameLbl.text = model.final_wicket_keeper[indexPath.row]
-            cell.userIds = allrounderTeam.wicketkeeperID[indexPath.row]
+               cell.userIds = allrounderTeam.wicketkeeperID[indexPath.row]
 //               cell.CompanyNameLbl.text = wicketkeeparTeam.Company_Name[indexPath.row]
 //               cell.CompanyDetailLbl.text = wicketkeeparTeam.Company_Details[indexPath.row]
                return cell
@@ -700,131 +742,3 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
 }
-
-
-
-/*
- Garbage:-
- func Fetch_Data_Bowler() {
- //        self.myactivity.isHidden = false
- //        self.myactivity.startAnimating()
-         let header:HTTPHeaders = [
-             "X-API-KEY": "\(self.Api_Key)"
-         ]
-         
-         let parameters = [
-         "comp_type": "bowler",
-         "date_id": model.dateID
-             ] as [String : Any]
-     
-         AF.request("http://projectstatus.co.in/Bulls11/api/authentication/list-datewise-compnaies", method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
-             switch response.result {
-             case .success:
-                 print(response.result)
-                 let myresult = try? JSON(data: response.data!)
-                 print(myresult!["data"])
-                 let resultArray = myresult!["data"]
-                 bowlerTeam.Company_Details.removeAll()
-                 bowlerTeam.Company_Name.removeAll()
-                 bowlerTeam.Company_ID.removeAll()
-                 for i in resultArray.arrayValue {
-                 print("y i value:- \(i)")
-                     let id = i["c_id"].stringValue
-                     bowlerTeam.Company_ID.append(id)
-                     let companyName  = i["c_name"].stringValue
-                     bowlerTeam.Company_Name.append(companyName)
-                     print("company:- \(bowlerTeam.Company_Name)")
-                     let companyDetails = i["c_detail"].stringValue
-                     bowlerTeam.Company_Details.append(companyDetails)
-             }
-                 self.table2.reloadData()
-                 break
-             case .failure(let eror):
-                 print(eror.errorDescription)
-             }
-         }
-         
-     }
- 
- func Fetch_Data_Wicket_Keepar() {
- //        self.myactivity.isHidden = false
- //        self.myactivity.startAnimating()
-         let header:HTTPHeaders = [
-             "X-API-KEY": "\(self.Api_Key)"
-         ]
-         
-         let parameters = [
-         "comp_type": "wicket_keeper",
-         "date_id": model.dateID
-             ] as [String : Any]
-     
-         AF.request(self.ApiURL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
-             switch response.result {
-             case .success:
-                 print(response.result)
-                 let myresult = try? JSON(data: response.data!)
-                 print(myresult!["data"])
-                 let resultArray = myresult!["data"]
-                 wicketkeeparTeam.Company_Details.removeAll()
-                 wicketkeeparTeam.Company_Name.removeAll()
-                 wicketkeeparTeam.Company_ID.removeAll()
-                 for i in resultArray.arrayValue {
-                 print("y i value:- \(i)")
-                     let id = i["c_id"].stringValue
-                     wicketkeeparTeam.Company_ID.append(id)
-                     let companyName  = i["c_name"].stringValue
-                     wicketkeeparTeam.Company_Name.append(companyName)
-                     print("company:- \(wicketkeeparTeam.Company_Name)")
-                     let companyDetails = i["c_detail"].stringValue
-                     wicketkeeparTeam.Company_Details.append(companyDetails)
-             }
-                 self.table4.reloadData()
-                 break
-             case .failure(let eror):
-                 print(eror.errorDescription)
-             }
-         }
-         
-     }
- 
- func Fetch_Data_All_Rounder() {
- //        self.myactivity.isHidden = false
- //        self.myactivity.startAnimating()
-         let header:HTTPHeaders = [
-             "X-API-KEY": "\(self.Api_Key)"
-         ]
-         
-         let parameters = [
-         "comp_type": "all_rounder",
-         "date_id": model.dateID
-             ] as [String : Any]
-     
-         AF.request(self.ApiURL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
-             switch response.result {
-             case .success:
-                 print(response.result)
-                 let myresult = try? JSON(data: response.data!)
-                 print(myresult!["data"])
-                 let resultArray = myresult!["data"]
-                 allrounderTeam.Company_Details.removeAll()
-                 allrounderTeam.Company_Name.removeAll()
-                 allrounderTeam.Company_ID.removeAll()
-                 for i in resultArray.arrayValue {
-                 print("y i value:- \(i)")
-                     let id = i["c_id"].stringValue
-                     allrounderTeam.Company_ID.append(id)
-                     let companyName  = i["c_name"].stringValue
-                     allrounderTeam.Company_Name.append(companyName)
-                     print("company:- \(allrounderTeam.Company_Name)")
-                     let companyDetails = i["c_detail"].stringValue
-                     allrounderTeam.Company_Details.append(companyDetails)
-             }
-                 self.table3.reloadData()
-                 break
-             case .failure(let eror):
-                 print(eror.errorDescription)
-             }
-         }
-         
-     }
- */

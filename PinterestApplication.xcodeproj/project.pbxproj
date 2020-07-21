@@ -17,6 +17,7 @@
 		3A360F7D246E961C00FB95C4 /* HowToPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A360F7C246E961C00FB95C4 /* HowToPlayViewController.swift */; };
 		3A360F7F246EB11500FB95C4 /* LegalityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A360F7E246EB11500FB95C4 /* LegalityViewController.swift */; };
 		3A3C070C246C3E55009D65B0 /* MyHallOfFameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C070B246C3E55009D65B0 /* MyHallOfFameViewController.swift */; };
+		3A3CB79F24C577BF0051EB29 /* UnpaidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CB79E24C577BF0051EB29 /* UnpaidViewController.swift */; };
 		3A42590124C0313D0027F4E8 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A42590024C0313D0027F4E8 /* LoginModel.swift */; };
 		3A478DBD249110FF006A8533 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A478DBC249110FF006A8533 /* CongratulationViewController.swift */; };
 		3A4DE77A246D31400037969E /* WeeklyLeaderBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DE779246D31400037969E /* WeeklyLeaderBoardViewController.swift */; };
@@ -40,6 +41,7 @@
 		3A858736249A016A005EA0AB /* WevViewHowToWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A858735249A016A005EA0AB /* WevViewHowToWorkViewController.swift */; };
 		3A85873C249A0667005EA0AB /* WebViewHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85873B249A0667005EA0AB /* WebViewHelpViewController.swift */; };
 		3A85873F249A23B8005EA0AB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85873E249A23B8005EA0AB /* Model.swift */; };
+		3A9088DC24C6F4DA00B34104 /* SelectSpecialPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9088DB24C6F4DA00B34104 /* SelectSpecialPlayerViewController.swift */; };
 		3A9A9F0724C2EE800089A6E9 /* SavedFinalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9A9F0624C2EE800089A6E9 /* SavedFinalModel.swift */; };
 		3AA4944C246BD92000EB45E2 /* CustomTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4944B246BD92000EB45E2 /* CustomTabbarController.swift */; };
 		3AA4944E246BD98600EB45E2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4944D246BD98600EB45E2 /* HomeViewController.swift */; };
@@ -74,6 +76,7 @@
 		3A360F7C246E961C00FB95C4 /* HowToPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayViewController.swift; sourceTree = "<group>"; };
 		3A360F7E246EB11500FB95C4 /* LegalityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalityViewController.swift; sourceTree = "<group>"; };
 		3A3C070B246C3E55009D65B0 /* MyHallOfFameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHallOfFameViewController.swift; sourceTree = "<group>"; };
+		3A3CB79E24C577BF0051EB29 /* UnpaidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidViewController.swift; sourceTree = "<group>"; };
 		3A42590024C0313D0027F4E8 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		3A478DBC249110FF006A8533 /* CongratulationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratulationViewController.swift; sourceTree = "<group>"; };
 		3A4DE779246D31400037969E /* WeeklyLeaderBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyLeaderBoardViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +100,7 @@
 		3A858735249A016A005EA0AB /* WevViewHowToWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WevViewHowToWorkViewController.swift; sourceTree = "<group>"; };
 		3A85873B249A0667005EA0AB /* WebViewHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewHelpViewController.swift; sourceTree = "<group>"; };
 		3A85873E249A23B8005EA0AB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		3A9088DB24C6F4DA00B34104 /* SelectSpecialPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSpecialPlayerViewController.swift; sourceTree = "<group>"; };
 		3A9A9F0624C2EE800089A6E9 /* SavedFinalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFinalModel.swift; sourceTree = "<group>"; };
 		3AA4944B246BD92000EB45E2 /* CustomTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbarController.swift; sourceTree = "<group>"; };
 		3AA4944D246BD98600EB45E2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -275,6 +279,8 @@
 				3A79F81F24A479DE007BC669 /* thirdTableViewCell.swift */,
 				3A79F82124A479E6007BC669 /* fourthTableViewCell.swift */,
 				3A9A9F0624C2EE800089A6E9 /* SavedFinalModel.swift */,
+				3A3CB79E24C577BF0051EB29 /* UnpaidViewController.swift */,
+				3A9088DB24C6F4DA00B34104 /* SelectSpecialPlayerViewController.swift */,
 			);
 			path = PinterestApplication;
 			sourceTree = "<group>";
@@ -437,6 +443,7 @@
 				3A4DE77C246D327B0037969E /* leaderBoardCell.swift in Sources */,
 				3A0252A12472AA950080C448 /* MorePlayersViewController.swift in Sources */,
 				3A3C070C246C3E55009D65B0 /* MyHallOfFameViewController.swift in Sources */,
+				3A9088DC24C6F4DA00B34104 /* SelectSpecialPlayerViewController.swift in Sources */,
 				3AA4944C246BD92000EB45E2 /* CustomTabbarController.swift in Sources */,
 				3A723D972472DAE3004E2AAF /* ChooseTeamViewController.swift in Sources */,
 				3AA49454246BD9C000EB45E2 /* MoreViewController.swift in Sources */,
@@ -453,6 +460,7 @@
 				3A85873C249A0667005EA0AB /* WebViewHelpViewController.swift in Sources */,
 				3A360F7F246EB11500FB95C4 /* LegalityViewController.swift in Sources */,
 				3ADAAD15246C359A003B0E3F /* MyRefferalsViewController.swift in Sources */,
+				3A3CB79F24C577BF0051EB29 /* UnpaidViewController.swift in Sources */,
 				3A85873F249A23B8005EA0AB /* Model.swift in Sources */,
 				3A67E9B2246FEFC900789A32 /* ActiveModeViewController.swift in Sources */,
 				3A360F7D246E961C00FB95C4 /* HowToPlayViewController.swift in Sources */,

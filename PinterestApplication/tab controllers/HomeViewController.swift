@@ -44,9 +44,9 @@ class HomeViewController: UIViewController {
     var sideMenu4 = false
     let Profile_URL = "http://projectstatus.co.in/Bulls11/api/authentication/user/"
     let Api_Key = "BULLS11@2020"
-    var namearr = ["My Profile", "Weekly Leaderboard", "Hall of Fame", "My Balance", "My Rewards & Offer", "My Refferals", "My Info Setting", "Point Systems", "Logout"]
+    var namearr = ["My Profile", "Weekly Leaderboard", "Hall of Fame", "My Balance", "My Rewards & Offer", "My Refferals", "Point Systems", "Logout"]
     
-    var iconArr = ["myprofile", "my_contest_icon", "hall_of_fame", "mybalance", "myrewardsoffers", "myreferrals", "myinfosettings", "pointsystem", "logout"]
+    var iconArr = ["myprofile", "my_contest_icon", "hall_of_fame", "mybalance", "myrewardsoffers", "myreferrals", "myinfosettings", "logout"]
     
     fileprivate func CustomNavBar(){
         title = "HOME"
@@ -56,6 +56,9 @@ class HomeViewController: UIViewController {
     }
     
     fileprivate func CustomizeViews(){
+        
+        self.profilePic.layer.cornerRadius = self.profilePic.frame.size.width/2
+        
         sidemenuview.layer.borderColor = UIColor.darkGray.cgColor
         sidemenuview.layer.borderWidth = 1
         sidemenuview.layer.masksToBounds = true
@@ -127,10 +130,10 @@ class HomeViewController: UIViewController {
             "X-API-KEY": "\(self.Api_Key)"
         ]
         
-        AF.request(self.Profile_URL + KeychainWrapper.standard.string(forKey: "userID")!, method: .get, parameters: nil,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON { response in
-                   switch response.result {
+        AF.request(self.Profile_URL + KeychainWrapper.standard.string(forKey: "userID")!, method: .get, parameters: nil,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON{ response in
+            switch response.result {
                    case .success:
-                    print(response.result)
+                    print("ok:-\(response.result)")
                     let result = try? JSON(data: response.data!)
                     print("myResult:- \(result!.dictionaryValue)")
                     let finalResult = result!.dictionaryValue
@@ -138,8 +141,7 @@ class HomeViewController: UIViewController {
                     let fullname = finalResult["first_name"]!.stringValue + finalResult["last_name"]!.stringValue
                     self.UserName.text = fullname
                     let profilepic = finalResult["profile_pic"]?.stringValue
-                 //   self.profilePic.sd_setImage(with: URL(string: profilepic ?? "don't know"), placeholderImage: UIImage(named: "user icon"))
-                   
+                    self.profilePic.sd_setImage(with: URL(string: profilepic!), placeholderImage: UIImage(named: "user icon"))
                     break
                    case .failure:
                     print(response.error.debugDescription)
@@ -220,7 +222,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        return 8
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -275,15 +277,14 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
            
         
         } else if indexPath.row == 7 {
-        // controler
-        } else if indexPath.row == 8 {
-            UserDefaults.standard.removeObject(forKey: "UserHasSubmittedPassword")
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                              let vc = storyboard.instantiateViewController(withIdentifier: "view")
-                              vc.modalPresentationStyle = .fullScreen
-            vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
-                       
+          UserDefaults.standard.removeObject(forKey: "UserHasSubmittedPassword")
+          KeychainWrapper.standard.removeObject(forKey: "userID")
+          print("userid:- \(KeychainWrapper.standard.string(forKey: "userID"))")
+          let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let vc = storyboard.instantiateViewController(withIdentifier: "view")
+                            vc.modalPresentationStyle = .fullScreen
+          vc.hidesBottomBarWhenPushed = true
+          self.navigationController?.pushViewController(vc, animated: true)
             
         }
     }

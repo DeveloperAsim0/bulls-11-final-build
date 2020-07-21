@@ -29,7 +29,7 @@ class model{
     static var fourthtext           = [String]()
     static var date                 = [String]()
     static var dateListStatus       = [Bool]()
-    static var dateID               = String()
+    static var dateID               = [String]()
     static var date_details         = [String]()
     static var CoreDiff             = [String]()
     static var TopTenCore           = [String]()
@@ -64,34 +64,34 @@ class wicketkeeparTeam {
 }
 
 class allrounderTeam {
-    static var Company_Details          = [String]()
-    static var Company_ID               = [String]()
+    static var Company_Details               = [String]()
+    static var Company_ID                    = [String]()
     static var Company_Name_Batsman_Core     = [String]()
-    static var Company_Name_Batsman_NonCore = [String]()
-    static var Company_Name_Bowler      = [String]()
+    static var Company_Name_Batsman_NonCore  = [String]()
+    static var Company_Name_Bowler           = [String]()
     static var Company_Name_Wicket_Keeper    = [String]()
-    static var Company_Type             = [String]()
-    static var BowlerCompID   = [String]()
-    static var wicketkeeperID   = [String]()
+    static var Company_Type                  = [String]()
+    static var BowlerCompID                  = [String]()
+    static var wicketkeeperID                = [String]()
     
 }
 
 class savedBatsmanTeams {
-    static var CompanyID = [String]()
+    static var CompanyID   = [String]()
     static var CompanyName = [String]()
 }
 
 class savedBowlerTeams {
-    static var CompanyID = [String]()
+    static var CompanyID   = [String]()
     static var CompanyName = [String]()
 }
 
 class savedAllRounderTeams {
-    static var CompanyID = [String]()
+    static var CompanyID   = [String]()
     static var CompanyName = [String]()
 }
 
 class savedWicketKeeperTeams {
-    static var CompanyID = [String]()
+    static var CompanyID   = [String]()
     static var CompanyName = [String]()
 }

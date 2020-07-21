@@ -14,17 +14,16 @@ class SelectCaptainViewController: UIViewController{
     var savedBowlerIDS       = [String]()
     var savedWicketKeeperIDS = [String]()
     
-    @IBOutlet weak var tabel1      : UITableView!
-    @IBOutlet weak var table2      : UITableView!
-    @IBOutlet weak var tabel3      : UITableView!
-    @IBOutlet weak var table4      : UITableView!
+    @IBOutlet weak var tabel1       : UITableView!
+    @IBOutlet weak var table2       : UITableView!
+    @IBOutlet weak var table4       : UITableView!
     
-    @IBOutlet weak var captainbtn : UIButton!
-    @IBOutlet weak var starbtn    : UIButton!
+    @IBOutlet weak var captainbtn   : UIButton!
+    @IBOutlet weak var starbtn      : UIButton!
     
-    @IBOutlet weak var selectview       : UIView!
-    @IBOutlet weak var createview       : UIView!
-    @IBOutlet weak var joinview         : UIView!
+    @IBOutlet weak var selectview   : UIView!
+    @IBOutlet weak var createview   : UIView!
+    @IBOutlet weak var joinview     : UIView!
     
     
     fileprivate func CustomizeViews2(){
@@ -120,23 +119,34 @@ extension SelectCaptainViewController: UITableViewDataSource, UITableViewDelegat
         if indexPath.row == 0 {
             print("mybts:-\(self.savedBatsmanIDS[0])")
             semiFinalBatsmanModel.Captains.append(contentsOf:self.savedBatsmanIDS[0])
+            DisableCaptainButton()
         } else if indexPath.row == 1 {
             print("mybts:-\(self.savedBatsmanIDS[1])")
             semiFinalBatsmanModel.Captains.append(contentsOf:self.savedBatsmanIDS[1])
+            DisableCaptainButton()
         }else if indexPath.row == 2 {
             print("mybts:-\(self.savedBatsmanIDS[2])")
             semiFinalBatsmanModel.Captains.append(contentsOf:self.savedBatsmanIDS[2])
+            DisableCaptainButton()
         }else if indexPath.row == 3 {
             print("mybts:-\(self.savedBatsmanIDS[3])")
             semiFinalBatsmanModel.Captains.append(contentsOf:self.savedBatsmanIDS[3])
+            DisableCaptainButton()
         }else if indexPath.row == 4 {
             print("mybts:-\(self.savedBatsmanIDS[4])")
             semiFinalBatsmanModel.Captains.append(contentsOf:self.savedBatsmanIDS[4])
+            DisableCaptainButton()
         }else if indexPath.row == 5 {
             print("mybts:-\(self.savedBatsmanIDS[5])")
             semiFinalBatsmanModel.Captains.append(contentsOf:self.savedBatsmanIDS[5])
+            DisableCaptainButton()
         }
         }
+    
+    func DisableCaptainButton() {
+        let cell = tabel1.dequeueReusableCell(withIdentifier: "batsman") as! SavedBatsmanTableViewCell
+        cell.captionButton.isSelected = false
+    }
     
     func buttonTapped2(cell: SavedBowlerTableViewCell) {
     guard let indexPath = table2.indexPath(for: cell) else {

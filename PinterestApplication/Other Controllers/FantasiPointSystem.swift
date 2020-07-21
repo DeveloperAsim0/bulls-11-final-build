@@ -9,10 +9,7 @@
 import UIKit
 
 class FantasiPointSystem: UIViewController {
-    
-    
-    
-   
+
     @IBOutlet weak var pasivebtn: UIButton!
     @IBOutlet weak var activebtn: UIButton!
     @IBOutlet weak var contView: UIView!

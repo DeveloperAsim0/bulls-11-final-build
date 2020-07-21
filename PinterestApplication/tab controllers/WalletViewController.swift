@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import SDWebImage
+import SwiftKeychainWrapper
+import Alamofire
+import SwiftyJSON
 
 class WalletViewController: UIViewController {
 
@@ -16,20 +20,46 @@ class WalletViewController: UIViewController {
     @IBOutlet weak var verifyBTN: UIButton!
     @IBOutlet weak var addCashBTN: UIButton!
     @IBOutlet weak var sidemenuView: UIView!
-    
+    @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var leadingConstraints: NSLayoutConstraint!
     @IBOutlet weak var UserName: UILabel!
     
     let cornerRadius: CGFloat = 6.0
-    
     var sideMenu4 = false
+    let Profile_URL = "http://projectstatus.co.in/Bulls11/api/authentication/user/"
+    let Api_Key = "BULLS11@2020"
+    var namearr = ["My Profile", "Weekly Leaderboard", "Hall of Fame", "My Balance", "My Rewards & Offer", "My Refferals", "Point Systems", "Logout"]
     
-    var namearr = ["My Profile", "Weekly Leaderboard", "Hall of Fame", "My Balance", "My Rewards & Offer", "My Refferals", "My Info Setting", "Point Systems", "Logout"]
+    var iconArr = ["myprofile", "my_contest_icon", "hall_of_fame", "mybalance", "myrewardsoffers", "myreferrals", "pointsystem", "logout"]
     
-    var iconArr = ["myprofile", "my_contest_icon", "hall_of_fame", "mybalance", "myrewardsoffers", "myreferrals", "myinfosettings", "pointsystem", "logout"]
+    func Fetch_Profile() {
+        let header:HTTPHeaders = [
+            "X-API-KEY": "\(self.Api_Key)"
+        ]
+        
+        AF.request(self.Profile_URL + KeychainWrapper.standard.string(forKey: "userID")!, method: .get, parameters: nil,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON{ response in
+            switch response.result {
+                   case .success:
+                    print("ok:-\(response.result)")
+                    let result = try? JSON(data: response.data!)
+                    print("myResult:- \(result!.dictionaryValue)")
+                    let finalResult = result!.dictionaryValue
+                    print("firstname:- \(finalResult["first_name"]!.stringValue)")
+                    let fullname = finalResult["first_name"]!.stringValue + finalResult["last_name"]!.stringValue
+                    self.UserName.text = fullname
+                    let profilepic = finalResult["profile_pic"]?.stringValue
+                    self.profilePic.sd_setImage(with: URL(string: profilepic!), placeholderImage: UIImage(named: "user icon"))
+                    break
+                   case .failure:
+                    print(response.error.debugDescription)
+            }
+        }
+    }
     
     fileprivate func CustomizeUIVIEW() {
+        self.profilePic.layer.cornerRadius = self.profilePic.frame.size.width/2
+        
        sidemenuView.layer.borderColor = UIColor.darkGray.cgColor
        sidemenuView.layer.borderWidth = 1
        sidemenuView.layer.masksToBounds = true
@@ -78,12 +108,12 @@ class WalletViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Fetch_Profile()
         CustomNavBar()
         CustomizeUIBUTTON()
         CustomizeUIVIEW()
         CustomNavBar()
         self.UserName.text = Login_Model.first_name + "" + Login_Model.last_name
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func AddCash(_ sender: Any){
@@ -116,7 +146,7 @@ class WalletViewController: UIViewController {
 
 extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        return 8
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -171,19 +201,14 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
            
         
         } else if indexPath.row == 7 {
-        // controler
-        } else if indexPath.row == 8 {
             UserDefaults.standard.removeObject(forKey: "UserHasSubmittedPassword")
+            KeychainWrapper.standard.removeObject(forKey: "userID")
+            print("userid:- \(KeychainWrapper.standard.string(forKey: "userID"))")
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
                               let vc = storyboard.instantiateViewController(withIdentifier: "view")
                               vc.modalPresentationStyle = .fullScreen
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
-                       
-            
         }
     }
-    
-    
-    
 }
