@@ -94,6 +94,18 @@ class letsplayViewController: UIViewController {
         lbl4.layer.masksToBounds = true
         lbl4.layer.cornerRadius = 10
         
+        priceKittylbl1.layer.masksToBounds = true
+        priceKittylbl1.layer.cornerRadius = 10
+        
+        priceKittylbl2.layer.masksToBounds = true
+        priceKittylbl2.layer.cornerRadius = 10
+        
+        priceKittylbl13.layer.masksToBounds = true
+        priceKittylbl13.layer.cornerRadius = 10
+        
+        priceKittylbl14.layer.masksToBounds = true
+        priceKittylbl14.layer.cornerRadius = 10
+        
         selectView.layer.cornerRadius = selectView.frame.size.width/2
         selectView.layer.borderColor = UIColor.white.cgColor
         selectView.layer.borderWidth = 1.5
@@ -175,13 +187,13 @@ class letsplayViewController: UIViewController {
                     self.lbl4.text = "Fee - ₹" + self.saveFees[3]
                     
                     // for lbls
-//                    self.priceKittylbl1.text = "Price Kitty -" + self.saveprittykit[0]
-//                    self.priceKittylbl2.text = "Price Kitty -" + self.saveprittykit[1]
-//                    self.priceKittylbl13.text = "Price Kitty -" + self.saveprittykit[2]
-//                    self.priceKittylbl14.text = "Price Kitty -" + self.saveprittykit[3]
+                    self.priceKittylbl1.text = "Price Kitty -" + self.saveprittykit[0]
+                    self.priceKittylbl2.text = "Price Kitty -" + self.saveprittykit[1]
+                    self.priceKittylbl13.text = "Price Kitty -" + self.saveprittykit[2]
+                    self.priceKittylbl14.text = "Price Kitty -" + self.saveprittykit[3]
 
-//                    self.totalprizeLbl1.titleLabel?.text = "Total Slots -" + model.totalSlots[0]
-//                    self.totalprizeLbl2.titleLabel?.text = "Total Slots -" + model.totalSlots[1]
+                    self.totalprizeLbl1.titleLabel?.text = "Total Slots -" + model.totalSlots[0]
+                    self.totalprizeLbl2.titleLabel?.text = "Total Slots -" + model.totalSlots[1]
 //                    self.totalprizeLbl3.titleLabel?.text = "Total Slots -" + model.totalSlots[2]
 //                    self.totalprizeLbl4.titleLabel?.text = "Total Slots -" + model.totalSlots[3]
 
@@ -233,9 +245,9 @@ class letsplayViewController: UIViewController {
         get_Details()
         self.userIDMerge = savedBatsmanTeams.CompanyID + savedBowlerTeams.CompanyID + savedWicketKeeperTeams.CompanyID
        print("updated:- \(semiFinalBatsmanModel.Captains)")
-      
+        print("totalslotsvalue:- \(model.totalSlots[0])")
        print("allusers:- \(userIDMerge)")
-        print("usersid:- \(String(describing: userid))")
+       print("usersid:- \(String(describing: userid))")
         // Do any additional setup after loading the view.
     }
     

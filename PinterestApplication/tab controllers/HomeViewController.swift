@@ -155,11 +155,24 @@ class HomeViewController: UIViewController {
         //self.navigationController?.navigationBar.topItem?.title = "HOME"
         CustomNavBar()
         CustomizeViews()
+        savedBatsmanTeams.CompanyName.removeAll()
+        savedBatsmanTeams.CompanyID.removeAll()
+        savedBowlerTeams.CompanyID.removeAll()
+        savedBowlerTeams.CompanyName.removeAll()
+        savedWicketKeeperTeams.CompanyName.removeAll()
+        savedWicketKeeperTeams.CompanyID.removeAll()
        // KeychainWrapper.standard.removeObject(forKey: "DateSaved")
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
             self.navigationItem.title="HOME"
+        savedBatsmanTeams.CompanyName.removeAll()
+        savedBatsmanTeams.CompanyID.removeAll()
+        savedBowlerTeams.CompanyID.removeAll()
+        savedBowlerTeams.CompanyName.removeAll()
+        savedWicketKeeperTeams.CompanyName.removeAll()
+        savedWicketKeeperTeams.CompanyID.removeAll()
     }
     
     @IBAction func DailyBtnSegue(_ sender: Any) {

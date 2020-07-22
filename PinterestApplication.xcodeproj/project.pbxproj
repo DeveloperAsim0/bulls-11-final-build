@@ -53,7 +53,6 @@
 		3ACECF1924695C9E003354CF /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACECF1824695C9E003354CF /* RegisterViewController.swift */; };
 		3AD0943724728F6C0069310A /* SelectYourTradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD0943624728F6C0069310A /* SelectYourTradeViewController.swift */; };
 		3AD09439247294C20069310A /* SelectTradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD09438247294C20069310A /* SelectTradeTableViewCell.swift */; };
-		3ADAAD13246C1C27003B0E3F /* MYBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADAAD12246C1C27003B0E3F /* MYBalanceViewController.swift */; };
 		3ADAAD15246C359A003B0E3F /* MyRefferalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADAAD14246C359A003B0E3F /* MyRefferalsViewController.swift */; };
 		3AE2D43F2490D985002DC0F4 /* contestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE2D43E2490D985002DC0F4 /* contestVC.swift */; };
 		3AF0244E246D1121009D8D5F /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF0244D246D1121009D8D5F /* MyProfileViewController.swift */; };
@@ -112,7 +111,6 @@
 		3ACECF1824695C9E003354CF /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		3AD0943624728F6C0069310A /* SelectYourTradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectYourTradeViewController.swift; sourceTree = "<group>"; };
 		3AD09438247294C20069310A /* SelectTradeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTradeTableViewCell.swift; sourceTree = "<group>"; };
-		3ADAAD12246C1C27003B0E3F /* MYBalanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MYBalanceViewController.swift; sourceTree = "<group>"; };
 		3ADAAD14246C359A003B0E3F /* MyRefferalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRefferalsViewController.swift; sourceTree = "<group>"; };
 		3AE2D43E2490D985002DC0F4 /* contestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contestVC.swift; sourceTree = "<group>"; };
 		3AF0244D246D1121009D8D5F /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
@@ -214,7 +212,6 @@
 				3AF0244D246D1121009D8D5F /* MyProfileViewController.swift */,
 				3A3C070B246C3E55009D65B0 /* MyHallOfFameViewController.swift */,
 				3ADAAD14246C359A003B0E3F /* MyRefferalsViewController.swift */,
-				3ADAAD12246C1C27003B0E3F /* MYBalanceViewController.swift */,
 			);
 			path = "Side Menu Bar Controllers";
 			sourceTree = "<group>";
@@ -464,7 +461,6 @@
 				3A85873F249A23B8005EA0AB /* Model.swift in Sources */,
 				3A67E9B2246FEFC900789A32 /* ActiveModeViewController.swift in Sources */,
 				3A360F7D246E961C00FB95C4 /* HowToPlayViewController.swift in Sources */,
-				3ADAAD13246C1C27003B0E3F /* MYBalanceViewController.swift in Sources */,
 				3A5D2A6024A0D465007C212B /* model.swift in Sources */,
 				3A4DE77A246D31400037969E /* WeeklyLeaderBoardViewController.swift in Sources */,
 				3A79F81E24A479D5007BC669 /* secondTableViewCell.swift in Sources */,

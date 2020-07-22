@@ -64,7 +64,6 @@ class SelectYourTradeViewController: UIViewController {
                         model.date.append(date)
                         let prizeAmount = i["prize_amount"].stringValue
                         model.totalSlots.append(prizeAmount)
-                       // print("mydate:- \(model.date)")
                 }
                     self.tableView.reloadData()
                     break

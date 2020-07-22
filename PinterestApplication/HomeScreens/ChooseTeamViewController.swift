@@ -35,10 +35,10 @@ class ChooseTeamViewController: UIViewController {
     
     @IBOutlet weak var playerPointView  : UIView!
     @IBOutlet weak var teamView         : UIView!
-    @IBOutlet weak var table1            : UITableView!
-     @IBOutlet weak var table2           : UITableView!
-     @IBOutlet weak var table3            : UITableView!
-     @IBOutlet weak var table4            : UITableView!
+    @IBOutlet weak var table1           : UITableView!
+     @IBOutlet weak var table2          : UITableView!
+     @IBOutlet weak var table3          : UITableView!
+     @IBOutlet weak var table4          : UITableView!
     @IBOutlet weak var batsmen          : UIButton!
     @IBOutlet weak var bowler           : UIButton!
     @IBOutlet weak var wicketKeeper     : UIButton!
@@ -185,6 +185,9 @@ class ChooseTeamViewController: UIViewController {
         CustomizeViews2()
         circularbutton()
         Fetch_Data()
+        savedBatsmanTeams.CompanyID.removeAll()
+        savedBowlerTeams.CompanyID.removeAll()
+        savedWicketKeeperTeams.CompanyID.removeAll()
         self.table1.estimatedRowHeight = 80
         self.table1.rowHeight = UITableView.automaticDimension
         self.table2.estimatedRowHeight = 80
@@ -375,13 +378,6 @@ extension ChooseTeamViewController: showStatus{
             // your actions here...
         }))
         self.present(showAlert, animated: true, completion: nil)
-        /*let alertTitle = "Watch Later"
-        let message = "\(title) added to Watch Later List"
-        
-        let alert = UIAlertController(title: alertTitle, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
- */
     }
 }
 

@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class AddCashViewController: UIViewController {
   
     @IBOutlet weak var myview       : UIView!
@@ -60,7 +61,24 @@ class AddCashViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func setcashValue1(_ sender: Any) {
+        self.cashfield.text = nil
+        self.cashfield.text = "₹" + "100"
+    }
+    
+    @IBAction func setcashValue2(_ sender: Any) {
+        self.cashfield.text = nil
+        self.cashfield.text = "₹" + "200"
+    }
 
+    @IBAction func setcashValue3(_ sender: Any) {
+        self.cashfield.text = nil
+        self.cashfield.text = "₹" + "500"
+    }
+    
+    @IBAction func addCashRedirect(_ sender: Any){
+        
+    }
     /*
     // MARK: - Navigation
 

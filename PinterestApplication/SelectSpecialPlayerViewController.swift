@@ -886,7 +886,7 @@ class SelectSpecialPlayerViewController: UIViewController {
     @IBAction func CreateTeam(_ sender: Any){
         print(finalModel.starPlayer.count)
         print(finalModel.Captain.count)
-        if finalModel.starPlayer.count == 3, finalModel.Captain.count == 3 {
+        if finalModel.starPlayer.count == 3{
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "letsplay")
         vc.modalPresentationStyle = .fullScreen
