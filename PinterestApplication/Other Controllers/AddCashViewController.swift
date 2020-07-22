@@ -7,15 +7,18 @@
 //
 
 import UIKit
+import Razorpay
+import SafariServices
 
-
-class AddCashViewController: UIViewController {
+class AddCashViewController: UIViewController, RazorpayPaymentCompletionProtocol {
   
     @IBOutlet weak var myview       : UIView!
     @IBOutlet weak var firstBtn     : UIButton!
     @IBOutlet weak var secondBtn    : UIButton!
     @IBOutlet weak var thirdBtn     : UIButton!
     @IBOutlet weak var cashfield    : UITextField!
+    
+    var razorpayD: RazorpayCheckout!
     
     fileprivate func CustomizeView(){
         myview.layer.shadowColor = UIColor.gray.cgColor
@@ -48,14 +51,40 @@ class AddCashViewController: UIViewController {
         
     }
     
+    func showPaymentForm() {
+        let params: [String: Any] = [
+            "amount": "10000",
+            "description": "Sample Product",
+            "image": UIImage(named: "logo bulls 11"),
+            "name": "Mihir-vyas",
+            "prifill": [
+                "contact": "9876543201",
+                "email": "mihir@acentriatech.com"
+             ],
+            "theme": [
+                "color": "#CB2D88"
+            ]
+        ]
+        razorpayD.open(params)
+    }
+    
+    func onPaymentError(_ code: Int32, description str: String) {
+        print("error")
+    }
+    
+    func onPaymentSuccess(_ payment_id: String) {
+        print("success")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.topItem?.title = ""
-
+        razorpayD = RazorpayCheckout.initWithKey("rzp_test_1DP5mmOlF5G5ag", andDelegate: self)
         title = "Add Cash"
         let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 212/255, green: 71/255, blue: 140/255, alpha: 1)
+        
          CustomizeButton()
          CustomizeView()
         // Do any additional setup after loading the view.
@@ -63,21 +92,21 @@ class AddCashViewController: UIViewController {
     
     @IBAction func setcashValue1(_ sender: Any) {
         self.cashfield.text = nil
-        self.cashfield.text = "₹" + "100"
+        self.cashfield.text = "100"
     }
     
     @IBAction func setcashValue2(_ sender: Any) {
         self.cashfield.text = nil
-        self.cashfield.text = "₹" + "200"
+        self.cashfield.text = "200"
     }
 
     @IBAction func setcashValue3(_ sender: Any) {
         self.cashfield.text = nil
-        self.cashfield.text = "₹" + "500"
+        self.cashfield.text = "500"
     }
     
     @IBAction func addCashRedirect(_ sender: Any){
-        
+        showPaymentForm()
     }
     /*
     // MARK: - Navigation

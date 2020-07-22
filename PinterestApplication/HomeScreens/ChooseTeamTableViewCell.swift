@@ -13,7 +13,7 @@ protocol showStatus {
 }
 
 class ChooseTeamTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var conView: UIView!
     @IBOutlet weak var CompanyNameLbl: UILabel!
     @IBOutlet weak var CompanyDetailLbl: UILabel!
@@ -24,8 +24,8 @@ class ChooseTeamTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
- 
+    
+    
     override func layoutSubviews() {
         super.layoutSubviews()
     }
@@ -43,7 +43,7 @@ class ChooseTeamTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         if (isSelected) {
             self.selectionStyle = .none
-        self.conView.backgroundColor = UIColor(red: 252/255, green: 243/255, blue: 207/255, alpha: 1.0)
+            self.conView.backgroundColor = UIColor(red: 252/255, green: 243/255, blue: 207/255, alpha: 1.0)
         } else {
             self.conView.backgroundColor = .white
         }
@@ -99,14 +99,14 @@ class ChooseTeamTableViewCell: UITableViewCell {
 
 /*
  for i in indexPath.row {
-            
-        }
-        if indexPath.row == 1 {
-            self.fifthcircle.image = #imageLiteral(resourceName: "wicket_keeper")
-        } else if indexPath.row == 3 {
-            self.sixthcircle.image = #imageLiteral(resourceName: "All-rounder")
-        }
-        //cell.reload()
-        //cell.selectionStyle = .none
-        
+ 
+ }
+ if indexPath.row == 1 {
+ self.fifthcircle.image = #imageLiteral(resourceName: "wicket_keeper")
+ } else if indexPath.row == 3 {
+ self.sixthcircle.image = #imageLiteral(resourceName: "All-rounder")
+ }
+ //cell.reload()
+ //cell.selectionStyle = .none
+ 
  */

@@ -9,7 +9,7 @@
 import UIKit
 
 class CongratulationViewController: UIViewController {
-
+    
     @IBOutlet weak var skipbtn: UIButton!
     @IBOutlet weak var congratulation: UILabel!
     @IBOutlet weak var betterlucknexttime: UILabel!
@@ -23,7 +23,7 @@ class CongratulationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         customBtn()
+        customBtn()
         // Do any additional setup after loading the view.
     }
     
@@ -32,12 +32,12 @@ class CongratulationViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
             model.bullsPoint = "100"
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                   let vc = storyboard.instantiateViewController(withIdentifier: "customtab")
-                   vc.modalPresentationStyle = .fullScreen
-                   self.present(vc, animated: true, completion: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "customtab")
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
         }))
         self.present(alert, animated: true, completion: nil)
-       
+        
     }
     
 }

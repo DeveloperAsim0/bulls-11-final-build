@@ -11,7 +11,7 @@ import UIKit
 class ContestViewController: UIViewController {
 
     @IBOutlet weak var leadingConstraints: NSLayoutConstraint!
-    
+    @IBOutlet weak var tableView: UITableView!
     var sideMenu2 = false
     
     fileprivate func CustomNavBar(){
@@ -24,6 +24,8 @@ class ContestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
          CustomNavBar()
+        
+        
         // Do any additional setup after loading the view.
     }
     
@@ -55,4 +57,22 @@ class ContestViewController: UIViewController {
     }
     */
 
+}
+
+extension ContestViewController: UITableViewDelegate, UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "resultcontestcell") as! ResultContestTableViewCell
+        return cell
+    }
+    
+    
 }

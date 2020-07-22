@@ -13,7 +13,7 @@ import Alamofire
 import SwiftyJSON
 
 class WalletViewController: UIViewController {
-
+    
     @IBOutlet weak var firstView: UIView!
     @IBOutlet weak var recentTransaction: UIButton!
     @IBOutlet weak var managePayments: UIView!
@@ -40,19 +40,19 @@ class WalletViewController: UIViewController {
         
         AF.request(self.Profile_URL + KeychainWrapper.standard.string(forKey: "userID")!, method: .get, parameters: nil,encoding: JSONEncoding.default, headers: header).authenticate(username: "admin", password: "1234").responseJSON{ response in
             switch response.result {
-                   case .success:
-                    print("ok:-\(response.result)")
-                    let result = try? JSON(data: response.data!)
-                    print("myResult:- \(result!.dictionaryValue)")
-                    let finalResult = result!.dictionaryValue
-                    print("firstname:- \(finalResult["first_name"]!.stringValue)")
-                    let fullname = finalResult["first_name"]!.stringValue + finalResult["last_name"]!.stringValue
-                    self.UserName.text = fullname
-                    let profilepic = finalResult["profile_pic"]?.stringValue
-                    self.profilePic.sd_setImage(with: URL(string: profilepic!), placeholderImage: UIImage(named: "user icon"))
-                    break
-                   case .failure:
-                    print(response.error.debugDescription)
+            case .success:
+                print("ok:-\(response.result)")
+                let result = try? JSON(data: response.data!)
+                print("myResult:- \(result!.dictionaryValue)")
+                let finalResult = result!.dictionaryValue
+                print("firstname:- \(finalResult["first_name"]!.stringValue)")
+                let fullname = finalResult["first_name"]!.stringValue + finalResult["last_name"]!.stringValue
+                self.UserName.text = fullname
+                let profilepic = finalResult["profile_pic"]?.stringValue
+                self.profilePic.sd_setImage(with: URL(string: profilepic!), placeholderImage: UIImage(named: "user icon"))
+                break
+            case .failure:
+                print(response.error.debugDescription)
             }
         }
     }
@@ -60,9 +60,9 @@ class WalletViewController: UIViewController {
     fileprivate func CustomizeUIVIEW() {
         self.profilePic.layer.cornerRadius = self.profilePic.frame.size.width/2
         
-       sidemenuView.layer.borderColor = UIColor.darkGray.cgColor
-       sidemenuView.layer.borderWidth = 1
-       sidemenuView.layer.masksToBounds = true
+        sidemenuView.layer.borderColor = UIColor.darkGray.cgColor
+        sidemenuView.layer.borderWidth = 1
+        sidemenuView.layer.masksToBounds = true
         
         firstView.layer.shadowColor = UIColor.gray.cgColor
         firstView.layer.shadowOffset = CGSize(width: 0, height: 1.0)
@@ -120,28 +120,28 @@ class WalletViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "addcash")
         vc.modalPresentationStyle = .fullScreen
-       // vc.hidesBottomBarWhenPushed = true
+        // vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func openSideMenu(_ sender: Any) {
-     if (sideMenu4) {
-               leadingConstraints.constant = -260
-               UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseIn, animations: {
-                   self.view.layoutIfNeeded()
-                  // self.view.backgroundColor = .white
-               })
-           } else {
-               leadingConstraints.constant = 0
-               UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseIn, animations: {
-                   self.view.layoutIfNeeded()
-                  // self.view.backgroundColor = UIColor(red: 155/255, green: 156/255, blue: 157/255, alpha: 1)
-               })
-           }
-           
-           sideMenu4 = !sideMenu4
+        if (sideMenu4) {
+            leadingConstraints.constant = -260
+            UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseIn, animations: {
+                self.view.layoutIfNeeded()
+                // self.view.backgroundColor = .white
+            })
+        } else {
+            leadingConstraints.constant = 0
+            UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseIn, animations: {
+                self.view.layoutIfNeeded()
+                // self.view.backgroundColor = UIColor(red: 155/255, green: 156/255, blue: 157/255, alpha: 1)
+            })
+        }
+        
+        sideMenu4 = !sideMenu4
     }
-
+    
 }
 
 extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
@@ -158,55 +158,57 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "profileview")
-        vc.modalPresentationStyle = .fullScreen
-        vc.navigationController?.navigationBar.topItem?.title = " "
-        self.navigationController?.pushViewController(vc, animated: true)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "profileview")
+            vc.modalPresentationStyle = .fullScreen
+            vc.navigationController?.navigationBar.topItem?.title = " "
+            self.navigationController?.pushViewController(vc, animated: true)
             
         } else if indexPath.row == 1 {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "weeklyleaderboard")
+            let vc = storyboard.instantiateViewController(withIdentifier: "weeklyleaderboard")
             vc.modalPresentationStyle = .fullScreen
-                vc.navigationController?.navigationBar.topItem?.title = " "
-                self.navigationController?.pushViewController(vc, animated: true)
-        
+            vc.navigationController?.navigationBar.topItem?.title = " "
+            self.navigationController?.pushViewController(vc, animated: true)
+            
         } else if indexPath.row == 2 {
-       let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                 let vc = storyboard.instantiateViewController(withIdentifier: "halloffame")
-              vc.modalPresentationStyle = .fullScreen
-                 self.navigationController?.pushViewController(vc, animated: true)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "halloffame")
+            vc.modalPresentationStyle = .fullScreen
+            self.navigationController?.pushViewController(vc, animated: true)
             
         } else if indexPath.row == 3 {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                  let vc = storyboard.instantiateViewController(withIdentifier: "balance")
-               vc.modalPresentationStyle = .fullScreen
-                  self.navigationController?.pushViewController(vc, animated: true)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "balance")
+            vc.modalPresentationStyle = .fullScreen
+            self.navigationController?.pushViewController(vc, animated: true)
             
         } else if indexPath.row == 4 {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                  let vc = storyboard.instantiateViewController(withIdentifier: "rewards")
-               vc.modalPresentationStyle = .fullScreen
-                  self.navigationController?.pushViewController(vc, animated: true)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "rewards")
+            vc.modalPresentationStyle = .fullScreen
+            self.navigationController?.pushViewController(vc, animated: true)
             
             
         } else if indexPath.row == 5 {
-       let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                         let vc = storyboard.instantiateViewController(withIdentifier: "refferal")
-                         vc.modalPresentationStyle = .fullScreen
-                         self.navigationController?.pushViewController(vc, animated: true)
-                  
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "refferal")
+            vc.modalPresentationStyle = .fullScreen
+            self.navigationController?.pushViewController(vc, animated: true)
             
         } else if indexPath.row == 6 {
-           
-        
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "bullspointcalculation")
+            vc.modalPresentationStyle = .fullScreen
+            self.navigationController?.pushViewController(vc, animated: true)
+            
         } else if indexPath.row == 7 {
             UserDefaults.standard.removeObject(forKey: "UserHasSubmittedPassword")
             KeychainWrapper.standard.removeObject(forKey: "userID")
             print("userid:- \(KeychainWrapper.standard.string(forKey: "userID"))")
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                              let vc = storyboard.instantiateViewController(withIdentifier: "view")
-                              vc.modalPresentationStyle = .fullScreen
+            let vc = storyboard.instantiateViewController(withIdentifier: "view")
+            vc.modalPresentationStyle = .fullScreen
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         }

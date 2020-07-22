@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -43,12 +43,15 @@
 		3A85873F249A23B8005EA0AB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85873E249A23B8005EA0AB /* Model.swift */; };
 		3A9088DC24C6F4DA00B34104 /* SelectSpecialPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9088DB24C6F4DA00B34104 /* SelectSpecialPlayerViewController.swift */; };
 		3A9A9F0724C2EE800089A6E9 /* SavedFinalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9A9F0624C2EE800089A6E9 /* SavedFinalModel.swift */; };
+		3A9F232124C86C1C00B37B14 /* ResultContestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9F232024C86C1C00B37B14 /* ResultContestTableViewCell.swift */; };
 		3AA4944C246BD92000EB45E2 /* CustomTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4944B246BD92000EB45E2 /* CustomTabbarController.swift */; };
 		3AA4944E246BD98600EB45E2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4944D246BD98600EB45E2 /* HomeViewController.swift */; };
 		3AA49450246BD99300EB45E2 /* ContestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4944F246BD99300EB45E2 /* ContestViewController.swift */; };
 		3AA49452246BD9B600EB45E2 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA49451246BD9B600EB45E2 /* WalletViewController.swift */; };
 		3AA49454246BD9C000EB45E2 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA49453246BD9C000EB45E2 /* MoreViewController.swift */; };
 		3AC5B519246ED93000F23701 /* HelpCentreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5B518246ED93000F23701 /* HelpCentreViewController.swift */; };
+		3AC67F2224C8352600F17BF6 /* Razorpay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC67F2024C8351A00F17BF6 /* Razorpay.xcframework */; };
+		3AC67F2324C8352700F17BF6 /* Razorpay.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC67F2024C8351A00F17BF6 /* Razorpay.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		3AC7AE11246FC2B4000B2083 /* FantasiPointSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC7AE10246FC2B4000B2083 /* FantasiPointSystem.swift */; };
 		3ACECF1924695C9E003354CF /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACECF1824695C9E003354CF /* RegisterViewController.swift */; };
 		3AD0943724728F6C0069310A /* SelectYourTradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD0943624728F6C0069310A /* SelectYourTradeViewController.swift */; };
@@ -63,6 +66,20 @@
 		DAB9FD031FC8E4C300CF64A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAB9FD021FC8E4C300CF64A7 /* Assets.xcassets */; };
 		DAB9FD061FC8E4C300CF64A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAB9FD041FC8E4C300CF64A7 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3AE67BDA24C8227A00F23BA4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3AC67F2324C8352700F17BF6 /* Razorpay.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3A0252A02472AA950080C448 /* MorePlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorePlayersViewController.swift; sourceTree = "<group>"; };
@@ -101,12 +118,14 @@
 		3A85873E249A23B8005EA0AB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		3A9088DB24C6F4DA00B34104 /* SelectSpecialPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSpecialPlayerViewController.swift; sourceTree = "<group>"; };
 		3A9A9F0624C2EE800089A6E9 /* SavedFinalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFinalModel.swift; sourceTree = "<group>"; };
+		3A9F232024C86C1C00B37B14 /* ResultContestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultContestTableViewCell.swift; sourceTree = "<group>"; };
 		3AA4944B246BD92000EB45E2 /* CustomTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbarController.swift; sourceTree = "<group>"; };
 		3AA4944D246BD98600EB45E2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3AA4944F246BD99300EB45E2 /* ContestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestViewController.swift; sourceTree = "<group>"; };
 		3AA49451246BD9B600EB45E2 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		3AA49453246BD9C000EB45E2 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		3AC5B518246ED93000F23701 /* HelpCentreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCentreViewController.swift; sourceTree = "<group>"; };
+		3AC67F2024C8351A00F17BF6 /* Razorpay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Razorpay.xcframework; sourceTree = "<group>"; };
 		3AC7AE10246FC2B4000B2083 /* FantasiPointSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FantasiPointSystem.swift; sourceTree = "<group>"; };
 		3ACECF1824695C9E003354CF /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		3AD0943624728F6C0069310A /* SelectYourTradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectYourTradeViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5A79FAC01E209FCCA6F6B5D /* Pods_PinterestApplication.framework in Frameworks */,
+				3AC67F2224C8352600F17BF6 /* Razorpay.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +269,7 @@
 		DAB9FCFA1FC8E4C200CF64A7 /* PinterestApplication */ = {
 			isa = PBXGroup;
 			children = (
+				3AC67F2024C8351A00F17BF6 /* Razorpay.xcframework */,
 				3A85873D249A23A7005EA0AB /* Models */,
 				3A5ABC32249738B800FFA09D /* Constant */,
 				3AEA89D22473C0E1001F3EF3 /* HomeScreens */,
@@ -278,6 +299,7 @@
 				3A9A9F0624C2EE800089A6E9 /* SavedFinalModel.swift */,
 				3A3CB79E24C577BF0051EB29 /* UnpaidViewController.swift */,
 				3A9088DB24C6F4DA00B34104 /* SelectSpecialPlayerViewController.swift */,
+				3A9F232024C86C1C00B37B14 /* ResultContestTableViewCell.swift */,
 			);
 			path = PinterestApplication;
 			sourceTree = "<group>";
@@ -303,6 +325,7 @@
 				DAB9FCF51FC8E4C200CF64A7 /* Frameworks */,
 				DAB9FCF61FC8E4C200CF64A7 /* Resources */,
 				A165FB34CD5E574B524CAF9A /* [CP] Embed Pods Frameworks */,
+				3AE67BDA24C8227A00F23BA4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -459,6 +482,7 @@
 				3ADAAD15246C359A003B0E3F /* MyRefferalsViewController.swift in Sources */,
 				3A3CB79F24C577BF0051EB29 /* UnpaidViewController.swift in Sources */,
 				3A85873F249A23B8005EA0AB /* Model.swift in Sources */,
+				3A9F232124C86C1C00B37B14 /* ResultContestTableViewCell.swift in Sources */,
 				3A67E9B2246FEFC900789A32 /* ActiveModeViewController.swift in Sources */,
 				3A360F7D246E961C00FB95C4 /* HowToPlayViewController.swift in Sources */,
 				3A5D2A6024A0D465007C212B /* model.swift in Sources */,
@@ -599,7 +623,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -611,9 +636,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V5A7X3J52B;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PinterestApplication",
+				);
 				INFOPLIST_FILE = PinterestApplication/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = myBullsProject;
 				PRODUCT_NAME = bulls11;
 				SWIFT_VERSION = 5.0;
@@ -628,9 +660,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V5A7X3J52B;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PinterestApplication",
+				);
 				INFOPLIST_FILE = PinterestApplication/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = myBullsProject;
 				PRODUCT_NAME = bulls11;
 				SWIFT_VERSION = 5.0;
