@@ -219,11 +219,11 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource {
         
         } else if indexPath.row == 7 {
            UserDefaults.standard.removeObject(forKey: "UserHasSubmittedPassword")
-            KeychainWrapper.standard.removeObject(forKey: "userID")
+            KeychainWrapper.standard.removeAllKeys()
             print("userid:- \(KeychainWrapper.standard.string(forKey: "userID"))")
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                              let vc = storyboard.instantiateViewController(withIdentifier: "view")
-                              vc.modalPresentationStyle = .fullScreen
+            let vc = storyboard.instantiateViewController(withIdentifier: "view")
+             vc.modalPresentationStyle = .fullScreen
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         }

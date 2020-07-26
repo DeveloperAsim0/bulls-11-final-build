@@ -76,7 +76,7 @@ class SelectSpecialPlayerViewController: UIViewController {
     @IBOutlet weak var starPlayer11:UIButton!
     
     var buttonCount     = [Int]()
-    
+    var clickBtn        = String()
     fileprivate func Set_Value() {
         // for select create and join views
         selectView.layer.cornerRadius = selectView.frame.size.width/2
@@ -183,6 +183,8 @@ class SelectSpecialPlayerViewController: UIViewController {
             print("jyf:- \(finalModel.Captain)")
         } else {
             sender.isSelected = true
+            clickBtn = "1"
+            print("clickbtn:-\(clickBtn.count)")
             finalModel.Captain.removeAll()
             captainBtn2.isSelected = false
             captainBtn3.isSelected = false
@@ -207,6 +209,8 @@ class SelectSpecialPlayerViewController: UIViewController {
             print("jyf:- \(finalModel.Captain)")
         } else {
             sender.isSelected = true
+            clickBtn = "1"
+            print("clickbtn:-\(clickBtn.count)")
              finalModel.Captain.removeAll()
              captainBtn1.isSelected = false
              captainBtn3.isSelected = false
@@ -231,6 +235,8 @@ class SelectSpecialPlayerViewController: UIViewController {
             print("jyf:- \(finalModel.Captain)")
         } else {
             sender.isSelected = true
+            clickBtn = "1"
+            print("clickbtn:-\(clickBtn.count)")
              finalModel.Captain.removeAll()
              captainBtn2.isSelected = false
              captainBtn1.isSelected = false
@@ -255,6 +261,8 @@ class SelectSpecialPlayerViewController: UIViewController {
             print("jyf:- \(finalModel.Captain)")
         } else {
             sender.isSelected = true
+            clickBtn = "1"
+            print("clickbtn:-\(clickBtn.count)")
              finalModel.Captain.removeAll()
              captainBtn2.isSelected = false
              captainBtn3.isSelected = false
@@ -279,6 +287,8 @@ class SelectSpecialPlayerViewController: UIViewController {
             print("jyf:- \(finalModel.Captain)")
         } else {
             sender.isSelected = true
+            clickBtn = "1"
+            print("clickbtn:-\(clickBtn.count)")
              finalModel.Captain.removeAll()
              captainBtn2.isSelected = false
              captainBtn3.isSelected = false
@@ -303,6 +313,8 @@ class SelectSpecialPlayerViewController: UIViewController {
             print("jyf:- \(finalModel.Captain)")
         } else {
             sender.isSelected = true
+            clickBtn = "1"
+            print("clickbtn:-\(clickBtn.count)")
              finalModel.Captain.removeAll()
              captainBtn2.isSelected = false
              captainBtn3.isSelected = false
@@ -327,6 +339,8 @@ class SelectSpecialPlayerViewController: UIViewController {
             print("jyf:- \(finalModel.Captain)")
         } else {
             sender.isSelected = true
+            clickBtn = "1"
+            print("clickbtn:-\(clickBtn.count)")
              finalModel.Captain.removeAll()
              captainBtn2.isSelected = false
              captainBtn3.isSelected = false
@@ -351,6 +365,8 @@ class SelectSpecialPlayerViewController: UIViewController {
             print("jyf:- \(finalModel.Captain)")
         } else {
             sender.isSelected = true
+            clickBtn = "1"
+            print("clickbtn:-\(clickBtn.count)")
              finalModel.Captain.removeAll()
              captainBtn2.isSelected = false
              captainBtn3.isSelected = false
@@ -375,6 +391,8 @@ class SelectSpecialPlayerViewController: UIViewController {
             print("jyf:- \(finalModel.Captain)")
         } else {
             sender.isSelected = true
+            clickBtn = "1"
+            print("clickbtn:-\(clickBtn.count)")
              finalModel.Captain.removeAll()
              captainBtn2.isSelected = false
              captainBtn3.isSelected = false
@@ -399,6 +417,8 @@ class SelectSpecialPlayerViewController: UIViewController {
             print("jyf:- \(finalModel.Captain)")
         } else {
             sender.isSelected = true
+            clickBtn = "1"
+            print("clickbtn:-\(clickBtn.count)")
              finalModel.Captain.removeAll()
              captainBtn2.isSelected = false
              captainBtn3.isSelected = false
@@ -423,6 +443,8 @@ class SelectSpecialPlayerViewController: UIViewController {
             print("jyf:- \(finalModel.Captain)")
         } else {
             sender.isSelected = true
+            clickBtn = "1"
+            print("clickbtn:-\(clickBtn.count)")
              finalModel.Captain.removeAll()
              captainBtn2.isSelected = false
              captainBtn3.isSelected = false
@@ -884,9 +906,11 @@ class SelectSpecialPlayerViewController: UIViewController {
        }
     
     @IBAction func CreateTeam(_ sender: Any){
-        print(finalModel.starPlayer.count)
-        print(finalModel.Captain.count)
-        if finalModel.starPlayer.count == 3{
+        print("starplayer:- \(finalModel.starPlayer.count)")
+        print("captainplayer:- \(finalModel.Captain.count)")
+        print("print:-\(clickBtn.count)")
+        
+        if clickBtn.count == 1{
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "letsplay")
         vc.modalPresentationStyle = .fullScreen

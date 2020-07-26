@@ -180,7 +180,6 @@ class ChooseTeamViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("chutiya")
         editButton()
         CustomizeViews2()
         circularbutton()
@@ -220,6 +219,11 @@ class ChooseTeamViewController: UIViewController {
                 model.final_wicket_keeper.removeAll()
                 model.final_Bowler.removeAll()
                 model.final_Batsman.removeAll()
+                
+                savedBatsmanTeams.CompanyID.removeAll()
+                self.BatsmanNumber = 1
+                self.BowlerNumber = 2
+                self.WicketKeeperNumber = 3
                 for i in ResultArray.arrayValue {
                     print("mycoretype:- \(i["core_type"].stringValue)")
                     let set = i["core_type"].stringValue
@@ -317,6 +321,43 @@ class ChooseTeamViewController: UIViewController {
         self.wicketKeeper.backgroundColor = .clear
     }
     
+    func dataClear() {
+        if savedBatsmanTeams.CompanyID.count >= 6 {
+        let refreshAlert = UIAlertController(title: "Alert", message: "User only select 6 Batsman", preferredStyle: UIAlertController.Style.alert)
+        refreshAlert.addAction(UIAlertAction(title: "Clear", style: .default, handler: { (action: UIAlertAction!) in
+            model.final_Batsman.removeAll()
+            self.RemoveBatsman()
+            savedBatsmanTeams.CompanyID.removeAll()
+            savedBatsmanTeams.CompanyName.removeAll()
+            self.Fetch_Data()
+            self.firstcircle.image = nil
+            self.secondcircle.image = nil
+            self.thirdcircle.image = nil
+            self.fourthcircle.image = nil
+            self.fifthcircle.image = nil
+            self.sixthcircle.image = nil
+            print("Handle Ok logic here")
+        }))
+        
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+            print("Handle Cancel Logic here")
+            self.table1.allowsSelection = false
+        }))
+        
+        present(refreshAlert, animated: true, completion: nil)
+        print("alright:= \(savedBatsmanTeams.CompanyID.count)")
+        
+    }
+    }
+    @IBAction func clearData(_ sender: Any) {
+        let refreshAlert = UIAlertController(title: "Alert", message: "Clear Data", preferredStyle: UIAlertController.Style.alert)
+                   refreshAlert.addAction(UIAlertAction(title: "Clear", style: .default, handler: { (action: UIAlertAction!) in
+                   // self.dataClear()
+                       print("Handle Ok logic here")
+                   }))
+        self.present(refreshAlert, animated: true, completion: nil)
+    }
+    
     @IBAction func AllRounder(_ sender: Any){
         table1.isHidden = true
         table2.isHidden = true
@@ -346,14 +387,14 @@ class ChooseTeamViewController: UIViewController {
     }
     
     @IBAction func chooseSpecialPlayer(_ sender: Any){
-        if self.sixthcircle.image == nil && tenthcircle.image == nil && eleventhcircle.image == nil {
-            let alert = UIAlertController(title: "Please choose 11 players to create Team", message: "", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        } else {
+        if self.sixthcircle.image != nil && tenthcircle.image != nil && eleventhcircle.image != nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "moreplayer")
             self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Please choose 11 players to create Team", message: "", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     @IBAction func viewSelectedPlayer(_ sender: Any){
@@ -395,13 +436,6 @@ extension ChooseTeamViewController: showStatus2{
             // your actions here...
         }))
         self.present(showAlert, animated: true, completion: nil)
-        /*let alertTitle = "Watch Later"
-         let message = "\(title) added to Watch Later List"
-         
-         let alert = UIAlertController(title: alertTitle, message: message, preferredStyle: .alert)
-         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-         present(alert, animated: true, completion: nil)
-         */
     }
 }
 
@@ -485,6 +519,7 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
             savedBatsmanTeams.CompanyName.append(cell.CompanyNameLbl.text ?? "defaults")
             savedBatsmanTeams.CompanyID.append(cell.userIds)
             print("myids:- \(savedBatsmanTeams.CompanyID)")
+            print("mycompany:- \(savedBatsmanTeams.CompanyName)")
             countForBatsman()
         }
         if let cell = tableView.cellForRow(at: indexPath) as? secondTableViewCell {
@@ -540,8 +575,15 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
             refreshAlert.addAction(UIAlertAction(title: "Clear", style: .default, handler: { (action: UIAlertAction!) in
                 model.final_Batsman.removeAll()
                 self.RemoveBatsman()
-                self.Fetch_Data()
                 savedBatsmanTeams.CompanyID.removeAll()
+                savedBatsmanTeams.CompanyName.removeAll()
+                self.Fetch_Data()
+                self.firstcircle.image = nil
+                self.secondcircle.image = nil
+                self.thirdcircle.image = nil
+                self.fourthcircle.image = nil
+                self.fifthcircle.image = nil
+                self.sixthcircle.image = nil
                 print("Handle Ok logic here")
             }))
             
@@ -553,7 +595,7 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
             present(refreshAlert, animated: true, completion: nil)
             // table1.allowsSelection = false
         } else {
-            //table1.allowsSelection = true
+            table1.allowsSelection = true
         }
         //                         if sixthcircle.image != nil {
         //                             table1.allowsSelection = false
@@ -587,8 +629,14 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
             refreshAlert.addAction(UIAlertAction(title: "Clear", style: .default, handler: { (action: UIAlertAction!) in
                 model.final_Bowler.removeAll()
                 self.RemoveBowler()
-                self.Fetch_Data()
                 savedBowlerTeams.CompanyID.removeAll()
+                savedBowlerTeams.CompanyName.removeAll()
+                self.Fetch_Data()
+                self.tenthcircle.image = nil
+                self.ninthcircle.image = nil
+                self.eightcircle.image = nil
+                self.seventhcircle.image = nil
+                
                 print("Handle Ok logic here")
             }))
             
@@ -614,8 +662,10 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
             refreshAlert.addAction(UIAlertAction(title: "Clear", style: .default, handler: { (action: UIAlertAction!) in
                 model.final_wicket_keeper.removeAll()
                 self.RemoveWicketKeeper()
-                self.Fetch_Data()
                 savedWicketKeeperTeams.CompanyID.removeAll()
+                savedWicketKeeperTeams.CompanyName.removeAll()
+                 self.Fetch_Data()
+                self.eleventhcircle.image = nil
                 print("Handle Ok logic here")
             }))
             
@@ -631,15 +681,12 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? ChooseTeamTableViewCell {
-            savedBatsmanTeams.CompanyName.removeAll()
             RemoveBatsman()
         }
         if let cell = tableView.cellForRow(at: indexPath) as? secondTableViewCell {
-            savedBowlerTeams.CompanyName.removeAll()
             RemoveBowler()
         }
         if let cell = tableView.cellForRow(at: indexPath) as? thirdTableViewCell {
-            savedAllRounderTeams.CompanyName.removeAll()
             RemoveWicketKeeper()
         }
     }
@@ -649,22 +696,49 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
             BatsmanNumber -= 1
             self.firstcircle.image = nil
             table1.allowsSelection = true
-            savedBatsmanTeams.CompanyID.remove(at: 1)
+            savedBatsmanTeams.CompanyID.remove(at: 0)
+            print("compnayname: - \(savedBatsmanTeams.CompanyName)")
+            savedBatsmanTeams.CompanyName.remove(at: 0)
         } else if BatsmanNumber == 3 {
             BatsmanNumber -= 1
             self.secondcircle.image = nil
+            table1.allowsSelection = true
+            savedBatsmanTeams.CompanyID.remove(at: 1)
+            print("compnayname: - \(savedBatsmanTeams.CompanyName)")
+            savedBatsmanTeams.CompanyName.remove(at: 1)
         } else if BatsmanNumber == 4 {
             BatsmanNumber -= 1
             self.thirdcircle.image = nil
+            table1.allowsSelection = true
+            savedBatsmanTeams.CompanyID.remove(at: 2)
+            print("compnayname: - \(savedBatsmanTeams.CompanyName)")
+            savedBatsmanTeams.CompanyName.remove(at: 2)
         }  else if BatsmanNumber == 5 {
             BatsmanNumber -= 1
             self.fourthcircle.image = nil
+            table1.allowsSelection = true
+            savedBatsmanTeams.CompanyID.remove(at: 3)
+            print("compnayname: - \(savedBatsmanTeams.CompanyName)")
+            savedBatsmanTeams.CompanyName.remove(at: 3)
         } else if BatsmanNumber == 6 {
             BatsmanNumber -= 1
             self.fifthcircle.image = nil
+            table1.allowsSelection = true
+            savedBatsmanTeams.CompanyID.remove(at: 4)
+            print("compnayname: - \(savedBatsmanTeams.CompanyName)")
+            savedBatsmanTeams.CompanyName.remove(at: 4)
         } else if BatsmanNumber == 7 {
             BatsmanNumber -= 1
             self.sixthcircle.image = nil
+            table1.allowsSelection = true
+            savedBatsmanTeams.CompanyID.remove(at: 5)
+            print("compnayname: - \(savedBatsmanTeams.CompanyName)")
+            savedBatsmanTeams.CompanyName.remove(at: 5)
+            
+        } else {
+            savedBatsmanTeams.CompanyID.removeAll()
+            savedBatsmanTeams.CompanyName.removeAll()
+            table1.allowsSelection = true
         }
     }
     
@@ -672,15 +746,27 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
         if BowlerNumber == 2 {
             BowlerNumber -= 1
             self.seventhcircle.image = nil
+            table2.allowsSelection = true
+            savedBowlerTeams.CompanyID.remove(at: 0)
+            savedBowlerTeams.CompanyName.remove(at: 0)
         } else if BowlerNumber == 3 {
             BowlerNumber -= 1
             self.eightcircle.image = nil
+            table2.allowsSelection = true
+            savedBowlerTeams.CompanyID.remove(at: 1)
+            savedBowlerTeams.CompanyName.remove(at: 1)
         } else if BowlerNumber == 4 {
             BowlerNumber -= 1
             self.ninthcircle.image = nil
+            table2.allowsSelection = true
+            savedBowlerTeams.CompanyID.remove(at: 2)
+            savedBowlerTeams.CompanyName.remove(at: 2)
         }  else if BowlerNumber == 5 {
             BowlerNumber -= 1
             self.tenthcircle.image = nil
+            table2.allowsSelection = true
+            savedBowlerTeams.CompanyID.remove(at: 3)
+            savedBowlerTeams.CompanyName.remove(at: 3)
         }
     }
     
@@ -688,6 +774,9 @@ extension ChooseTeamViewController: UITableViewDelegate, UITableViewDataSource {
         if WicketKeeperNumber == 2 {
             WicketKeeperNumber -= 1
             self.eleventhcircle.image = nil
+            table4.allowsSelection = true
+            savedWicketKeeperTeams.CompanyID.remove(at: 0)
+            savedWicketKeeperTeams.CompanyName.remove(at: 0)
         }
     }
     

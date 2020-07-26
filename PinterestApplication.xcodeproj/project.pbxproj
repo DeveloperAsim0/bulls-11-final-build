@@ -17,7 +17,6 @@
 		3A360F7D246E961C00FB95C4 /* HowToPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A360F7C246E961C00FB95C4 /* HowToPlayViewController.swift */; };
 		3A360F7F246EB11500FB95C4 /* LegalityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A360F7E246EB11500FB95C4 /* LegalityViewController.swift */; };
 		3A3C070C246C3E55009D65B0 /* MyHallOfFameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C070B246C3E55009D65B0 /* MyHallOfFameViewController.swift */; };
-		3A3CB79F24C577BF0051EB29 /* UnpaidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CB79E24C577BF0051EB29 /* UnpaidViewController.swift */; };
 		3A42590124C0313D0027F4E8 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A42590024C0313D0027F4E8 /* LoginModel.swift */; };
 		3A478DBD249110FF006A8533 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A478DBC249110FF006A8533 /* CongratulationViewController.swift */; };
 		3A4DE77A246D31400037969E /* WeeklyLeaderBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DE779246D31400037969E /* WeeklyLeaderBoardViewController.swift */; };
@@ -44,6 +43,7 @@
 		3A9088DC24C6F4DA00B34104 /* SelectSpecialPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9088DB24C6F4DA00B34104 /* SelectSpecialPlayerViewController.swift */; };
 		3A9A9F0724C2EE800089A6E9 /* SavedFinalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9A9F0624C2EE800089A6E9 /* SavedFinalModel.swift */; };
 		3A9F232124C86C1C00B37B14 /* ResultContestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9F232024C86C1C00B37B14 /* ResultContestTableViewCell.swift */; };
+		3A9F232324C874A600B37B14 /* TeamResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9F232224C874A600B37B14 /* TeamResultViewController.swift */; };
 		3AA4944C246BD92000EB45E2 /* CustomTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4944B246BD92000EB45E2 /* CustomTabbarController.swift */; };
 		3AA4944E246BD98600EB45E2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4944D246BD98600EB45E2 /* HomeViewController.swift */; };
 		3AA49450246BD99300EB45E2 /* ContestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4944F246BD99300EB45E2 /* ContestViewController.swift */; };
@@ -59,6 +59,7 @@
 		3ADAAD15246C359A003B0E3F /* MyRefferalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADAAD14246C359A003B0E3F /* MyRefferalsViewController.swift */; };
 		3AE2D43F2490D985002DC0F4 /* contestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE2D43E2490D985002DC0F4 /* contestVC.swift */; };
 		3AF0244E246D1121009D8D5F /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF0244D246D1121009D8D5F /* MyProfileViewController.swift */; };
+		3AFE93EA24C9529000E61381 /* teamresultcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE93E924C9529000E61381 /* teamresultcell.swift */; };
 		A5A79FAC01E209FCCA6F6B5D /* Pods_PinterestApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93F51586B569D1049BB900E /* Pods_PinterestApplication.framework */; };
 		DAB9FCFC1FC8E4C300CF64A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB9FCFB1FC8E4C300CF64A7 /* AppDelegate.swift */; };
 		DAB9FCFE1FC8E4C300CF64A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB9FCFD1FC8E4C300CF64A7 /* ViewController.swift */; };
@@ -92,7 +93,6 @@
 		3A360F7C246E961C00FB95C4 /* HowToPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayViewController.swift; sourceTree = "<group>"; };
 		3A360F7E246EB11500FB95C4 /* LegalityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalityViewController.swift; sourceTree = "<group>"; };
 		3A3C070B246C3E55009D65B0 /* MyHallOfFameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHallOfFameViewController.swift; sourceTree = "<group>"; };
-		3A3CB79E24C577BF0051EB29 /* UnpaidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidViewController.swift; sourceTree = "<group>"; };
 		3A42590024C0313D0027F4E8 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		3A478DBC249110FF006A8533 /* CongratulationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratulationViewController.swift; sourceTree = "<group>"; };
 		3A4DE779246D31400037969E /* WeeklyLeaderBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyLeaderBoardViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +119,7 @@
 		3A9088DB24C6F4DA00B34104 /* SelectSpecialPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSpecialPlayerViewController.swift; sourceTree = "<group>"; };
 		3A9A9F0624C2EE800089A6E9 /* SavedFinalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFinalModel.swift; sourceTree = "<group>"; };
 		3A9F232024C86C1C00B37B14 /* ResultContestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultContestTableViewCell.swift; sourceTree = "<group>"; };
+		3A9F232224C874A600B37B14 /* TeamResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamResultViewController.swift; sourceTree = "<group>"; };
 		3AA4944B246BD92000EB45E2 /* CustomTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbarController.swift; sourceTree = "<group>"; };
 		3AA4944D246BD98600EB45E2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3AA4944F246BD99300EB45E2 /* ContestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +134,7 @@
 		3ADAAD14246C359A003B0E3F /* MyRefferalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRefferalsViewController.swift; sourceTree = "<group>"; };
 		3AE2D43E2490D985002DC0F4 /* contestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contestVC.swift; sourceTree = "<group>"; };
 		3AF0244D246D1121009D8D5F /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
+		3AFE93E924C9529000E61381 /* teamresultcell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = teamresultcell.swift; sourceTree = "<group>"; };
 		B933583CB232BFE67CE48194 /* Pods-PinterestApplication.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinterestApplication.debug.xcconfig"; path = "Target Support Files/Pods-PinterestApplication/Pods-PinterestApplication.debug.xcconfig"; sourceTree = "<group>"; };
 		C30364A19600B565C05C6B20 /* Pods-PinterestApplication.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinterestApplication.release.xcconfig"; path = "Target Support Files/Pods-PinterestApplication/Pods-PinterestApplication.release.xcconfig"; sourceTree = "<group>"; };
 		C93F51586B569D1049BB900E /* Pods_PinterestApplication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PinterestApplication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -297,9 +299,10 @@
 				3A79F81F24A479DE007BC669 /* thirdTableViewCell.swift */,
 				3A79F82124A479E6007BC669 /* fourthTableViewCell.swift */,
 				3A9A9F0624C2EE800089A6E9 /* SavedFinalModel.swift */,
-				3A3CB79E24C577BF0051EB29 /* UnpaidViewController.swift */,
 				3A9088DB24C6F4DA00B34104 /* SelectSpecialPlayerViewController.swift */,
 				3A9F232024C86C1C00B37B14 /* ResultContestTableViewCell.swift */,
+				3A9F232224C874A600B37B14 /* TeamResultViewController.swift */,
+				3AFE93E924C9529000E61381 /* teamresultcell.swift */,
 			);
 			path = PinterestApplication;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				3AA49450246BD99300EB45E2 /* ContestViewController.swift in Sources */,
 				3A4DE782246D679A0037969E /* HowToWorksViewController.swift in Sources */,
 				3A1D735324921A18002D7AB3 /* letsplayViewController.swift in Sources */,
+				3AFE93EA24C9529000E61381 /* teamresultcell.swift in Sources */,
 				3A858736249A016A005EA0AB /* WevViewHowToWorkViewController.swift in Sources */,
 				3AC5B519246ED93000F23701 /* HelpCentreViewController.swift in Sources */,
 				3A478DBD249110FF006A8533 /* CongratulationViewController.swift in Sources */,
@@ -480,7 +484,6 @@
 				3A85873C249A0667005EA0AB /* WebViewHelpViewController.swift in Sources */,
 				3A360F7F246EB11500FB95C4 /* LegalityViewController.swift in Sources */,
 				3ADAAD15246C359A003B0E3F /* MyRefferalsViewController.swift in Sources */,
-				3A3CB79F24C577BF0051EB29 /* UnpaidViewController.swift in Sources */,
 				3A85873F249A23B8005EA0AB /* Model.swift in Sources */,
 				3A9F232124C86C1C00B37B14 /* ResultContestTableViewCell.swift in Sources */,
 				3A67E9B2246FEFC900789A32 /* ActiveModeViewController.swift in Sources */,
@@ -495,6 +498,7 @@
 				3A4DE780246D4F4F0037969E /* AddCashViewController.swift in Sources */,
 				3A0252A32472BAAE0080C448 /* SelectCaptainViewController.swift in Sources */,
 				3AD09439247294C20069310A /* SelectTradeTableViewCell.swift in Sources */,
+				3A9F232324C874A600B37B14 /* TeamResultViewController.swift in Sources */,
 				3AD0943724728F6C0069310A /* SelectYourTradeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

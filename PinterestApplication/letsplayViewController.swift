@@ -290,7 +290,7 @@ class letsplayViewController: UIViewController {
     
     @IBAction func pointsBtn(_ sender: Any){
         self.currency = "100"
-        print("pointcurrency:-\(self.currency)")
+        //print("pointcurrency:-\(self.currency)")
     }
     
     @IBAction func firstBtn(_ sender: Any){
@@ -315,10 +315,10 @@ class letsplayViewController: UIViewController {
     
     @IBAction func LetsPlay(_ sender: Any) {
         Send_Details()
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyboard.instantiateViewController(withIdentifier: "customtab")
-//        vc.modalPresentationStyle = .fullScreen
-//        self.present(vc, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "addcash")
+        vc.modalPresentationStyle = .fullScreen
+        self.navigationController!.pushViewController(vc, animated: true)
     }
 
 }

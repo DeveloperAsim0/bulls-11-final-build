@@ -9,8 +9,12 @@
 import Foundation
 
 class model{
-    static var totalSlots = [String]()
-    static var actualDateID = String()
+    static var startingtime         = [String]()
+    static var totalSlots           = [String]()
+    static var actualDateID         = String()
+    static var paidUsers            = [String]()
+    static var freeUsers            = [String]()
+    static var prizeAmount          = [String]()
     static var firstoption          = [String]()
     static var secondoption         = [String]()
     static var thirdoption          = [String]()
@@ -40,7 +44,31 @@ class model{
     static var final_wicket_keeper  = [String]()
     
 }
+class myPersonalData {
+ static var myuserName = String()
+ static var mypoints = String()
+ static var myentryfee = String()
+    static var captain = String()
+    static var starplay1 = String()
+    static var starplay2 = String()
+    static var starplay3 = String()
+    static var rank = String()
+}
 
+class Result {
+    static var user_id = [String]()
+    static var result = [String]()
+    static var starPlayer1 = [String]()
+    static var starPlayer2 = [String]()
+    static var starPlayer3 = [String]()
+    static var captain      = [String]()
+    static var team_id = [String]()
+    static var currency = [String]()
+    static var amount = [String]()
+    static var userna = [String]()
+    static var rank = [String]()
+    
+}
 
 class batsmanTeam {
     static var Company_Details = [String]()
